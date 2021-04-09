@@ -1,0 +1,25 @@
+{
+  "name": "open-data-integrity-verification",
+  "version": "1.0.0",
+  "description": "Open Data Integrity Verification",
+  "main": "app/index.html",
+  "scripts": {
+    "start": "http-server app",
+    "lint": "eslint --ext .js app"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AkarionDevelopers/open-data-integrity-verification.git"
+  },
+  "author": "Paul Em",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AkarionDevelopers/open-data-integrity-verification/issues"
+  },
+  "homepage": "https://github.com/AkarionDevelopers/open-data-integrity-verification#readme",
+  "devDependencies": {
+    "eslint": "^7.23.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "http-server": "^0.12.3"
+  }
+}

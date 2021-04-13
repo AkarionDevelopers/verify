@@ -11,9 +11,8 @@ function parseAttachment(file) {
     .promise
     .then((document) => document.getPage(1))
     .then((page) => page.getAnnotations())
-    .then((annotations) => JSON.parse(
-      String.fromCharCode.apply(null, new Uint16Array(annotations[0].file.content)),
-    ));
+    .then((annotations) => new TextDecoder().decode(annotations[0].file.content))
+    .then((text) => JSON.parse(text));
 }
 
 function verify(data) {

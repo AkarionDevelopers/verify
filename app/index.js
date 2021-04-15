@@ -43,7 +43,7 @@ function checkFile(file) {
     .then(() => {
       $resultSuccess.style.display = 'initial';
       $resultFail.style.display = 'none';
-      $resultText.innerText = 'Verification successful';
+      $resultText.innerText = 'Verification successful. Check console for contents of verified object';
     })
     .catch((error) => {
       console.log('Verification failed', error);

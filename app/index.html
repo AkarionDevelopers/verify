@@ -1,13 +1,21 @@
+<!DOCTYPE html>
 <html>
 <head>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.8.335/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/2.3.1/sha256.js"></script>
   <script src="index.js" type="module"></script>
+  <link rel="stylesheet" href="index.css">
   <title>Open Data Integrity Verification</title>
 </head>
 <body>
-  <h1>Verify</h1>
-  <input id="upload" type="file" accept="application/pdf">
-  <div id="result"></div>
+  <img src="logo.png" alt="Logo">
+  <h1>Open Data Integrity Verification</h1>
+  <label for="upload">Select PDF to get started</label>
+  <input id="upload" type="file" accept="application/pdf" hidden>
+  <div>
+    <img class="result" id="result-success" src="success.svg" alt="success">
+    <img class="result" id="result-fail" src="fail.svg" alt="fail">
+  </div>
+  <p id="result-text"></p>
 </body>
 </html>

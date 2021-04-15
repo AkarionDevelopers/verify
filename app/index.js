@@ -19,16 +19,13 @@ function verify(data) {
   console.log('Object to verify:', data.object);
   console.log('Notarization data:', data.notarization);
   if (!verifyObjectId(data)) {
-    console.warn('id of object and notarization does not match');
-    return false;
+    throw new Error('id of object and notarization does not match');
   }
   if (!verifyPropHashes(data)) {
-    console.warn('prop hashes don\'t match', getInvalidProps(data));
-    return false;
+    throw new Error('prop hashes don\'t match', getInvalidProps(data));
   }
   if (!verifyCumulatedHash(data)) {
-    console.warn('cumulated hash does not match');
-    return false;
+    throw new Error('cumulated hash does not match');
   }
 
   // TODO: verify blockchain entry
@@ -36,24 +33,41 @@ function verify(data) {
   return true;
 }
 
+function checkFile(file) {
+  const $resultSuccess = document.getElementById('result-success');
+  const $resultFail = document.getElementById('result-fail');
+  const $resultText = document.getElementById('result-text');
+  return file.arrayBuffer()
+    .then(parseAttachment)
+    .then(verify)
+    .then(() => {
+      $resultSuccess.style.display = 'initial';
+      $resultFail.style.display = 'none';
+      $resultText.innerText = 'Verification successful';
+    })
+    .catch((error) => {
+      console.log('Verification failed', error);
+      $resultSuccess.style.display = 'none';
+      $resultFail.style.display = 'initial';
+      $resultText.innerText = 'Verification failed. Check console for details';
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+  document.body.addEventListener('dragover', (evt) => {
+    console.log('dragover');
+    evt.stopPropagation();
+    evt.preventDefault();
+    // eslint-disable-next-line no-param-reassign
+    evt.dataTransfer.dropEffect = 'copy';
+  });
+  document.body.addEventListener('drop', (evt) => {
+    evt.stopPropagation();
+    evt.preventDefault();
+    checkFile(evt.dataTransfer.files[0]);
+  });
+
   document.getElementById('upload').addEventListener('change', (evt) => {
-    evt.target.files[0]
-      .arrayBuffer()
-      .then(parseAttachment)
-      .then(verify)
-      .then((success) => {
-        const $result = document.getElementById('result');
-        if (success) {
-          $result.innerText = 'SUCCESS';
-        } else {
-          $result.innerText = 'FAILED';
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        const $result = document.getElementById('result');
-        $result.innerText = 'ERROR';
-      });
+    checkFile(evt.target.files[0]);
   }, false);
 });

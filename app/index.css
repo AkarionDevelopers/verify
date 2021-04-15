@@ -1,0 +1,23 @@
+body {
+  width: 100%;
+  padding: 100px 30px;
+  text-align: center;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+label {
+  display: inline-block;
+  background-color: #4955a1;
+  color: white;
+  padding: 0.8rem;
+  font-family: sans-serif;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.result {
+  margin-top: 30px;
+  width: 100px;
+  display: none;
+}

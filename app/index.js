@@ -2,6 +2,7 @@ import {
   verifyObjectId,
   verifyPropHashes,
   verifyCumulatedHash,
+  verifyBlockchainHash,
   getInvalidProps,
 } from './verify.js';
 
@@ -27,9 +28,10 @@ function verify(data) {
   if (!verifyCumulatedHash(data)) {
     throw new Error('cumulated hash does not match');
   }
-
-  // TODO: verify blockchain entry
-
+  //only works for transactions on ETH Mainnet
+  if (!verifyBlockchainHash(data)) {
+    throw new Error('hash on blockchain does not match');
+  }
   return true;
 }
 

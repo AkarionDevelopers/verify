@@ -84,6 +84,14 @@ function hash(key, value, salt) {
   return hashString(value, salt);
 }
 
+function fromHex(h) {
+  let s = ''
+  for (let i = 0; i < h.length; i+=2) {
+    s += String.fromCharCode(parseInt(h.substr(i, 2), 16))
+  }
+  return decodeURIComponent(escape(s))
+}
+
 export function verifyObjectId(data) {
   return data.object.id === data.notarization.auditProofs[0].notarizedObject.chroniqlObjectId;
 }
@@ -122,4 +130,23 @@ export function verifyCumulatedHash(data) {
     })
     .join('');
   return hashRaw(cumulatedHash);
+}
+
+export function verifyBlockchainHash(data) {
+  const hash = data.notarization.auditProofs[0].notarizationDetails.hash;
+  const txHash = data.notarization.auditProofs[0].notarizationDetails.notarizationId;
+  return fetch("https://api.blockcypher.com/v1/eth/main/txs/" + txHash )
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      const message = JSON.parse(fromHex(data.outputs[0].script));
+      return message.hash === hash;
+    })
+    .catch(function (error) {
+      console.log("Could not find transaction " + txHash + " on ETH Mainnet");
+      return false;
+    });
+    
+    
 }

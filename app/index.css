@@ -1,8 +1,21 @@
+:root {
+  --colorBackground1: #FFFFFF;
+  --colorBackground2: #F9F9F9;
+  --colorOutline1: #ECEEF5;
+  --colorOutline2: #0000001F;
+  --colorText1: #151E3F;
+  --colorText2: #303030;
+  --colorText3: #161718;
+  --colorButton: #4955A1;
+  --colorChroniqlPrimary: #4955A1;
+}
+
 body {
-  width: 100%;
-  padding: 100px 30px;
-  text-align: center;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: normal normal 300 24px/35px Avenir;
+  color: var(--colorText2);
+  letter-spacing: 0;
+  text-align: left;
+  background-color: var(--colorBackground2);
 }
 
 label {
@@ -16,8 +29,122 @@ label {
   margin-top: 1rem;
 }
 
+.logo {
+  margin-left: 17.5%;
+  display:inline-flex;
+  margin-top: 60px;
+}
+
 .result {
   margin-top: 30px;
   width: 100px;
   display: none;
+}
+
+.chroniqlText {
+  color: var(--colorChroniqlPrimary);
+  text-align: left;
+  letter-spacing: -1.64px;
+  margin: auto;
+  font: normal normal normal 37px/46px Avenir-Heavy;
+}
+
+h1 {
+  font: normal normal normal 46px/56px Avenir;
+  color: var(--colorText1);
+  letter-spacing: 0;
+  text-align: left;
+
+}
+
+h5 {
+  font: normal normal normal 14px/20px Avenir;
+  color: var(--colorText3);
+  letter-spacing: 0;
+  text-align: left;
+  margin:auto;
+}
+
+#buttonTextBlack {
+  font: normal normal normal 14px/20px Avenir-Heavy;
+  color: var(--colorText3);
+  letter-spacing: 0;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 40px;
+  background-color: var(--colorBackground1);
+}
+
+#buttonTextWhite{
+  font: normal normal normal 14px/20px Avenir-Heavy;
+  color: var(--colorBackground1);
+  letter-spacing: 0;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 40px;
+  background-color: var(--colorButton);
+}
+
+h4 {
+  font: normal normal normal 17px/25px Avenir;
+  color: var(--colorText3);
+}
+
+.outerContainer {
+  width: 65%;
+  height: 910px;
+  margin-top: 59px;
+  margin-left: auto;
+  margin-right: auto;
+  background: var(--colorBackground1) 0% 0% no-repeat padding-box;
+  border: 1px solid var(--colorOutline1);
+  border-radius: 10px 0px 0px 0px;
+  opacity: 1;
+}
+
+.innerContainer {
+  margin-top: 65px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 78%;
+  background: var(--colorBackground1) 0% 0% no-repeat padding-box;
+}
+
+.instruction {
+  display:inline-flex;
+  margin-top: 90px;
+  margin-bottom:20px;
+}
+
+.infoLogo {
+  padding-right: 7px;
+}
+
+.upload {
+  height: 345px;
+  width: 100%;
+  box-shadow: 0px 2px 10px var(--colorOutline2);
+  border: 1px dashed var(--colorText3);
+  border-radius: 10px;
+}
+
+.button {
+  width: 173px;
+  height: 40px;
+  border: 2px solid var(--colorChroniqlPrimary);
+  border-radius: 10px 0px 0px 0px;
+  margin-left: 18.02px;
+}
+
+.buttonBox {
+  display:inline-flex;
+  float: right;
+  margin-bottom: 127px;
+  margin-top: 60px;
+}
+
+.iconAndText {
+  text-align: center;
+  margin-top: 114.44px;
+  margin-bottom: auto;
 }

@@ -3,19 +3,52 @@
 <head>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.8.335/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/2.3.1/sha256.js"></script>
+  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
   <script src="index.js" type="module"></script>
   <link rel="stylesheet" href="index.css">
-  <title>Open Data Integrity Verification</title>
+  <title>Notarization Verification</title>
 </head>
 <body>
-  <img src="logo.png" alt="Logo">
-  <h1>Open Data Integrity Verification</h1>
-  <label for="upload">Select PDF to get started</label>
-  <input id="upload" type="file" accept="application/pdf" hidden>
   <div>
-    <img class="result" id="result-success" src="success.svg" alt="success">
-    <img class="result" id="result-fail" src="fail.svg" alt="fail">
+      <div class="logo">
+        <img src="logo.png" width="55" height="55" alt="Logo">
+        <div class="chroniqlText">chroniql</div>
+      </div>
+      <div class="outerContainer">
+      
+          <div class=innerContainer>
+            <h1>Notarization Verification</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla massa nisi, pharetra lobortis purus at, pulvinar</p>
+            <div class="instruction">
+              <div class="infoLogo">&#x24D8;</div>
+              <h5>Select a source to import your files</h5>
+            </div>
+
+            
+            <div class="upload">
+              <div class="iconAndText">
+                <i style="font-size:92px" class='fas'>&#xf382;</i>
+                <h4>Drag & Drop your PDF files here</h4>
+              </div>
+              
+              <input id="upload" type="file" accept="application/pdf" hidden>
+
+
+            </div>
+            <div class="buttonBox">
+              <div class="button" id="buttonTextBlack">Learn More</div>
+              <div class="button" id="buttonTextWhite">Browser File</div>
+            </div>
+            
+            <div>
+              <img class="result" id="result-success" src="success.svg" alt="success">
+              <img class="result" id="result-fail" src="fail.svg" alt="fail">
+            </div>
+            <p id="result-text"></p>
+
+          </div>
+          
+      </div>
   </div>
-  <p id="result-text"></p>
 </body>
 </html>

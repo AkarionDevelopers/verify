@@ -148,5 +148,4 @@ export function verifyBlockchainHash(data) {
       return false;
     });
     
-    
 }

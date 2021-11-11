@@ -16,6 +16,7 @@ const $fileList = document.getElementById('fileList');
 const $instructionText = document.getElementById('instructionText');
 const $buttonReturnVerifier = document.getElementById('buttonReturnVerifier');
 const $arrowLeft = document.getElementById('arrowLeft');
+const $descriptionTop = document.getElementById('descriptionTop');
 
 
 
@@ -29,9 +30,7 @@ function parseAttachment(file) {
     .then((text) => JSON.parse(text));
 }
 
-function verify(data) {
-  console.log('Object to verify:', data.object);
-  console.log('Notarization data:', data.notarization);
+async function verify(data) {
   if (!verifyObjectId(data)) {
     throw new Error('id of object and notarization does not match');
   }
@@ -42,31 +41,21 @@ function verify(data) {
     throw new Error('cumulated hash does not match');
   }
   //only works for transactions on ETH Mainnet
-  if (!verifyBlockchainHash(data)) {
-    throw new Error('hash on blockchain does not match');
-  }
-  return true;
+  const verifiedByBlockchain = await verifyBlockchainHash(data);
+  if (!verifiedByBlockchain) throw new Error('hashes on blockchain do not match')
+  
 }
 
 async function checkFile(file) {
-  const $resultSuccess = document.getElementById('result-success');
-  const $resultFail = document.getElementById('result-fail');
-  const $resultText = document.getElementById('result-text');
   let promise = new Promise((resolve,reject) =>{
     file.arrayBuffer()
     .then(parseAttachment)
     .then(verify)
     .then(() => {
-    //  $resultSuccess.style.display = 'initial';
-     // $resultFail.style.display = 'none';
-    //  $resultText.innerText = 'Verification successful. Check console for contents of verified object';
     resolve("verified");
     })
     .catch((error) => {
       console.log('Verification failed', error);
-    //  $resultSuccess.style.display = 'none';
-    //  $resultFail.style.display = 'initial';
-    //  $resultText.innerText = 'Verification failed. Check console for details';
     reject("rejected");
     });  
   });
@@ -147,7 +136,7 @@ function updateView() {
     $arrowLeft.style.visibility = 'visible';
     $buttonNewVerification.style.display = 'block';
     $fileList.style.display = 'block';
-
+    $descriptionTop.textContent = 'The results are calculated by comparing the PDF data to entries stored on the Ethereum Blockchain.';
     updateFileList();
 
   } else {
@@ -159,7 +148,7 @@ function updateView() {
     $arrowLeft.style.visibility = 'hidden';
     $instructionText.textContent = "Select a source to import your files";
     $fileList.style.display = 'none';
-
+    $descriptionTop.textContent = 'Select the Chroniql PDF files to verify the integrity of their contents. The data is embedded inside the PDF.';
     resetFileList();
   }
 }
@@ -172,6 +161,8 @@ function updateFileList() {
     let isVerified, isPdf, isValidFormat;
     isPdf = files[i].name.substr(name.length-4) == ".pdf";
     isValidFormat = files[i].objectData != undefined;
+    console.log(files[i])
+
     checkFile(files[i]).then((res) => {isVerified = true;}, (err) => {isVerified = false;}).then(() =>{
     $html += (isVerified ? 
         "<div id=\"fileSymbolOuterSuccess\"> <div id=\"fileSymbol\">&#10003;</div> </div>" :
@@ -184,19 +175,18 @@ function updateFileList() {
       files[i].name +
       "</div>   </div> <div id=\"fileRightSegment\">" + 
       (isVerified ?
-        "<div id=\"viewButton\"> View</div>" : 
+        ""://"<div id=\"viewButton\"> View</div>" : 
         !isPdf ? 
           "<div id=\"noView\">Invalid file format</div>" : 
-            !isValidFormat ? 
-              "<div id=\"noView\">Invalid file content</div>":
-        "<div id=\"viewButton\"> View</div>") +
+            
+          "<div id=\"noView\">hashes don't match</div>")+//"<div id=\"viewButton\"> View</div>") +
       "</div></div>"
       $fileList.innerHTML += $html;
 
     //update status text
     if (files.length > 1) $instructionText.textContent = "Verification status of the uploaded documents.";
-    else if (isVerified) $instructionText.textContent = "Verification of the uploaded file was successful. View the content of the verified document.";
-    else $instructionText.textContent = "The verification of the uploaded file failed. View the content of the document for more details.";
+    else if (isVerified) $instructionText.textContent = "Verification of the uploaded file was successful."// View the content of the verified document.";
+    else $instructionText.textContent = "The verification of the uploaded file failed."// View the content of the document for more details.";
     }); 
   }
 }

@@ -6,6 +6,7 @@ import {
   getInvalidProps,
 } from './verify.js';
 
+
 const files = [];
 const $buttonBrowse = document.getElementById('buttonBrowse');
 const $buttonLearnMore = document.getElementById('buttonLearnMore');
@@ -15,6 +16,7 @@ const $fileList = document.getElementById('fileList');
 const $instructionText = document.getElementById('instructionText');
 const $buttonReturnVerifier = document.getElementById('buttonReturnVerifier');
 const $arrowLeft = document.getElementById('arrowLeft');
+
 
 
 function parseAttachment(file) {
@@ -58,7 +60,6 @@ async function checkFile(file) {
     //  $resultSuccess.style.display = 'initial';
      // $resultFail.style.display = 'none';
     //  $resultText.innerText = 'Verification successful. Check console for contents of verified object';
-    console.log("verified now")
     resolve("verified");
     })
     .catch((error) => {
@@ -70,8 +71,6 @@ async function checkFile(file) {
     });  
   });
   return promise;
-  
-  
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -89,8 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
       files.push(evt.dataTransfer.files[i])
       }
     updateView();
-    }
-    
+    } 
   });
 
   document.getElementById('upload').addEventListener('change', (evt) => {
@@ -101,8 +99,25 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 $buttonBrowse.addEventListener('click', (evt) => {
-  console.log("clicked Browse File");
+  openDialog();
 });
+  
+
+function openDialog() {
+  document.getElementById('manualSelection').click();
+}
+
+document.getElementById('manualSelection').addEventListener('change', handleFiles, false);
+
+function handleFiles(){
+  
+  const selectedFiles = document.getElementById('manualSelection').files;
+  for (var i = 0; i < selectedFiles.length;i++){
+    files.push(selectedFiles.item(i));
+  }
+
+  updateView();
+}
 
 $buttonLearnMore.addEventListener('click', (evt) => {
   console.log("clicked Learn More");
@@ -122,7 +137,6 @@ $arrowLeft.addEventListener('click', (evt) => {
   files.length = 0;
   updateView();
 });
-
 
 function updateView() {
   if (files.length > 0) {
@@ -151,9 +165,8 @@ function updateView() {
 }
 
 function updateFileList() {
-  console.log(files)
+
   for (let i = 0; i < files.length; i++) {
-    
     let $html = "";
     $html += "<div id=\"fileOutline\">";
     let isVerified, isPdf, isValidFormat;
@@ -179,20 +192,12 @@ function updateFileList() {
         "<div id=\"viewButton\"> View</div>") +
       "</div></div>"
       $fileList.innerHTML += $html;
-      console.log($html)
-
 
     //update status text
     if (files.length > 1) $instructionText.textContent = "Verification status of the uploaded documents.";
     else if (isVerified) $instructionText.textContent = "Verification of the uploaded file was successful. View the content of the verified document.";
     else $instructionText.textContent = "The verification of the uploaded file failed. View the content of the document for more details.";
-    });
-    
-    
-    
-    
-    
-    
+    }); 
   }
 }
 

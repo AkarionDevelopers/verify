@@ -76,7 +76,6 @@ async function checkFile(file) {
 
 document.addEventListener('DOMContentLoaded', () => {
   document.body.addEventListener('dragover', (evt) => {
-    console.log('dragover');
     evt.stopPropagation();
     evt.preventDefault();
     // eslint-disable-next-line no-param-reassign
@@ -85,10 +84,13 @@ document.addEventListener('DOMContentLoaded', () => {
   document.body.addEventListener('drop', (evt) => {
     evt.stopPropagation();
     evt.preventDefault();
-    for (let i = 0; i < evt.dataTransfer.files.length;i++) {
+    if (files.length == 0) {
+      for (let i = 0; i < evt.dataTransfer.files.length;i++) {
       files.push(evt.dataTransfer.files[i])
-    }
+      }
     updateView();
+    }
+    
   });
 
   document.getElementById('upload').addEventListener('change', (evt) => {
@@ -124,7 +126,6 @@ $arrowLeft.addEventListener('click', (evt) => {
 
 function updateView() {
   if (files.length > 0) {
-    console.log("asdf")
     $buttonBrowse.style.display = 'none';
     $buttonLearnMore.style.display = 'none';
     $uploadBox.style.display = 'none';

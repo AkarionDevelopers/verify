@@ -8,6 +8,8 @@
   --colorText3: #161718;
   --colorButton: #4955A1;
   --colorChroniqlPrimary: #4955A1;
+  --colorSuccess: #84c318;
+  --colorFailure: #d64933;
 }
 
 body {
@@ -18,54 +20,43 @@ body {
   background-color: var(--colorBackground2);
 }
 
-label {
-  display: inline-block;
-  background-color: #4955a1;
-  color: white;
-  padding: 0.8rem;
-  font-family: sans-serif;
-  border-radius: 0.3rem;
-  cursor: pointer;
-  margin-top: 1rem;
-}
-
-.logo {
-  margin-left: 17.5%;
-  display:inline-flex;
-  margin-top: 60px;
-}
-
 .result {
   margin-top: 30px;
   width: 100px;
   display: none;
 }
 
-.chroniqlText {
+#chroniqlText {
   color: var(--colorChroniqlPrimary);
   text-align: left;
   letter-spacing: -1.64px;
-  margin: auto;
   font: normal normal normal 37px/46px Avenir-Heavy;
 }
 
 h1 {
   font: normal normal normal 46px/56px Avenir;
   color: var(--colorText1);
-  letter-spacing: 0;
   text-align: left;
-
+  margin-block-end: 10px;
+  margin-block-start: 11.64px;
 }
 
-h5 {
+#buttonNewVerification {
+  text-align: center;
+  color: var(--colorChroniqlPrimary);
   font: normal normal normal 14px/20px Avenir;
-  color: var(--colorText3);
-  letter-spacing: 0;
-  text-align: left;
-  margin:auto;
+  text-decoration: underline;
+  cursor:pointer;
 }
 
-#buttonTextBlack {
+#buttonReturnVerifier {
+  font: normal normal normal 14px/20px Avenir;
+  margin-top: 34.36px;
+  visibility: hidden;
+  cursor:pointer;
+}
+
+#buttonLearnMore {
   font: normal normal normal 14px/20px Avenir-Heavy;
   color: var(--colorText3);
   letter-spacing: 0;
@@ -75,7 +66,7 @@ h5 {
   background-color: var(--colorBackground1);
 }
 
-#buttonTextWhite{
+#buttonBrowse{
   font: normal normal normal 14px/20px Avenir-Heavy;
   color: var(--colorBackground1);
   letter-spacing: 0;
@@ -90,37 +81,68 @@ h4 {
   color: var(--colorText3);
 }
 
-.outerContainer {
-  width: 65%;
-  height: 910px;
-  margin-top: 59px;
+.outerContainer,.outerContainerTop {
+  width: 935px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.outerContainer {
+  height: 910px;
   background: var(--colorBackground1) 0% 0% no-repeat padding-box;
   border: 1px solid var(--colorOutline1);
   border-radius: 10px 0px 0px 0px;
-  opacity: 1;
 }
 
-.innerContainer {
-  margin-top: 65px;
+ .outerContainerTop {
+  height: 171px;
+  background: var(--colorBackground2) 0% 0% no-repeat padding-box;
+}
+
+.innerContainer,.innerContainerTop {
   margin-left: auto;
   margin-right: auto;
   width: 78%;
+}
+
+.innerContainer {
   background: var(--colorBackground1) 0% 0% no-repeat padding-box;
 }
 
-.instruction {
+.innerContainerTop {
+  background: var(--colorBackground2) 0% 0% no-repeat padding-box;
+  padding-top: 60px;
+}
+
+#logo {
+  position: absolute; 
+  padding-top:47px; 
+  padding-left:20px;
+}
+
+#arrowLeft {
+  position: absolute; 
+  padding-top:27px; 
+  padding-left:68px;
+  visibility: hidden;
+  cursor:pointer;
+}
+
+#instruction {
+  font: normal normal normal 14px/20px Avenir;
+  color: var(--colorText3);
+  text-align: left;
   display:inline-flex;
   margin-top: 90px;
-  margin-bottom:20px;
+  margin-bottom:10px;
+  
 }
 
 .infoLogo {
   padding-right: 7px;
 }
 
-.upload {
+#uploadBox {
   height: 345px;
   width: 100%;
   box-shadow: 0px 2px 10px var(--colorOutline2);
@@ -134,6 +156,7 @@ h4 {
   border: 2px solid var(--colorChroniqlPrimary);
   border-radius: 10px 0px 0px 0px;
   margin-left: 18.02px;
+  cursor:pointer;
 }
 
 .buttonBox {
@@ -147,4 +170,80 @@ h4 {
   text-align: center;
   margin-top: 114.44px;
   margin-bottom: auto;
+}
+
+#fileList {
+  display: none;
+}
+
+#fileOutline {
+  height: 90px;
+  box-shadow: 0px 2px 10px #0000001F;
+  border-radius: 10px 0px 0px 0px;
+  margin-bottom: 20px;
+  display: inline-flex;
+}
+
+#fileSymbolOuterSuccess, #fileSymbolOuterFailure {
+  width: 45px;
+  margin-left: 20.5px;
+}
+
+#fileSymbolOuterSuccess {
+  border-top: 3px solid var(--colorSuccess);
+}
+
+#fileSymbolOuterFailure {
+  border-top: 3px solid var(--colorFailure);
+}
+
+#fileSymbol {
+  height: 25px;
+  width: 50%;
+  margin-top: 62.5%;
+  margin-left: 25%;
+  text-align: center;
+}
+
+#fileStatusOuter {
+  width: 505px;
+  padding-top: 22px;
+  padding-left: 10px;
+}
+
+#fileStatus {
+  font: normal normal normal 17px/25px Avenir;
+}
+
+#fileName {
+  font: normal normal normal 14px/20px Avenir;
+}
+
+
+#fileRightSegment {
+  width: 146px;
+  margin-top: 30px;
+}
+
+#viewButton {
+  width: 70px;
+  height: 24.5px;
+  border: 1px solid var(--colorChroniqlPrimary);
+  border-radius: 4px;
+  font: normal normal normal 14px/20px Avenir;
+  color: var(--colorChroniqlPrimary);
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 5.5px;
+  margin-left: 36.5px;
+  cursor: pointer;
+}
+
+#noView {
+  width: 130px;
+  padding-right: 35px;
+  font: normal normal normal 14px/20px Avenir;
+  color: var(--colorFailure);
+  text-align: left;
+  padding-top: 5.5px;
 }

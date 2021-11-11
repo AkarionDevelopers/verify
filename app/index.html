@@ -3,41 +3,52 @@
 <head>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.8.335/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/2.3.1/sha256.js"></script>
-  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+  <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
   <script src="index.js" type="module"></script>
   <link rel="stylesheet" href="index.css">
   <title>Notarization Verification</title>
 </head>
 <body>
   <div>
-      <div class="logo">
-        <img src="logo.png" width="55" height="55" alt="Logo">
-        <div class="chroniqlText">chroniql</div>
+      <div class="outerContainerTop">
+          <img src="logo.png" width="70" height="70" alt="Logo" id=logo>
+        <div class=innerContainerTop id=chroniqlText>
+          chroniql
+        </div>
       </div>
+
       <div class="outerContainer">
-      
+          <div id="arrowLeft"><i class="fa fa-long-arrow-alt-left fa-sm"></i></div>
           <div class=innerContainer>
+            <div id="buttonReturnVerifier">Verifier</div>
             <h1>Notarization Verification</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla massa nisi, pharetra lobortis purus at, pulvinar</p>
-            <div class="instruction">
+            <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla massa nisi, pharetra lobortis purus at, pulvinar</div>
+            <div id="instruction">
               <div class="infoLogo">&#x24D8;</div>
-              <h5>Select a source to import your files</h5>
+              <div id="instructionText">Select a source to import your files</div> 
             </div>
 
             
-            <div class="upload">
+            <div id="uploadBox">
               <div class="iconAndText">
-                <i style="font-size:92px" class='fas'>&#xf382;</i>
+                <i class="fa fa-cloud-upload-alt fa-3x"></i>
                 <h4>Drag & Drop your PDF files here</h4>
+                <input id="upload" type="file" accept="application/pdf" hidden>
               </div>
               
-              <input id="upload" type="file" accept="application/pdf" hidden>
+              
 
 
             </div>
+            <div id="fileList">
+              
+
+            </div>
+            <p id="buttonNewVerification" style="display: none">New Verification</p>
+
             <div class="buttonBox">
-              <div class="button" id="buttonTextBlack">Learn More</div>
-              <div class="button" id="buttonTextWhite">Browser File</div>
+              <div class="button" id="buttonLearnMore">Learn More</div>
+              <div class="button" id="buttonBrowse">Browse File</div>
             </div>
             
             <div>

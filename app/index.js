@@ -27,7 +27,8 @@ function parseAttachment(file) {
     .then((document) => document.getPage(1))
     .then((page) => page.getAnnotations())
     .then((annotations) => new TextDecoder().decode(annotations[0].file.content))
-    .then((text) => JSON.parse(text));
+    .then((text) => JSON.parse(text))
+    .catch(()=> {throw new Error("Invalid File Format")});
 }
 
 async function verify(data) {
@@ -56,7 +57,7 @@ async function checkFile(file) {
     })
     .catch((error) => {
       console.log('Verification failed', error);
-    reject("rejected");
+    reject(error.toString().substr(6));
     });  
   });
   return promise;
@@ -109,7 +110,8 @@ function handleFiles(){
 }
 
 $buttonLearnMore.addEventListener('click', (evt) => {
-  console.log("clicked Learn More");
+  window.open(
+    "https://akarion.com/en/trust-layer", "_blank");
 });
 
 $buttonNewVerification.addEventListener('click', (evt) => {
@@ -162,8 +164,9 @@ function updateFileList() {
     isPdf = files[i].name.substr(name.length-4) == ".pdf";
     isValidFormat = files[i].objectData != undefined;
     console.log(files[i])
+    let errorMessage;
 
-    checkFile(files[i]).then((res) => {isVerified = true;}, (err) => {isVerified = false;}).then(() =>{
+    checkFile(files[i]).then((res) => {isVerified = true;}, (err) => {isVerified = false; errorMessage = err}).then(() =>{
     $html += (isVerified ? 
         "<div id=\"fileSymbolOuterSuccess\"> <div id=\"fileSymbol\">&#10003;</div> </div>" :
         "<div id=\"fileSymbolOuterFailure\"> <div id=\"fileSymbol\">X</div> </div>") +
@@ -177,9 +180,9 @@ function updateFileList() {
       (isVerified ?
         ""://"<div id=\"viewButton\"> View</div>" : 
         !isPdf ? 
-          "<div id=\"noView\">Invalid file format</div>" : 
+          "<div id=\"noView\"><span>Invalid file format</span></div>" : 
             
-          "<div id=\"noView\">hashes don't match</div>")+//"<div id=\"viewButton\"> View</div>") +
+          "<div id=\"noView\"><span>"+ errorMessage +"</span></div>")+//"<div id=\"viewButton\"> View</div>") +
       "</div></div>"
       $fileList.innerHTML += $html;
 

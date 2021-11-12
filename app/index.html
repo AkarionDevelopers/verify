@@ -3,7 +3,6 @@
 <head>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.8.335/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/2.3.1/sha256.js"></script>
-  <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
   <script src="index.js" type="module"></script>
   <link rel="stylesheet" href="index.css">
   <title>Notarization Verification</title>
@@ -11,28 +10,26 @@
 <body>
   <div>
       <div class="outerContainerTop">
-          <img src="logo.png" width="70" height="70" alt="Logo" id=logo>
-        <div class=innerContainerTop id=chroniqlText>
-          chroniql
-        </div>
+          <img src="images/logo.svg" width="230.5" height="51" alt="Logo" id=logo>
+        
       </div>
 
       <div class="outerContainer">
-          <div id="arrowLeft"><i class="fa fa-long-arrow-alt-left fa-sm"></i></div>
+        <img class="infoLogo" src="images/lang-arrow-back.svg" width="19" height="19" alt="Logo" id="arrowLeft"></img>
           <div class=innerContainer>
             <div id="buttonReturnVerifier">Verifier</div>
             <h1>Notarization Verification</h1>
             <div id="descriptionTop">Select the Chroniql PDF files to verify the integrity of their contents. The data is embedded inside the PDF.</div>
             <div id="instruction">
-              <div class="infoLogo">&#x24D8;</div>
+              <img class="infoLogo" src="images/info-circle-light.svg" width="19" height="19" alt="Logo"></img>
               <div id="instructionText">Select a source to import your files</div> 
             </div>
 
             
             <div id="uploadBox">
               <div class="iconAndText">
-                <i class="fa fa-cloud-upload-alt fa-3x"></i>
-                <h4>Drag & Drop your PDF files here</h4>
+                <img src="images/cloud-upload.svg" width="85" alt="Logo" id="cloud">
+                <h4 id="dragAndDrop">Drag & Drop your PDF files here</h4>
                 <input id="upload" type="file" accept="application/pdf" hidden>
               </div>
               
@@ -52,11 +49,7 @@
               <input id='manualSelection' type='file' hidden multiple/>
             </div>
             
-            <div>
-              <img class="result" id="result-success" src="success.svg" alt="success">
-              <img class="result" id="result-fail" src="fail.svg" alt="fail">
-            </div>
-            <p id="result-text"></p>
+            
 
           </div>
           

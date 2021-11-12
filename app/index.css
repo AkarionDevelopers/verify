@@ -20,18 +20,10 @@ body {
   background-color: var(--colorBackground2);
 }
 
-.result {
-  margin-top: 30px;
-  width: 100px;
-  display: none;
+#descriptionTop{
+  padding-left: 10px;
 }
 
-#chroniqlText {
-  color: var(--colorChroniqlPrimary);
-  text-align: left;
-  letter-spacing: -1.64px;
-  font: normal normal normal 37px/46px Avenir-Heavy;
-}
 
 h1 {
   font: normal normal normal 46px/56px Avenir;
@@ -39,6 +31,7 @@ h1 {
   text-align: left;
   margin-block-end: 10px;
   margin-block-start: 11.64px;
+  padding-left: 10px;
 }
 
 #buttonNewVerification {
@@ -54,6 +47,7 @@ h1 {
   margin-top: 34.36px;
   visibility: hidden;
   cursor:pointer;
+  margin-left: 10px;
 }
 
 #buttonLearnMore {
@@ -95,14 +89,14 @@ h4 {
 }
 
  .outerContainerTop {
-  height: 171px;
+  height: 170px;
   background: var(--colorBackground2) 0% 0% no-repeat padding-box;
 }
 
 .innerContainer,.innerContainerTop {
   margin-left: auto;
   margin-right: auto;
-  width: 78%;
+  width: 750px;
 }
 
 .innerContainer {
@@ -111,19 +105,18 @@ h4 {
 
 .innerContainerTop {
   background: var(--colorBackground2) 0% 0% no-repeat padding-box;
-  padding-top: 60px;
 }
 
 #logo {
   position: absolute; 
-  padding-top:47px; 
-  padding-left:20px;
+  padding-top:60px; 
+  padding-left:13px;
 }
 
 #arrowLeft {
   position: absolute; 
-  padding-top:27px; 
-  padding-left:68px;
+  padding-top:33px; 
+  padding-left:74px;
   visibility: hidden;
   cursor:pointer;
 }
@@ -134,7 +127,9 @@ h4 {
   text-align: left;
   display:inline-flex;
   margin-top: 90px;
-  margin-bottom:10px;
+  margin-bottom:7px;
+  margin-left: 10px;
+  
   
 }
 
@@ -144,10 +139,12 @@ h4 {
 
 #uploadBox {
   height: 345px;
-  width: 100%;
+  width: 730px;
   box-shadow: 0px 2px 10px var(--colorOutline2);
   border: 1px dashed var(--colorText3);
   border-radius: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 
 .button {
@@ -164,12 +161,17 @@ h4 {
   float: right;
   margin-bottom: 127px;
   margin-top: 60px;
+  margin-right: 10px;
 }
 
 .iconAndText {
   text-align: center;
-  margin-top: 114.44px;
+  margin-top: 108px;
   margin-bottom: auto;
+}
+
+#dragAndDrop {
+  margin-block-start: 10px;
 }
 
 #fileList {
@@ -177,7 +179,8 @@ h4 {
   overflow-x: hidden;
   height: 440px;
   scrollbar-width: none;
-  padding-left: 5px;
+  padding-left: 10px;
+ 
   
 }
 ::-webkit-scrollbar{
@@ -188,21 +191,22 @@ h4 {
   height: 90px;
   box-shadow: 0px 2px 10px #0000001F;
   border-radius: 10px 0px 0px 0px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   display: inline-flex;
+  margin-top: 10px;
 }
 
-#fileSymbolOuterSuccess, #fileSymbolOuterFailure {
-  width: 45px;
-  margin-left: 20.5px;
-}
 
 #fileSymbolOuterSuccess {
   border-top: 3px solid var(--colorSuccess);
+  width: 45px;
+  margin-left: 20px;
 }
 
 #fileSymbolOuterFailure {
   border-top: 3px solid var(--colorFailure);
+  width: 45px;
+  margin-left: 20px;
 }
 
 #fileSymbol {
@@ -214,7 +218,7 @@ h4 {
 }
 
 #fileStatusOuter {
-  width: 475.5px;
+  width: 490px;
   padding-top: 22px;
   padding-left: 10px;
 }
@@ -230,7 +234,8 @@ h4 {
 
 #fileRightSegment {
   width: 165px;
-  margin-top: 30px;
+  height: 90px;
+  text-align: center;
 }
 
 #viewButton {
@@ -241,17 +246,24 @@ h4 {
   font: normal normal normal 14px/20px Avenir;
   color: var(--colorChroniqlPrimary);
   text-align: center;
+  display: inline-block;
   vertical-align: middle;
-  padding-top: 5.5px;
   margin-left: 36.5px;
   cursor: pointer;
 }
 
 #noView {
-  
+  height: 100%;
+  display: table;
+  width: 135px;
   padding-right: 30px;
   font: normal normal normal 14px/20px Avenir;
   color: var(--colorFailure);
   text-align: right;
-  padding-top: 5.5px;
+  
+}
+
+#noView span {
+  vertical-align:middle;
+  display: table-cell;
 }

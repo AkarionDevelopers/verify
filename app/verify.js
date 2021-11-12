@@ -129,7 +129,7 @@ export function verifyCumulatedHash(data) {
       return entryHash;
     })
     .join('');
-  return hashRaw(cumulatedHash);
+  return hashRaw(cumulatedHash); 
 }
 
 export function verifyBlockchainHash(data) {

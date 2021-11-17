@@ -28,7 +28,7 @@ function parseAttachment(file) {
     .then((page) => page.getAnnotations())
     .then((annotations) => new TextDecoder().decode(annotations[0].file.content))
     .then((text) => JSON.parse(text))
-    .catch(()=> {throw new Error("Invalid File Format")});
+    .catch(()=> {throw new Error("invalid file content")});
 }
 
 async function verify(data) {
@@ -57,7 +57,7 @@ async function checkFile(file) {
     })
     .catch((error) => {
       console.log('Verification failed', error);
-    reject(error.toString().substr(6));
+    reject(error.toString().substr(7));
     });  
   });
   return promise;
@@ -160,29 +160,30 @@ function updateFileList() {
   for (let i = 0; i < files.length; i++) {
     let $html = "";
     $html += "<div id=\"fileOutline\">";
-    let isVerified, isPdf, isValidFormat;
-    isPdf = files[i].name.substr(name.length-4) == ".pdf";
-    isValidFormat = files[i].objectData != undefined;
-    console.log(files[i])
-    let errorMessage;
-
-    checkFile(files[i]).then((res) => {isVerified = true;}, (err) => {isVerified = false; errorMessage = err}).then(() =>{
-    $html += (isVerified ? 
-        "<div id=\"fileSymbolOuterSuccess\"> <div id=\"fileSymbol\">&#10003;</div> </div>" :
-        "<div id=\"fileSymbolOuterFailure\"> <div id=\"fileSymbol\">X</div> </div>") +
+    let $isVerified, $isPdf, $isValidFormat;
+    $isPdf = files[i].name.substr(name.length-4) == ".pdf";
+    $isValidFormat = files[i].objectData != undefined;
+    let $errorMessage;
+    
+    checkFile(files[i]).then((res) => {$isVerified = true;}, (err) => {$isVerified = false; $errorMessage = err; $isValidFormat = err != "invalid file content";}).then(() =>{
+    $html += ($isVerified ? 
+        "<div id=\"fileSymbolOuterSuccess\"> <div id=\"fileSymbol\"> <img src=\"images/check.svg\" width=\"25\" height=\"25\" alt=\"OK\"></div> </div>" :
+        !$isPdf ? "<div id=\"fileSymbolOuterFailure\"> <div id=\"fileSymbol\"> <img src=\"images/refresh.svg\" width=\"25\" height=\"25\" alt=\"OK\"></div> </div>" :
+        !$isValidFormat ? "<div id=\"fileSymbolOuterFailure\"> <div id=\"fileSymbol\"> <img src=\"images/exclamation-triangle-light.svg\" width=\"25\" height=\"25\" alt=\"OK\"></div> </div>" :
+        "<div id=\"fileSymbolOuterFailure\"> <div id=\"fileSymbol\"><img src=\"images/times.svg\" width=\"25\" height=\"25\" alt=\"X\"></div> </div>") +
       "<div id=\"fileStatusOuter\"> <div id=\"fileStatus\">" + 
-      (isVerified ? 
+      ($isVerified ? 
         "Succesfully verified!" : 
         "Verification failed!") +
       "</div><div id=\"fileName\">" + 
       files[i].name +
       "</div>   </div> <div id=\"fileRightSegment\">" + 
-      (isVerified ?
+      ($isVerified ?
         ""://"<div id=\"viewButton\"> View</div>" : 
-        !isPdf ? 
+        !$isPdf ? 
           "<div id=\"noView\"><span>Invalid file format</span></div>" : 
             
-          "<div id=\"noView\"><span>"+ errorMessage +"</span></div>")+//"<div id=\"viewButton\"> View</div>") +
+          "<div id=\"noView\"><span>"+ $errorMessage +"</span></div>")+//"<div id=\"viewButton\"> View</div>") +
       "</div></div>"
       $fileList.innerHTML += $html;
 

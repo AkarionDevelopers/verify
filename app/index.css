@@ -1,13 +1,13 @@
 :root {
-  --colorBackground1: #FFFFFF;
-  --colorBackground2: #F9F9F9;
-  --colorOutline1: #ECEEF5;
-  --colorOutline2: #0000001F;
-  --colorText1: #151E3F;
+  --colorBackground1: #ffffff;
+  --colorBackground2: #f9f9f9;
+  --colorOutline1: #eceef5;
+  --colorOutline2: #0000001f;
+  --colorText1: #151e3f;
   --colorText2: #303030;
   --colorText3: #161718;
-  --colorButton: #4955A1;
-  --colorChroniqlPrimary: #4955A1;
+  --colorButton: #4955a1;
+  --colorChroniqlPrimary: #4955a1;
   --colorSuccess: #84c318;
   --colorFailure: #d64933;
 }
@@ -20,10 +20,9 @@ body {
   background-color: var(--colorBackground2);
 }
 
-#descriptionTop{
+#descriptionTop {
   padding-left: 10px;
 }
-
 
 h1 {
   font: normal normal normal 46px/56px Avenir;
@@ -39,14 +38,14 @@ h1 {
   color: var(--colorChroniqlPrimary);
   font: normal normal normal 14px/20px Avenir;
   text-decoration: underline;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 #buttonReturnVerifier {
   font: normal normal normal 14px/20px Avenir;
   margin-top: 34.36px;
   visibility: hidden;
-  cursor:pointer;
+  cursor: pointer;
   margin-left: 10px;
 }
 
@@ -60,7 +59,7 @@ h1 {
   background-color: var(--colorBackground1);
 }
 
-#buttonBrowse{
+#buttonBrowse {
   font: normal normal normal 14px/20px Avenir-Heavy;
   color: var(--colorBackground1);
   letter-spacing: 0;
@@ -75,7 +74,8 @@ h4 {
   color: var(--colorText3);
 }
 
-.outerContainer,.outerContainerTop {
+.outerContainer,
+.outerContainerTop {
   width: 935px;
   margin-left: auto;
   margin-right: auto;
@@ -88,12 +88,13 @@ h4 {
   border-radius: 10px 10px 10px 10px;
 }
 
- .outerContainerTop {
+.outerContainerTop {
   height: 170px;
   background: var(--colorBackground2) 0% 0% no-repeat padding-box;
 }
 
-.innerContainer,.innerContainerTop {
+.innerContainer,
+.innerContainerTop {
   margin-left: auto;
   margin-right: auto;
   width: 750px;
@@ -108,29 +109,27 @@ h4 {
 }
 
 #logo {
-  position: absolute; 
-  padding-top:60px; 
-  padding-left:13px;
+  position: absolute;
+  padding-top: 60px;
+  padding-left: 13px;
 }
 
 #arrowLeft {
-  position: absolute; 
-  padding-top:33px; 
-  padding-left:74px;
+  position: absolute;
+  padding-top: 33px;
+  padding-left: 74px;
   visibility: hidden;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 #instruction {
   font: normal normal normal 14px/20px Avenir;
   color: var(--colorText3);
   text-align: left;
-  display:inline-flex;
+  display: inline-flex;
   margin-top: 90px;
-  margin-bottom:7px;
+  margin-bottom: 7px;
   margin-left: 10px;
-  
-  
 }
 
 .infoLogo {
@@ -153,11 +152,11 @@ h4 {
   border: 2px solid var(--colorChroniqlPrimary);
   border-radius: 10px 0px 0px 0px;
   margin-left: 18.02px;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .buttonBox {
-  display:inline-flex;
+  display: inline-flex;
   float: right;
   margin-bottom: 127px;
   margin-top: 60px;
@@ -180,22 +179,19 @@ h4 {
   height: 440px;
   scrollbar-width: none;
   padding-left: 10px;
- 
-  
 }
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   display: none;
 }
 
 #fileOutline {
   height: 90px;
-  box-shadow: 0px 2px 10px #0000001F;
+  box-shadow: 0px 2px 10px #0000001f;
   border-radius: 10px 0px 0px 0px;
   margin-bottom: 10px;
   display: inline-flex;
   margin-top: 10px;
 }
-
 
 #fileSymbolOuterSuccess {
   border-top: 3px solid var(--colorSuccess);
@@ -231,7 +227,6 @@ h4 {
   font: normal normal normal 14px/20px Avenir;
 }
 
-
 #fileRightSegment {
   width: 165px;
   height: 90px;
@@ -260,10 +255,9 @@ h4 {
   font: normal normal normal 14px/20px Avenir;
   color: var(--colorFailure);
   text-align: right;
-  
 }
 
 #noView span {
-  vertical-align:middle;
+  vertical-align: middle;
   display: table-cell;
 }

@@ -22,7 +22,7 @@ function flatten(data) {
       }
     }
   }
-  recurse(data, "");
+  recurse(data, '');
   return result;
 }
 
@@ -34,9 +34,9 @@ function hashRaw(value) {
     return null;
   }
   // eslint-disable-next-line new-cap
-  const shaObj = new window.jsSHA("SHA-256", "TEXT");
-  shaObj.update(value || "");
-  return shaObj.getHash("HEX");
+  const shaObj = new window.jsSHA('SHA-256', 'TEXT');
+  shaObj.update(value || '');
+  return shaObj.getHash('HEX');
 }
 
 function hashString(value, salt) {
@@ -62,38 +62,38 @@ function hashNull(salt) {
 function hash(key, value, salt) {
   if (!salt) {
     // salt has was removed -> entry sanitized
-    return "sanitized";
+    return 'sanitized';
   }
-  if (typeof value === "undefined") {
-    return "entry-not-found";
+  if (typeof value === 'undefined') {
+    return 'entry-not-found';
   }
   if (
-    key === "genesisDate" ||
-    key === "modificationDate" ||
-    key === "endedDate"
+    key === 'genesisDate' ||
+    key === 'modificationDate' ||
+    key === 'endedDate'
   ) {
     return hashDate(value, salt);
   }
   if (value === null || value === undefined) {
     return hashNull(salt);
   }
-  if (typeof value === "boolean") {
+  if (typeof value === 'boolean') {
     return hashBoolean(value, salt);
   }
-  if (typeof value === "number") {
+  if (typeof value === 'number') {
     return hashInt(value, salt);
   }
   if (Array.isArray(value)) {
     return hashRaw(`[]${salt}`);
   }
-  if (typeof value === "object") {
+  if (typeof value === 'object') {
     return hashRaw(`{}${salt}`);
   }
   return hashString(value, salt);
 }
 
 function fromHex(h) {
-  let s = "";
+  let s = '';
   for (let i = 0; i < h.length; i += 2) {
     s += String.fromCharCode(parseInt(h.substr(i, 2), 16));
   }
@@ -134,12 +134,12 @@ export function verifyCumulatedHash(data) {
         flattenedObject[entry.name],
         entry.salt
       );
-      if (entryHash === "sanitized") {
+      if (entryHash === 'sanitized') {
         return entry.hash;
       }
       return entryHash;
     })
-    .join("");
+    .join('');
   return hashRaw(cumulatedHash);
 }
 
@@ -147,7 +147,7 @@ export function verifyBlockchainHash(data) {
   const hash = data.notarization.auditProofs[0].notarizationDetails.hash;
   const txHash =
     data.notarization.auditProofs[0].notarizationDetails.notarizationId;
-  return fetch("https://api.blockcypher.com/v1/eth/main/txs/" + txHash)
+  return fetch('https://api.blockcypher.com/v1/eth/main/txs/' + txHash)
     .then(function(response) {
       return response.json();
     })
@@ -156,7 +156,7 @@ export function verifyBlockchainHash(data) {
       return message.hash === hash;
     })
     .catch(function(error) {
-      console.log("Could not find transaction " + txHash + " on ETH Mainnet");
+      console.log('Could not find transaction ' + txHash + ' on ETH Mainnet');
       return false;
     });
 }

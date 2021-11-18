@@ -198,7 +198,7 @@ function updateFileList() {
             ? '<div id="noView"><span>Invalid file format</span></div>'
             : '<div id="noView"><span>' + $errorMessage + '</span></div>') + //"<div id=\"viewButton\"> View</div>") +
           '</div></div>';
-        $fileList.innerHTML += sanitizeHtml($html);
+        $fileList.innerHTML += sanitizeHTML($html);
 
         //update status text
         if (files.length > 1)

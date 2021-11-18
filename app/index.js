@@ -190,7 +190,7 @@ function updateFileList() {
           '<div id="fileStatusOuter"> <div id="fileStatus">' +
           ($isVerified ? 'Succesfully verified!' : 'Verification failed!') +
           '</div><div id="fileName">' +
-          files[i].name +
+          sanitizeHTML(files[i].name) +
           '</div>   </div> <div id="fileRightSegment">' +
           ($isVerified
             ? '' //"<div id=\"viewButton\"> View</div>" :
@@ -198,13 +198,14 @@ function updateFileList() {
             ? '<div id="noView"><span>Invalid file format</span></div>'
             : '<div id="noView"><span>' + $errorMessage + '</span></div>') + //"<div id=\"viewButton\"> View</div>") +
           '</div></div>';
-        $fileList.innerHTML += sanitizeHTML($html);
+        $fileList.innerHTML += $html;
+        console.log($fileList);
 
         //update status text
         if (files.length > 1)
           $instructionText.textContent =
             'Verification status of the uploaded documents.';
-        else if (isVerified)
+        else if ($isVerified)
           $instructionText.textContent =
             'Verification of the uploaded file was successful.';
         // View the content of the verified document.";

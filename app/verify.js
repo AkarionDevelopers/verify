@@ -13,7 +13,7 @@ function flatten(data) {
       }
     } else {
       let isEmpty = true;
-      Object.keys(cur).forEach((p) => {
+      Object.keys(cur).forEach(p => {
         isEmpty = false;
         recurse(cur[p], prop ? `${prop}.${p}` : p);
       });
@@ -67,47 +67,58 @@ function hash(key, value, salt) {
   if (typeof value === 'undefined') {
     return 'entry-not-found';
   }
-  if (key === 'genesisDate' || key === 'modificationDate' || key === 'endedDate') {
+  if (
+    key === 'genesisDate' ||
+    key === 'modificationDate' ||
+    key === 'endedDate'
+  ) {
     return hashDate(value, salt);
   }
   if (value === null || value === undefined) {
     return hashNull(salt);
-  } if (typeof value === 'boolean') {
+  }
+  if (typeof value === 'boolean') {
     return hashBoolean(value, salt);
-  } if (typeof value === 'number') {
+  }
+  if (typeof value === 'number') {
     return hashInt(value, salt);
-  } if (Array.isArray(value)) {
+  }
+  if (Array.isArray(value)) {
     return hashRaw(`[]${salt}`);
-  } if (typeof value === 'object') {
+  }
+  if (typeof value === 'object') {
     return hashRaw(`{}${salt}`);
   }
   return hashString(value, salt);
 }
 
 function fromHex(h) {
-  let s = ''
-  for (let i = 0; i < h.length; i+=2) {
-    s += String.fromCharCode(parseInt(h.substr(i, 2), 16))
+  let s = '';
+  for (let i = 0; i < h.length; i += 2) {
+    s += String.fromCharCode(parseInt(h.substr(i, 2), 16));
   }
-  return decodeURIComponent(escape(s))
+  return decodeURIComponent(escape(s));
 }
 
 export function verifyObjectId(data) {
-  return data.object.id === data.notarization.auditProofs[0].notarizedObject.chroniqlObjectId;
+  return (
+    data.object.id ===
+    data.notarization.auditProofs[0].notarizedObject.chroniqlObjectId
+  );
 }
 
 export function getInvalidProps(data) {
   const flattenedObject = flatten(data.object);
   return data.notarization.auditProofs[0].notarizedObject.notarizationEntries
-    .filter((entry) => {
+    .filter(entry => {
       const calcHash = hash(
         entry.name,
         flattenedObject[entry.name],
-        entry.salt,
+        entry.salt
       );
       return calcHash !== entry.hash;
     })
-    .map((entry) => entry.name);
+    .map(entry => entry.name);
 }
 
 export function verifyPropHashes(data) {
@@ -117,11 +128,11 @@ export function verifyPropHashes(data) {
 export function verifyCumulatedHash(data) {
   const flattenedObject = flatten(data.object);
   const cumulatedHash = data.notarization.auditProofs[0].notarizedObject.notarizationEntries
-    .map((entry) => {
+    .map(entry => {
       const entryHash = hash(
         entry.name,
         flattenedObject[entry.name],
-        entry.salt,
+        entry.salt
       );
       if (entryHash === 'sanitized') {
         return entry.hash;
@@ -134,19 +145,18 @@ export function verifyCumulatedHash(data) {
 
 export function verifyBlockchainHash(data) {
   const hash = data.notarization.auditProofs[0].notarizationDetails.hash;
-  const txHash = data.notarization.auditProofs[0].notarizationDetails.notarizationId;
-  return fetch("https://api.blockcypher.com/v1/eth/main/txs/" + txHash )
-    .then(function (response) {
+  const txHash =
+    data.notarization.auditProofs[0].notarizationDetails.notarizationId;
+  return fetch('https://api.blockcypher.com/v1/eth/main/txs/' + txHash)
+    .then(function(response) {
       return response.json();
     })
-    .then(function (data) {
+    .then(function(data) {
       const message = JSON.parse(fromHex(data.outputs[0].script));
       return message.hash === hash;
     })
-    .catch(function (error) {
-      console.log("Could not find transaction " + txHash + " on ETH Mainnet");
+    .catch(function(error) {
+      console.log('Could not find transaction ' + txHash + ' on ETH Mainnet');
       return false;
     });
-    
-    
 }

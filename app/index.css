@@ -1,23 +1,263 @@
+:root {
+  --colorBackground1: #ffffff;
+  --colorBackground2: #f9f9f9;
+  --colorOutline1: #eceef5;
+  --colorOutline2: #0000001f;
+  --colorText1: #151e3f;
+  --colorText2: #303030;
+  --colorText3: #161718;
+  --colorButton: #4955a1;
+  --colorChroniqlPrimary: #4955a1;
+  --colorSuccess: #84c318;
+  --colorFailure: #d64933;
+}
+
 body {
-  width: 100%;
-  padding: 100px 30px;
+  font: normal normal 300 24px/35px Avenir;
+  color: var(--colorText2);
+  letter-spacing: 0;
+  text-align: left;
+  background-color: var(--colorBackground2);
+}
+
+#descriptionTop {
+  padding-left: 10px;
+}
+
+h1 {
+  font: normal normal normal 46px/56px Avenir;
+  color: var(--colorText1);
+  text-align: left;
+  margin-block-end: 10px;
+  margin-block-start: 11.64px;
+  padding-left: 10px;
+}
+
+#buttonNewVerification {
   text-align: center;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-label {
-  display: inline-block;
-  background-color: #4955a1;
-  color: white;
-  padding: 0.8rem;
-  font-family: sans-serif;
-  border-radius: 0.3rem;
+  color: var(--colorChroniqlPrimary);
+  font: normal normal normal 14px/20px Avenir;
+  text-decoration: underline;
   cursor: pointer;
-  margin-top: 1rem;
 }
 
-.result {
-  margin-top: 30px;
-  width: 100px;
+#buttonReturnVerifier {
+  font: normal normal normal 14px/20px Avenir;
+  margin-top: 34.36px;
+  visibility: hidden;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+#buttonLearnMore {
+  font: normal normal normal 14px/20px Avenir-Heavy;
+  color: var(--colorText3);
+  letter-spacing: 0;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 40px;
+  background-color: var(--colorBackground1);
+}
+
+#buttonBrowse {
+  font: normal normal normal 14px/20px Avenir-Heavy;
+  color: var(--colorBackground1);
+  letter-spacing: 0;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 40px;
+  background-color: var(--colorButton);
+}
+
+h4 {
+  font: normal normal normal 17px/25px Avenir;
+  color: var(--colorText3);
+}
+
+.outerContainer,
+.outerContainerTop {
+  width: 935px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.outerContainer {
+  height: 910px;
+  background: var(--colorBackground1) 0% 0% no-repeat padding-box;
+  border: 1px solid var(--colorOutline1);
+  border-radius: 10px 10px 10px 10px;
+}
+
+.outerContainerTop {
+  height: 170px;
+  background: var(--colorBackground2) 0% 0% no-repeat padding-box;
+}
+
+.innerContainer,
+.innerContainerTop {
+  margin-left: auto;
+  margin-right: auto;
+  width: 750px;
+}
+
+.innerContainer {
+  background: var(--colorBackground1) 0% 0% no-repeat padding-box;
+}
+
+.innerContainerTop {
+  background: var(--colorBackground2) 0% 0% no-repeat padding-box;
+}
+
+#logo {
+  position: absolute;
+  padding-top: 60px;
+  padding-left: 13px;
+}
+
+#arrowLeft {
+  position: absolute;
+  padding-top: 33px;
+  padding-left: 74px;
+  visibility: hidden;
+  cursor: pointer;
+}
+
+#instruction {
+  font: normal normal normal 14px/20px Avenir;
+  color: var(--colorText3);
+  text-align: left;
+  display: inline-flex;
+  margin-top: 90px;
+  margin-bottom: 7px;
+  margin-left: 10px;
+}
+
+.infoLogo {
+  padding-right: 7px;
+}
+
+#uploadBox {
+  height: 345px;
+  width: 730px;
+  box-shadow: 0px 2px 10px var(--colorOutline2);
+  border: 1px dashed var(--colorText3);
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.button {
+  width: 173px;
+  height: 40px;
+  border: 2px solid var(--colorChroniqlPrimary);
+  border-radius: 10px 0px 0px 0px;
+  margin-left: 18.02px;
+  cursor: pointer;
+}
+
+.buttonBox {
+  display: inline-flex;
+  float: right;
+  margin-bottom: 127px;
+  margin-top: 60px;
+  margin-right: 10px;
+}
+
+.iconAndText {
+  text-align: center;
+  margin-top: 108px;
+  margin-bottom: auto;
+}
+
+#dragAndDrop {
+  margin-block-start: 10px;
+}
+
+#fileList {
   display: none;
+  overflow-x: hidden;
+  height: 440px;
+  scrollbar-width: none;
+  padding-left: 10px;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+#fileOutline {
+  height: 90px;
+  box-shadow: 0px 2px 10px #0000001f;
+  border-radius: 10px 0px 0px 0px;
+  margin-bottom: 10px;
+  display: inline-flex;
+  margin-top: 10px;
+}
+
+#fileSymbolOuterSuccess {
+  border-top: 3px solid var(--colorSuccess);
+  width: 45px;
+  margin-left: 20px;
+}
+
+#fileSymbolOuterFailure {
+  border-top: 3px solid var(--colorFailure);
+  width: 45px;
+  margin-left: 20px;
+}
+
+#fileSymbol {
+  height: 25px;
+  width: 50%;
+  margin-top: 62.5%;
+  margin-left: 25%;
+  text-align: center;
+}
+
+#fileStatusOuter {
+  width: 490px;
+  padding-top: 22px;
+  padding-left: 10px;
+}
+
+#fileStatus {
+  font: normal normal normal 17px/25px Avenir;
+}
+
+#fileName {
+  font: normal normal normal 14px/20px Avenir;
+}
+
+#fileRightSegment {
+  width: 165px;
+  height: 90px;
+  text-align: center;
+}
+
+#viewButton {
+  width: 70px;
+  height: 24.5px;
+  border: 1px solid var(--colorChroniqlPrimary);
+  border-radius: 4px;
+  font: normal normal normal 14px/20px Avenir;
+  color: var(--colorChroniqlPrimary);
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 36.5px;
+  cursor: pointer;
+}
+
+#noView {
+  height: 100%;
+  display: table;
+  width: 135px;
+  padding-right: 30px;
+  font: normal normal normal 14px/20px Avenir;
+  color: var(--colorFailure);
+  text-align: right;
+}
+
+#noView span {
+  vertical-align: middle;
+  display: table-cell;
 }

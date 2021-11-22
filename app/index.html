@@ -5,17 +5,55 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jsSHA/2.3.1/sha256.js"></script>
   <script src="index.js" type="module"></script>
   <link rel="stylesheet" href="index.css">
-  <title>Open Data Integrity Verification</title>
+  <title>Notarization Verification</title>
 </head>
 <body>
-  <img src="logo.png" alt="Logo">
-  <h1>Open Data Integrity Verification</h1>
-  <label for="upload">Select PDF to get started</label>
-  <input id="upload" type="file" accept="application/pdf" hidden>
   <div>
-    <img class="result" id="result-success" src="success.svg" alt="success">
-    <img class="result" id="result-fail" src="fail.svg" alt="fail">
+      <div class="outerContainerTop">
+          <img src="images/logo.svg" width="230.5" height="51" alt="Logo" id=logo>
+        
+      </div>
+
+      <div class="outerContainer">
+        <img class="infoLogo" src="images/lang-arrow-back.svg" width="19" height="19" alt="Logo" id="arrowLeft"></img>
+          <div class=innerContainer>
+            <div id="buttonReturnVerifier">Verifier</div>
+            <h1>Notarization Verification</h1>
+            <div id="descriptionTop">Select the Chroniql PDF files to verify the integrity of their contents. The data is embedded inside the PDF.</div>
+            <div id="instruction">
+              <img class="infoLogo" src="images/info-circle-light.svg" width="19" height="19" alt="Logo"></img>
+              <div id="instructionText">Select a source to import your files</div> 
+            </div>
+
+            
+            <div id="uploadBox">
+              <div class="iconAndText">
+                <img src="images/cloud-upload.svg" width="85" alt="Logo" id="cloud">
+                <h4 id="dragAndDrop">Drag & Drop your PDF files here</h4>
+                <input id="upload" type="file" accept="application/pdf" hidden>
+              </div>
+              
+              
+
+
+            </div>
+            <div id="fileList">
+              
+
+            </div>
+            <p id="buttonNewVerification" style="display: none">New Verification</p>
+
+            <div class="buttonBox">
+              <div class="button" id="buttonLearnMore">Learn More</div>
+              <div class="button" id="buttonBrowse" >Browse File </div>
+              <input id='manualSelection' type='file' hidden multiple/>
+            </div>
+            
+            
+
+          </div>
+          
+      </div>
   </div>
-  <p id="result-text"></p>
 </body>
 </html>

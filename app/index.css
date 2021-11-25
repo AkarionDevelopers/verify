@@ -2,7 +2,7 @@
   --colorBackground1: #ffffff;
   --colorBackground2: #f9f9f9;
   --colorOutline1: #eceef5;
-  --colorOutline2: #0000001f;
+  --colorOutline2: #0000000f;
   --colorText1: #151e3f;
   --colorText2: #303030;
   --colorText3: #161718;
@@ -18,6 +18,7 @@ body {
   letter-spacing: 0;
   text-align: left;
   background-color: var(--colorBackground2);
+  margin: 0px;
 }
 
 #descriptionTop {
@@ -242,9 +243,10 @@ h4 {
   color: var(--colorChroniqlPrimary);
   text-align: center;
   display: inline-block;
-  vertical-align: middle;
   margin-left: 36.5px;
   cursor: pointer;
+  padding-block-start: 5.5px;
+  margin-top: 30px;
 }
 
 #noView {
@@ -260,4 +262,125 @@ h4 {
 #noView span {
   vertical-align: middle;
   display: table-cell;
+}
+
+#details {
+  display: none;
+}
+
+#detailsOuterTop {
+  width: 1440px;
+  height: 222px;
+  background-color: var(--colorBackground1);
+}
+
+#detailsInnerTop {
+  width: 1228px;
+  height: 222px;
+  background-color: var(--colorBackground1);
+  padding-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#detailsOuter {
+  width: 1440px;
+  background-color: var(--colorBackground2);
+}
+
+.detailsInner {
+  width: 1248px;
+  background-color: var(--colorBackground2);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#detailsStatusBox {
+  width: 100px;
+  height: 30px;
+  background-color: var(--colorBackground2);
+  margin-right: 10px;
+  border-radius: 4px;
+}
+
+#detailsStatusBar {
+  margin-top: 25px;
+  display: flex;
+}
+
+#detailsHeader {
+  color: var(--colorText3);
+  font: normal normal normal 34px/39px Avenir;
+  margin-top: 6px;
+}
+
+#detailsButtonsTop {
+  margin-top: 25px;
+  display: inline-flex;
+  width: 100%;
+  margin-left: 10px;
+}
+
+#detailsDataButtons {
+  display: flex;
+  float: left;
+  width: 855px;
+}
+
+#detailsReturnButtons {
+  display: flex;
+  float: right;
+}
+
+.detailsDataButton {
+  font: normal normal normal 17px/25px Avenir;
+  text-align: left;
+  color: var(--colorText3);
+  margin-right: 46px;
+  cursor: pointer;
+}
+.detailsDataButton:focus {
+  font: normal normal 900 17px/25px Avenir;
+  color: var(--colorChroniqlPrimary);
+  border-bottom: 3px solid var(--colorChroniqlPrimary);
+}
+
+.detailsReturnButton {
+  font: normal normal normal 14px/21px Avenir;
+  color: var(--colorText3);
+  margin-left: 20px;
+  width: 165px;
+  height: 23px;
+  text-align: center;
+  padding-top: 5px;
+  border: 1.2px solid var(--colorChroniqlPrimary);
+  background: var(--colorBackground1);
+  border: 1px solid var(--colorChroniqlPrimary);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.dataSheet {
+  width: 1228px;
+  background-color: var(--colorBackground1);
+  height: 300px;
+  box-shadow: 0px 4px 6px var(--colorOutline2);
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  padding: 40px;
+}
+
+#documentDataSheet {
+}
+
+#objectDataSheet {
+}
+
+#referencesSheet {
+}
+
+#detailsScrollPanel {
+  margin-bottom: 55px;
 }

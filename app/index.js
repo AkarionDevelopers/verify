@@ -7,6 +7,7 @@ import {
 } from './verify.js';
 
 const files = [];
+const flattenedFiles = [];
 const $buttonBrowse = document.getElementById('buttonBrowse');
 const $buttonLearnMore = document.getElementById('buttonLearnMore');
 const $buttonNewVerification = document.getElementById('buttonNewVerification');
@@ -16,6 +17,11 @@ const $instructionText = document.getElementById('instructionText');
 const $buttonReturnVerifier = document.getElementById('buttonReturnVerifier');
 const $arrowLeft = document.getElementById('arrowLeft');
 const $descriptionTop = document.getElementById('descriptionTop');
+const $main = document.getElementById('main');
+
+const $details = document.getElementById('details');
+const $buttonBack = document.getElementById('buttonBack');
+const $detailsScrollPanel = document.getElementById('detailsScrollPanel');
 
 function parseAttachment(file) {
   return window.pdfjsLib
@@ -30,6 +36,7 @@ function parseAttachment(file) {
 }
 
 async function verify(data) {
+  flattenedFiles.push(data);
   if (!verifyObjectId(data)) {
     throw new Error('id of object and notarization does not match');
   }
@@ -131,6 +138,11 @@ $arrowLeft.addEventListener('click', evt => {
   updateView();
 });
 
+$buttonBack.addEventListener('click', evt => {
+  $main.style.display = 'block';
+  $details.style.display = 'none';
+});
+
 function updateView() {
   if (files.length > 0) {
     $buttonBrowse.style.display = 'none';
@@ -165,7 +177,6 @@ function updateFileList() {
     let $isVerified, $isPdf, $isValidFormat;
     $isPdf = files[i].name.substr(name.length - 4) == '.pdf';
     $isValidFormat = files[i].objectData != undefined;
-    let $errorMessage;
 
     checkFile(files[i])
       .then(
@@ -174,7 +185,6 @@ function updateFileList() {
         },
         err => {
           $isVerified = false;
-          $errorMessage = err;
           $isValidFormat = err != 'invalid file content';
         }
       )
@@ -193,13 +203,23 @@ function updateFileList() {
           sanitizeHTML(files[i].name) +
           '</div>   </div> <div id="fileRightSegment">' +
           ($isVerified
-            ? '' //"<div id=\"viewButton\"> View</div>" :
+            ? '<div id="viewButton"> View</div>'
             : !$isPdf
             ? '<div id="noView"><span>Invalid file format</span></div>'
-            : '<div id="noView"><span>' + $errorMessage + '</span></div>') + //"<div id=\"viewButton\"> View</div>") +
+            : !$isValidFormat
+            ? '<div id="noView"><span>Invalid file content</span></div>'
+            : '<div id="viewButton"> View</div>') +
           '</div></div>';
         $fileList.innerHTML += $html;
         console.log($fileList);
+
+        if (document.getElementById('viewButton') != null) {
+          document
+            .getElementById('viewButton')
+            .addEventListener('click', evt => {
+              viewDetails(i);
+            });
+        }
 
         //update status text
         if (files.length > 1)
@@ -224,4 +244,53 @@ function sanitizeHTML(text) {
   const element = document.createElement('div');
   element.innerText = text;
   return element.innerHTML;
+}
+
+function viewDetails(i) {
+  $main.style.display = 'none';
+  $details.style.display = 'block';
+  const $data = flattenedFiles[i];
+
+  console.log($data);
+
+  printDocumentDataSheet($data);
+  printObjectDataSheet($data);
+  printReferences($data);
+}
+
+function printDocumentDataSheet($data) {
+  $detailsScrollPanel.innerHTML +=
+    '<div class="dataSheet" id="documentDataSheet">';
+
+  $detailsScrollPanel.innerHTML +=
+    '<div class="documentDataRow">' +
+    '<div class="documentDataSet">' +
+    '<div class="documentDataTitle">' +
+    'Type' +
+    '</div>' +
+    '<div class="documentDataItem">  ' +
+    $data.object['type'] +
+    '  </div>' +
+    '</div>' +
+    '</div>' +
+    '<div class="documentDataSet">' +
+    '<div class="documentDataTitle">' +
+    'Document ID' +
+    '</div>' +
+    '<div class="documentDataItem">  ' +
+    $data.object['id'] +
+    '  </div>' +
+    '</div>' +
+    '</div>' +
+    '</div>';
+}
+
+function printObjectDataSheet($data) {
+  $detailsScrollPanel.innerHTML +=
+    '<div class="dataSheet" id="objectDataSheet"/>';
+}
+
+function printReferences($data) {
+  $detailsScrollPanel.innerHTML +=
+    '<div class="dataSheet" id="referenceSheet"/>';
 }

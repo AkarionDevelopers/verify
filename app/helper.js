@@ -1,4 +1,5 @@
-export function printDocumentDataSheet($data) {
+export function printDocumentDataSheet(data, i) {
+  const $fileDetails = data.get('data')[i];
   //row 1
   let res =
     '<div class="dataSheet" id="documentDataSheet">' +
@@ -8,7 +9,7 @@ export function printDocumentDataSheet($data) {
     'Type:' +
     '</div>' +
     '<div class="documentDataItem">  ' +
-    $data.object['type'] +
+    $fileDetails.object['type'] +
     '</div>' +
     '</div>' +
     '<div class="documentDataSet" id="documentDataCol2">' +
@@ -16,7 +17,7 @@ export function printDocumentDataSheet($data) {
     'Document ID:' +
     '</div>' +
     '<div class="documentDataItem">  ' +
-    $data.object['id'] +
+    $fileDetails.object['id'] +
     '</div>' +
     '</div>' +
     '</div>' +
@@ -27,7 +28,7 @@ export function printDocumentDataSheet($data) {
     'Type Index:' +
     '</div>' +
     '<div class="documentDataItem">  ' +
-    $data.object['typeIndex'] +
+    $fileDetails.object['typeIndex'] +
     '</div>' +
     '</div>' +
     '<div class="documentDataSet" id="documentDataCol2">' +
@@ -35,7 +36,7 @@ export function printDocumentDataSheet($data) {
     'Timeline ID:' +
     '</div>' +
     '<div class="documentDataItem">  ' +
-    $data.object['timelineId'] +
+    $fileDetails.object['timelineId'] +
     '</div>' +
     '</div>' +
     '</div>' +
@@ -46,7 +47,7 @@ export function printDocumentDataSheet($data) {
     'Created on:' +
     '</div>' +
     '<div class="documentDataItem">  ' +
-    formatDate($data.object['genesisDate']) +
+    formatDate($fileDetails.object['genesisDate']) +
     '</div>' +
     '</div>' +
     '<div class="documentDataSet" id="documentDataCol2">' +
@@ -54,7 +55,7 @@ export function printDocumentDataSheet($data) {
     'Created by:' +
     '</div>' +
     '<div class="documentDataItem">  ' +
-    $data.object['genesisUserId'] +
+    $fileDetails.object['genesisUserId'] +
     '</div>' +
     '</div>' +
     '</div>' +
@@ -65,7 +66,7 @@ export function printDocumentDataSheet($data) {
     'Last modified on:' +
     '</div>' +
     '<div class="documentDataItem">  ' +
-    formatDate($data.object['modificationDate']) +
+    formatDate($fileDetails.object['modificationDate']) +
     '</div>' +
     '</div>' +
     '<div class="documentDataSet" id="documentDataCol2">' +
@@ -73,7 +74,7 @@ export function printDocumentDataSheet($data) {
     'Modified by:' +
     '</div>' +
     '<div class="documentDataItem">  ' +
-    $data.object['modificationUserId'] +
+    $fileDetails.object['modificationUserId'] +
     '</div>' +
     '</div>' +
     '</div>' +
@@ -84,7 +85,7 @@ export function printDocumentDataSheet($data) {
     'Version:' +
     '</div>' +
     '<div class="documentDataItem">  ' +
-    $data.object['modificationCount'] +
+    $fileDetails.object['modificationCount'] +
     '</div>' +
     '</div>' +
     '<div class="documentDataSet" id="documentDataCol2">' +
@@ -92,7 +93,7 @@ export function printDocumentDataSheet($data) {
     'Predecessor ID:' +
     '</div>' +
     '<div class="documentDataItem">  ' +
-    $data.object['predecessorId'] +
+    $fileDetails.object['predecessorId'] +
     '</div>' +
     '</div>' +
     '</div>' +
@@ -101,7 +102,9 @@ export function printDocumentDataSheet($data) {
   return res;
 }
 
-export function printObjectDataSheet($data) {
+export function printObjectDataSheet(data, i) {
+  const $fileDetails = data.get('data')[i];
+  const $isVerified = data.get('isVerified')[i];
   return (
     '<div class="dataSheet" id="objectDataSheet">' +
     '<div class="objectDataRow" style="border-top: 0px">' +
@@ -109,28 +112,71 @@ export function printObjectDataSheet($data) {
     '<div class="objectDataItem" id="objectDataCol2" style="font-weight: 500">Value</div>' +
     '<div class="objectDataItem" id="objectDataCol3" style="font-weight: 500">State</div>' +
     '</div>' +
-    getObjectDataRows($data) +
+    getObjectDataRows($fileDetails, $isVerified) +
     '</div>'
   );
 }
 
-function getObjectDataRows($data) {
+function getObjectDataRows($fileDetails, $isVerified) {
   let res = '';
-  for (let link in $data.object['links']) {
+  for (let itemName in $fileDetails.object['links']) {
     res +=
       '<div class="objectDataRow">' +
       '<div class="objectDataItem" id="objectDataCol1">' +
-      link +
+      itemName +
       '</div>' +
       '<div class="objectDataItem" id="objectDataCol2">' +
-      getValueFromLink(link, $data) +
+      getValueFromLink(itemName, $fileDetails) +
       '</div>' +
+      ($isVerified
+        ? '<div class="successCircle"></div>'
+        : '<div class="failCircle"></div>') +
       '</div>';
   }
   return res;
 }
-export function printReferences($data) {
-  return '<div class="dataSheet" id="referenceSheet">' + '</div>';
+export function printReferences(data, i) {
+  const $fileDetails = data.get('data')[i];
+  const $isVerified = data.get('isVerified')[i];
+  return (
+    '<div class="dataSheet" id="objectDataSheet">' +
+    '<div class="objectDataRow" style="border-top: 0px">' +
+    '<div class="objectDataItem" id="referencesCol1" style="font-weight: 500">Name</div>' +
+    '<div class="objectDataItem" id="referencesCol2" style="font-weight: 500">Type</div>' +
+    '<div class="objectDataItem" id="referencesCol3" style="font-weight: 500">Timeline ID</div>' +
+    '<div class="objectDataItem" id="referencesCol4" style="font-weight: 500">ID</div>' +
+    '<div class="objectDataItem" id="referencesCol5" style="font-weight: 500">State</div>' +
+    '</div>' +
+    getReferencesRows($fileDetails, $isVerified) +
+    '</div>'
+  );
+}
+
+function getReferencesRows($fileDetails, $isVerified) {
+  let res = '';
+  let references = $fileDetails.object['references'];
+  for (let item in references) {
+    console.log(item);
+    res +=
+      '<div class="objectDataRow">' +
+      '<div class="objectDataItem" id="referencesCol1">' +
+      references[item]['name'] +
+      '</div>' +
+      '<div class="objectDataItem" id="referencesCol2">' +
+      references[item]['type'] +
+      '</div>' +
+      '<div class="objectDataItem" id="referencesCol3">' +
+      references[item]['timelineId'] +
+      '</div>' +
+      '<div class="objectDataItem" id="referencesCol4">' +
+      references[item]['id'] +
+      '</div>' +
+      ($isVerified
+        ? '<div class="successCircle"></div>'
+        : '<div class="failCircle"></div>') +
+      '</div>';
+  }
+  return res;
 }
 
 function formatDate(date) {
@@ -149,20 +195,20 @@ function formatDate(date) {
   );
 }
 
-function getValueFromLink(item, $data) {
-  let link = $data.object['links'][item];
+function getValueFromLink(itemName, $fileDetails) {
+  let link = $fileDetails.object['links'][itemName];
   if (link == '') return '';
-  if (item == 'referencedBy')
+  if (itemName == 'referencedBy')
     return link.substring(
       link.indexOf('referencedBy/') + 'referencedBy/'.length,
       link.indexOf('referencedBy/') + 24 + 'referencedBy/'.length
     );
-  if (item == 'genesisUser' || item == 'modificationUser')
+  if (itemName == 'genesisUser' || itemName == 'modificationUser')
     return link.substring(
       link.indexOf('users/') + 'users/'.length,
       link.indexOf('users/') + 24 + 'users/'.length
     );
-  if (item == 'latest')
+  if (itemName == 'latest')
     return link.substring(
       link.indexOf('timelines/') + 'timelines/'.length,
       link.indexOf('timelines/') + 24 + 'timelines/'.length

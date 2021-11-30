@@ -5,6 +5,11 @@ import {
   verifyBlockchainHash,
   getInvalidProps
 } from './verify.js';
+import {
+  printDocumentDataSheet,
+  printObjectDataSheet,
+  printReferences
+} from './helper.js';
 
 const files = [];
 const flattenedFiles = [];
@@ -253,44 +258,7 @@ function viewDetails(i) {
 
   console.log($data);
 
-  printDocumentDataSheet($data);
-  printObjectDataSheet($data);
-  printReferences($data);
-}
-
-function printDocumentDataSheet($data) {
-  $detailsScrollPanel.innerHTML +=
-    '<div class="dataSheet" id="documentDataSheet">';
-
-  $detailsScrollPanel.innerHTML +=
-    '<div class="documentDataRow">' +
-    '<div class="documentDataSet">' +
-    '<div class="documentDataTitle">' +
-    'Type' +
-    '</div>' +
-    '<div class="documentDataItem">  ' +
-    $data.object['type'] +
-    '  </div>' +
-    '</div>' +
-    '</div>' +
-    '<div class="documentDataSet">' +
-    '<div class="documentDataTitle">' +
-    'Document ID' +
-    '</div>' +
-    '<div class="documentDataItem">  ' +
-    $data.object['id'] +
-    '  </div>' +
-    '</div>' +
-    '</div>' +
-    '</div>';
-}
-
-function printObjectDataSheet($data) {
-  $detailsScrollPanel.innerHTML +=
-    '<div class="dataSheet" id="objectDataSheet"/>';
-}
-
-function printReferences($data) {
-  $detailsScrollPanel.innerHTML +=
-    '<div class="dataSheet" id="referenceSheet"/>';
+  $detailsScrollPanel.innerHTML += printDocumentDataSheet($data);
+  $detailsScrollPanel.innerHTML += printObjectDataSheet($data);
+  $detailsScrollPanel.innerHTML += printReferences($data);
 }

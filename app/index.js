@@ -12,10 +12,15 @@ import {
 } from './helper.js';
 
 const files = [];
-const flattenedFiles = [];
+const data = new Map();
+data.set('data', []);
+data.set('isVerified', []);
 const $buttonBrowse = document.getElementById('buttonBrowse');
 const $buttonLearnMore = document.getElementById('buttonLearnMore');
 const $buttonNewVerification = document.getElementById('buttonNewVerification');
+const $detailsButtonNewVerification = document.getElementById(
+  'detailsButtonNewVerification'
+);
 const $uploadBox = document.getElementById('uploadBox');
 const $fileList = document.getElementById('fileList');
 const $instructionText = document.getElementById('instructionText');
@@ -40,19 +45,19 @@ function parseAttachment(file) {
     });
 }
 
-async function verify(data) {
-  flattenedFiles.push(data);
-  if (!verifyObjectId(data)) {
+async function verify($data) {
+  data.get('data').push($data);
+  if (!verifyObjectId($data)) {
     throw new Error('id of object and notarization does not match');
   }
-  if (!verifyPropHashes(data)) {
-    throw new Error("prop hashes don't match", getInvalidProps(data));
+  if (!verifyPropHashes($data)) {
+    throw new Error("prop hashes don't match", getInvalidProps($data));
   }
-  if (!verifyCumulatedHash(data)) {
+  if (!verifyCumulatedHash($data)) {
     throw new Error('cumulated hash does not match');
   }
   //only works for transactions on ETH Mainnet
-  const verifiedByBlockchain = await verifyBlockchainHash(data);
+  const verifiedByBlockchain = await verifyBlockchainHash($data);
   if (!verifiedByBlockchain)
     throw new Error('hashes on blockchain do not match');
 }
@@ -132,6 +137,12 @@ $buttonNewVerification.addEventListener('click', evt => {
   files.length = 0;
   updateView();
 });
+$detailsButtonNewVerification.addEventListener('click', evt => {
+  files.length = 0;
+  $main.style.display = 'block';
+  $details.style.display = 'none';
+  updateView();
+});
 
 $buttonReturnVerifier.addEventListener('click', evt => {
   files.length = 0;
@@ -187,9 +198,11 @@ function updateFileList() {
       .then(
         res => {
           $isVerified = true;
+          data.get('isVerified')[i] = true;
         },
         err => {
           $isVerified = false;
+          data.get('isVerified')[i] = false;
           $isValidFormat = err != 'invalid file content';
         }
       )
@@ -254,11 +267,15 @@ function sanitizeHTML(text) {
 function viewDetails(i) {
   $main.style.display = 'none';
   $details.style.display = 'block';
-  const $data = flattenedFiles[i];
+  const $isVerified = data.get('isVerified')[i];
+  console.log(data.get('data')[i]);
 
-  console.log($data);
+  document.getElementById('detailsStatusBox').innerHTML = $isVerified
+    ? '<div class="detailsStatusSuccess">Successful</div>'
+    : '<div class="detailsStatusFail">Failed</div>';
 
-  $detailsScrollPanel.innerHTML += printDocumentDataSheet($data);
-  $detailsScrollPanel.innerHTML += printObjectDataSheet($data);
-  $detailsScrollPanel.innerHTML += printReferences($data);
+  $detailsScrollPanel.innerHTML = printDocumentDataSheet(data, i);
+  $detailsScrollPanel.innerHTML += printObjectDataSheet(data, i);
+  $detailsScrollPanel.innerHTML += printReferences(data, i);
+  $detailsScrollPanel.innerHTML += '<div style="height: 20px"> </div>';
 }

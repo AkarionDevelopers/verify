@@ -10,6 +10,8 @@
   --colorChroniqlPrimary: #4955a1;
   --colorSuccess: #84c318;
   --colorFailure: #d64933;
+  --colorDocumentDataItem: #9b9b9b;
+  --colorRowBorder: #e7e7e7;
 }
 
 body {
@@ -361,9 +363,8 @@ h4 {
 }
 
 .dataSheet {
-  width: 1228px;
+  width: 1148px;
   background-color: var(--colorBackground1);
-  height: 300px;
   box-shadow: 0px 4px 6px var(--colorOutline2);
   border-radius: 10px;
   margin-left: 10px;
@@ -383,4 +384,56 @@ h4 {
 
 #detailsScrollPanel {
   margin-bottom: 55px;
+}
+
+.documentDataTitle {
+  font: normal normal normal 14px/25px Avenir;
+  text-align: left;
+  color: var(--colorDocumentDataItem);
+  width: 168px;
+}
+
+.documentDataItem,
+.objectDataItem {
+  font: normal normal normal 14px/20px Avenir;
+  text-align: left;
+  color: var(--colorText3);
+  width: 200px;
+}
+
+.documentDataSet {
+  display: flex;
+}
+
+.documentDataRow {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+#documentDataCol2 {
+  margin-left: 108px;
+}
+
+#lastRow {
+  margin-bottom: 0px;
+}
+
+.objectDataRow {
+  display: flex;
+  border-top: 1px solid var(--colorRowBorder);
+  height: 39px;
+  padding-top: 20px;
+}
+
+#objectDataCol1 {
+  margin-left: 40px;
+  width: 499px;
+}
+
+#objectDataCol2 {
+  width: 544px;
+}
+
+#objectDataCol3 {
+  width: 34px;
 }

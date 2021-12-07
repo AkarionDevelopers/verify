@@ -110,7 +110,7 @@ export function printObjectDataSheet(data, i) {
     '<div class="objectDataRow" style="border-top: 0px">' +
     '<div class="objectDataItem" id="objectDataCol1" style="font-weight: 500">Name</div>' +
     '<div class="objectDataItem" id="objectDataCol2" style="font-weight: 500">Value</div>' +
-    '<div class="objectDataItem" id="objectDataCol3" style="font-weight: 500">State</div>' +
+    //   '<div class="objectDataItem" id="objectDataCol3" style="font-weight: 500">State</div>' +
     '</div>' +
     getObjectDataRows($fileDetails, $isVerified) +
     '</div>'
@@ -119,33 +119,57 @@ export function printObjectDataSheet(data, i) {
 
 function getObjectDataRows($fileDetails, $isVerified) {
   let res = '';
-  for (let itemName in $fileDetails.object['links']) {
-    res +=
-      '<div class="objectDataRow">' +
-      '<div class="objectDataItem" id="objectDataCol1">' +
-      itemName +
-      '</div>' +
-      '<div class="objectDataItem" id="objectDataCol2">' +
-      getValueFromLink(itemName, $fileDetails) +
-      '</div>' +
-      ($isVerified
-        ? '<div class="successCircle"></div>'
-        : '<div class="failCircle"></div>') +
-      '</div>';
+  const objectData = $fileDetails.object['objectData'];
+
+  for (let itemName in objectData) {
+    if (
+      objectData[itemName] == null ||
+      !Array.isArray(objectData[itemName]) ||
+      objectData[itemName].length <= 1
+    ) {
+      //single line item or empty
+      res +=
+        '<div class="objectDataRow">' +
+        '<div class="objectDataItem" id="objectDataCol1">' +
+        itemName +
+        '</div>' +
+        '<div class="objectDataItem" id="objectDataCol2">' +
+        getObjectDataValue(objectData[itemName]) +
+        '</div>' +
+        // ($isVerified
+        //    ? '<div class="successCircle"></div>'
+        //   : '<div class="failCircle"></div>') +
+        '</div>';
+    } else {
+      //multi line objectData
+      res +=
+        '<div class="objectDataRow">' +
+        '<div class="objectDataItem" id="objectDataCol1">' +
+        itemName +
+        '</div>' +
+        '<div class="objectDataItem" id="objectDataCol2">' +
+        JSON.stringify(objectData[itemName]) +
+        '</div>' +
+        // ($isVerified
+        //    ? '<div class="successCircle"></div>'
+        //   : '<div class="failCircle"></div>') +
+        '</div>';
+    }
   }
+
   return res;
 }
 export function printReferences(data, i) {
   const $fileDetails = data.get('data')[i];
   const $isVerified = data.get('isVerified')[i];
   return (
-    '<div class="dataSheet" id="objectDataSheet">' +
+    '<div class="dataSheet" id="referencesSheet">' +
     '<div class="objectDataRow" style="border-top: 0px">' +
     '<div class="objectDataItem" id="referencesCol1" style="font-weight: 500">Name</div>' +
     '<div class="objectDataItem" id="referencesCol2" style="font-weight: 500">Type</div>' +
     '<div class="objectDataItem" id="referencesCol3" style="font-weight: 500">Timeline ID</div>' +
     '<div class="objectDataItem" id="referencesCol4" style="font-weight: 500">ID</div>' +
-    '<div class="objectDataItem" id="referencesCol5" style="font-weight: 500">State</div>' +
+    //  '<div class="objectDataItem" id="referencesCol5" style="font-weight: 500">State</div>' +
     '</div>' +
     getReferencesRows($fileDetails, $isVerified) +
     '</div>'
@@ -156,7 +180,6 @@ function getReferencesRows($fileDetails, $isVerified) {
   let res = '';
   let references = $fileDetails.object['references'];
   for (let item in references) {
-    console.log(item);
     res +=
       '<div class="objectDataRow">' +
       '<div class="objectDataItem" id="referencesCol1">' +
@@ -171,9 +194,9 @@ function getReferencesRows($fileDetails, $isVerified) {
       '<div class="objectDataItem" id="referencesCol4">' +
       references[item]['id'] +
       '</div>' +
-      ($isVerified
-        ? '<div class="successCircle"></div>'
-        : '<div class="failCircle"></div>') +
+      // ($isVerified
+      //   ? '<div class="successCircle"></div>'
+      //   : '<div class="failCircle"></div>') +
       '</div>';
   }
   return res;
@@ -195,24 +218,14 @@ function formatDate(date) {
   );
 }
 
-function getValueFromLink(itemName, $fileDetails) {
-  let link = $fileDetails.object['links'][itemName];
-  if (link == '') return '';
-  if (itemName == 'referencedBy')
-    return link.substring(
-      link.indexOf('referencedBy/') + 'referencedBy/'.length,
-      link.indexOf('referencedBy/') + 24 + 'referencedBy/'.length
-    );
-  if (itemName == 'genesisUser' || itemName == 'modificationUser')
-    return link.substring(
-      link.indexOf('users/') + 'users/'.length,
-      link.indexOf('users/') + 24 + 'users/'.length
-    );
-  if (itemName == 'latest')
-    return link.substring(
-      link.indexOf('timelines/') + 'timelines/'.length,
-      link.indexOf('timelines/') + 24 + 'timelines/'.length
-    );
+function getObjectDataValue(objectData) {
+  if (
+    objectData == null ||
+    objectData.length == 0 ||
+    objectData.toString() == '[object Object]'
+  ) {
+    return '-';
+  }
 
-  return link.substring(link.indexOf('base')).replace('/objects/', '.');
+  return objectData.toString();
 }

@@ -33,6 +33,10 @@ const $details = document.getElementById('details');
 const $buttonBack = document.getElementById('buttonBack');
 const $detailsScrollPanel = document.getElementById('detailsScrollPanel');
 
+const $buttonDocumentData = document.getElementById('buttonDocumentData');
+const $buttonObjectData = document.getElementById('buttonObjectData');
+const $buttonReferences = document.getElementById('buttonReferences');
+
 function parseAttachment(file) {
   return window.pdfjsLib
     .getDocument(file)
@@ -221,23 +225,14 @@ function updateFileList() {
           sanitizeHTML(files[i].name) +
           '</div>   </div> <div id="fileRightSegment">' +
           ($isVerified
-            ? '<div id="viewButton"> View</div>'
+            ? '<div class="viewButton" id="viewButton_' + i + '"> View</div>'
             : !$isPdf
             ? '<div id="noView"><span>Invalid file format</span></div>'
             : !$isValidFormat
             ? '<div id="noView"><span>Invalid file content</span></div>'
-            : '<div id="viewButton"> View</div>') +
+            : '<div class="viewButton" id="viewButton_' + i + '"> View</div>') +
           '</div></div>';
         $fileList.innerHTML += $html;
-        console.log($fileList);
-
-        if (document.getElementById('viewButton') != null) {
-          document
-            .getElementById('viewButton')
-            .addEventListener('click', evt => {
-              viewDetails(i);
-            });
-        }
 
         //update status text
         if (files.length > 1)
@@ -245,12 +240,19 @@ function updateFileList() {
             'Verification status of the uploaded documents.';
         else if ($isVerified)
           $instructionText.textContent =
-            'Verification of the uploaded file was successful.';
-        // View the content of the verified document.";
+            'Verification of the uploaded file was successful. View the content of the verified document.';
         else
           $instructionText.textContent =
-            'The verification of the uploaded file failed.'; // View the content of the document for more details.";
+            'The verification of the uploaded file failed. View the content of the document for more details.';
       });
+  }
+
+  for (let i = 0; i < files.length; i++) {
+    document.addEventListener('click', function(e) {
+      if (e.target && e.target.id == 'viewButton_' + i) {
+        viewDetails(i);
+      }
+    });
   }
 }
 
@@ -274,8 +276,63 @@ function viewDetails(i) {
     ? '<div class="detailsStatusSuccess">Successful</div>'
     : '<div class="detailsStatusFail">Failed</div>';
 
+  document.getElementById('detailsFileName').innerHTML = files[i].name;
+
   $detailsScrollPanel.innerHTML = printDocumentDataSheet(data, i);
   $detailsScrollPanel.innerHTML += printObjectDataSheet(data, i);
   $detailsScrollPanel.innerHTML += printReferences(data, i);
   $detailsScrollPanel.innerHTML += '<div style="height: 20px"> </div>';
+
+  const detailsTopHeight = document.getElementById('detailsTop').offsetHeight;
+
+  const offsetObjectData =
+    document.getElementById('objectDataSheet').getBoundingClientRect().top -
+    detailsTopHeight -
+    15; //for smoother transition
+
+  const offsetReferences =
+    document.getElementById('referencesSheet').getBoundingClientRect().top -
+    detailsTopHeight -
+    15; //for smoother transition
+
+  let offset = 0;
+  let previousOffset = 0;
+  window.addEventListener('scroll', () => {
+    previousOffset = offset;
+    offset = window.pageYOffset;
+    if (offset >= offsetObjectData && previousOffset < offsetObjectData) {
+      unMarkButton($buttonDocumentData);
+      markButton($buttonObjectData);
+    } else if (
+      offset <= offsetObjectData &&
+      previousOffset > offsetObjectData
+    ) {
+      markButton($buttonDocumentData);
+      unMarkButton($buttonObjectData);
+    } else if (
+      offset >= offsetReferences &&
+      previousOffset < offsetReferences
+    ) {
+      markButton($buttonReferences);
+      unMarkButton($buttonObjectData);
+    } else if (
+      offset <= offsetReferences &&
+      previousOffset > offsetReferences
+    ) {
+      markButton($buttonObjectData);
+      unMarkButton($buttonReferences);
+    }
+  });
+
+  scroll(0, 0);
+  markButton($buttonDocumentData);
+}
+
+function markButton(button) {
+  button.style.color = '#4955a1';
+  button.style.borderBottom = ' 3px solid';
+}
+function unMarkButton(button) {
+  button.style.color = '#161718';
+  button.style.borderBottom = 'none';
 }

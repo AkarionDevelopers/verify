@@ -79,6 +79,11 @@ h4 {
   color: var(--colorText3);
 }
 
+#detailsFileName {
+  font: normal normal normal 17px/25px Avenir;
+  color: var(--colorText3);
+  margin-top: 2px;
+}
 .outerContainer,
 .outerContainerTop {
   width: 935px;
@@ -238,7 +243,7 @@ h4 {
   text-align: center;
 }
 
-#viewButton {
+.viewButton {
   width: 70px;
   height: 24.5px;
   border: 1px solid var(--colorChroniqlPrimary);
@@ -271,6 +276,10 @@ h4 {
 #details {
   display: none;
 }
+#detailsTop {
+  position: sticky;
+  top: 0px;
+}
 
 #detailsOuterTop {
   width: 1440px;
@@ -299,12 +308,9 @@ h4 {
   margin-right: auto;
 }
 
-.detailsStatusBox {
-}
-
 .detailsStatusSuccess,
-.detailsStatusFailure {
-  height: 25px;
+.detailsStatusFail {
+  height: 24px;
   background-color: var(--colorSuccessBackground);
   color: var(--colorSuccess);
   padding-left: 17px;
@@ -313,9 +319,9 @@ h4 {
   font: normal normal 500 14px/20px Avenir;
   text-align: center;
   margin-right: 10px;
-  padding-top: 5px;
+  padding-top: 6px;
 }
-.detailsStatusFailure {
+.detailsStatusFail {
   background-color: var(--colorFailureBackground);
   color: var(--colorFailure);
 }
@@ -332,7 +338,7 @@ h4 {
 }
 
 #detailsButtonsTop {
-  margin-top: 25px;
+  margin-top: 20.5px;
   display: inline-flex;
   width: 100%;
   margin-left: 10px;
@@ -342,6 +348,7 @@ h4 {
   display: flex;
   float: left;
   width: 855px;
+  margin-top: 4.5px;
 }
 
 #detailsReturnButtons {
@@ -355,7 +362,9 @@ h4 {
   color: var(--colorText3);
   margin-right: 46px;
   cursor: pointer;
+  padding-bottom: 6px;
 }
+
 .detailsDataButton:focus {
   font: normal normal 900 17px/25px Avenir;
   color: var(--colorChroniqlPrimary);
@@ -405,6 +414,8 @@ h4 {
   text-align: left;
   color: var(--colorText3);
   width: 200px;
+  padding-block-end: 20px;
+  word-wrap: break-word;
 }
 
 .documentDataSet {
@@ -413,7 +424,6 @@ h4 {
 
 .documentDataRow {
   display: flex;
-  margin-bottom: 20px;
 }
 
 #documentDataCol2 {
@@ -427,7 +437,6 @@ h4 {
 .objectDataRow {
   display: flex;
   border-top: 1px solid var(--colorRowBorder);
-  height: 39px;
   padding-top: 20px;
 }
 
@@ -437,7 +446,7 @@ h4 {
 }
 
 #objectDataCol2 {
-  width: 544px;
+  width: 574px;
 }
 
 #objectDataCol3 {
@@ -459,6 +468,11 @@ h4 {
 }
 #referencesCol5 {
   width: 34px;
+}
+#referencesCol2,
+#referencesCol3,
+#referencesCol4 {
+  margin-left: 70px;
 }
 
 .failCircle,

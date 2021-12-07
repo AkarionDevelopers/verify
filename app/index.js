@@ -300,28 +300,39 @@ function viewDetails(i) {
   window.addEventListener('scroll', () => {
     previousOffset = offset;
     offset = window.pageYOffset;
-    if (offset >= offsetObjectData && previousOffset < offsetObjectData) {
+    if (
+      offset >= offsetObjectData &&
+      offset < offsetReferences &&
+      (previousOffset < offsetObjectData || previousOffset >= offsetReferences)
+    ) {
       unMarkButton($buttonDocumentData);
+      unMarkButton($buttonReferences);
       markButton($buttonObjectData);
     } else if (
-      offset <= offsetObjectData &&
-      previousOffset > offsetObjectData
+      offset < offsetObjectData &&
+      previousOffset >= offsetObjectData
     ) {
       markButton($buttonDocumentData);
       unMarkButton($buttonObjectData);
+      unMarkButton($buttonReferences);
     } else if (
       offset >= offsetReferences &&
       previousOffset < offsetReferences
     ) {
       markButton($buttonReferences);
       unMarkButton($buttonObjectData);
-    } else if (
-      offset <= offsetReferences &&
-      previousOffset > offsetReferences
-    ) {
-      markButton($buttonObjectData);
-      unMarkButton($buttonReferences);
+      unMarkButton($buttonDocumentData);
     }
+  });
+
+  $buttonDocumentData.addEventListener('click', evt => {
+    scroll(0, 0);
+  });
+  $buttonObjectData.addEventListener('click', evt => {
+    scroll(0, offsetObjectData);
+  });
+  $buttonReferences.addEventListener('click', evt => {
+    scroll(0, offsetReferences);
   });
 
   scroll(0, 0);

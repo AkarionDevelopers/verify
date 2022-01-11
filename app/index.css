@@ -30,7 +30,7 @@ body {
 }
 
 h1 {
-  font: normal normal normal 46px/56px Avenir;
+  font: normal normal normal 40px/56px Avenir;
   color: var(--colorText1);
   text-align: left;
   margin-block-end: 10px;
@@ -491,4 +491,66 @@ h4 {
 
 .successCircle {
   background-color: var(--colorSuccess);
+}
+
+@media only screen and (max-device-width: 320px) {
+  .outerContainer,
+  .outerContainerTop {
+    width: 93%;
+  }
+  .outerContainer {
+    height: 458px;
+  }
+  .outerContainerTop {
+    height: 110px;
+  }
+
+  .innerContainer,
+  .innerContainerTop {
+    width: 85.57%;
+  }
+
+  #uploadBox {
+    display: none;
+  }
+
+  .button {
+    width: 98%;
+    height: 8.0435%;
+    margin-block-end: 10px;
+    margin-left: 0;
+  }
+
+  .buttonBox {
+    display: block;
+    float: none;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    width: 100%;
+    height: auto;
+  }
+
+  #logo {
+    padding-top: 29px;
+    padding-left: 0px;
+    margin-left: -13 px;
+  }
+  #instruction {
+    display: none;
+  }
+  body {
+    font: normal normal 300 21px/31px Avenir;
+  }
+
+  h1 {
+    padding-left: 0px;
+  }
+
+  #descriptionTop {
+    padding-left: 0px;
+  }
+
+  #buttonReturnVerifier {
+    margin-top: 10px;
+  }
 }

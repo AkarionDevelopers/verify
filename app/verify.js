@@ -100,25 +100,34 @@ function fromHex(h) {
   return decodeURIComponent(escape(s));
 }
 
-export function verifyObjectId(data) {
-  return (
-    data.object.id ===
-    data.notarization.auditProofs[0].notarizedObject.chroniqlObjectId
-  );
+export function verifyObjectData(data) {
+  const secretStep = data.hashing.steps[0];
+  if (secretStep == null) return false;
+  const hash = hashRaw(data.object.objectData + secretStep.postfix);
+  return hash === secretStep.output;
 }
-
-export function getInvalidProps(data) {
-  const flattenedObject = flatten(data.object);
-  return data.notarization.auditProofs[0].notarizedObject.notarizationEntries
-    .filter(entry => {
-      const calcHash = hash(
-        entry.name,
-        flattenedObject[entry.name],
-        entry.salt
-      );
-      return calcHash !== entry.hash;
-    })
-    .map(entry => entry.name);
+export function verifyMetaData(data) {
+  const metaDataStep = data.hashing.steps[1];
+  const secretStep = data.hashing.steps[0];
+  if (metaDataStep == null || secretStep == null) return false;
+  //prefix of metaData should be hash of metaData, check if true
+  if (hashRaw(data.object.metaData) != metaDataStep.prefix) return false;
+  const hash = hashRaw(metaDataStep.prefix + secretStep.output);
+  return hash === metaDataStep.output;
+}
+export function verifyHashingSteps(data) {
+  const steps = data.hashing.steps;
+  for (let i = 2; i < steps.length; i++) {
+    const prefix = steps[i].prefix || '';
+    const previousOutput = steps[i - 1].output;
+    const postfix = steps[i].postfix || '';
+    const output = steps[i].output;
+    hash = hashRaw(prefix + previousOutput + postfix);
+    if (hash != output) return false;
+    //additional check from last step to hash in notarization
+    if (i === steps.length - 1 && hash != data.notarization.hash) return false;
+  }
+  return true;
 }
 
 export function verifyPropHashes(data) {
@@ -144,9 +153,8 @@ export function verifyCumulatedHash(data) {
 }
 
 export function verifyBlockchainHash(data) {
-  const hash = data.notarization.auditProofs[0].notarizationDetails.hash;
-  const txHash =
-    data.notarization.auditProofs[0].notarizationDetails.notarizationId;
+  const hash = data.notarization.hash;
+  const txHash = data.notarization.id;
   return fetch('https://api.blockcypher.com/v1/eth/main/txs/' + txHash)
     .then(function(response) {
       return response.json();

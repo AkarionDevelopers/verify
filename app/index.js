@@ -1,9 +1,8 @@
 import {
-  verifyObjectId,
-  verifyPropHashes,
-  verifyCumulatedHash,
   verifyBlockchainHash,
-  getInvalidProps
+  verifyObjectData,
+  verifyMetaData,
+  verifyHashingSteps
 } from './verify.js';
 import {
   printDocumentDataSheet,
@@ -38,12 +37,21 @@ const $buttonObjectData = document.getElementById('buttonObjectData');
 const $buttonReferences = document.getElementById('buttonReferences');
 
 function parseAttachment(file) {
+  /*return fetch('./response.json').then(response => {
+    //uncomment this to test new notarization algo with json file
+    return response.json();
+  });*/
+
   return window.pdfjsLib
     .getDocument(file)
     .promise.then(document => document.getPage(1))
     .then(page => page.getAnnotations())
     .then(annotations => new TextDecoder().decode(annotations[0].file.content))
-    .then(text => JSON.parse(text))
+    .then(text => {
+      console.log(JSON.parse(text).hashing[0]); //check if correct format
+      JSON.parse(text);
+    })
+
     .catch(() => {
       throw new Error('invalid file content');
     });
@@ -51,19 +59,20 @@ function parseAttachment(file) {
 
 async function verify($data) {
   data.get('data').push($data);
-  if (!verifyObjectId($data)) {
-    throw new Error('id of object and notarization does not match');
+  console.log(data);
+  if (!verifyObjectData($data)) {
+    throw new Error("object data hashes don't match");
   }
-  if (!verifyPropHashes($data)) {
-    throw new Error("prop hashes don't match", getInvalidProps($data));
+  if (!verifyMetaData($data)) {
+    throw new Error("meta data hashes don't match");
   }
-  if (!verifyCumulatedHash($data)) {
-    throw new Error('cumulated hash does not match');
+  if (!verifyHashingSteps($data)) {
+    throw new Error('hashing steps output does not match notarization hash');
   }
   //only works for transactions on ETH Mainnet
   const verifiedByBlockchain = await verifyBlockchainHash($data);
   if (!verifiedByBlockchain)
-    throw new Error('hashes on blockchain do not match');
+    throw new Error('Blockchain verification is not completed');
 }
 
 async function checkFile(file) {
@@ -197,7 +206,7 @@ function updateFileList() {
     let $isVerified, $isPdf, $isValidFormat;
     $isPdf = files[i].name.substr(name.length - 4) == '.pdf';
     $isValidFormat = files[i].objectData != undefined;
-
+    let $thrownError = null;
     checkFile(files[i])
       .then(
         res => {
@@ -208,6 +217,7 @@ function updateFileList() {
           $isVerified = false;
           data.get('isVerified')[i] = false;
           $isValidFormat = err != 'invalid file content';
+          $thrownError = err;
         }
       )
       .then(() => {
@@ -244,15 +254,16 @@ function updateFileList() {
         else
           $instructionText.textContent =
             'The verification of the uploaded file failed. View the content of the document for more details.';
+      })
+      .then(() => {
+        for (let i = 0; i < files.length; i++) {
+          document.addEventListener('click', function(e) {
+            if (e.target && e.target.id == 'viewButton_' + i) {
+              viewDetails(i, $thrownError);
+            }
+          });
+        }
       });
-  }
-
-  for (let i = 0; i < files.length; i++) {
-    document.addEventListener('click', function(e) {
-      if (e.target && e.target.id == 'viewButton_' + i) {
-        viewDetails(i);
-      }
-    });
   }
 }
 
@@ -266,11 +277,14 @@ function sanitizeHTML(text) {
   return element.innerHTML;
 }
 
-function viewDetails(i) {
+function viewDetails(i, thrownError) {
   $main.style.display = 'none';
   $details.style.display = 'block';
   const $isVerified = data.get('isVerified')[i];
-  console.log(data.get('data')[i]);
+  if (thrownError != null) {
+    document.getElementById('detailsErrorMessage').style.display = 'block';
+    document.getElementById('detailsErrorMessage').innerText = thrownError;
+  }
 
   document.getElementById('detailsStatusBox').innerHTML = $isVerified
     ? '<div class="detailsStatusSuccess">Successful</div>'
@@ -285,15 +299,18 @@ function viewDetails(i) {
 
   const detailsTopHeight = document.getElementById('detailsTop').offsetHeight;
 
-  const offsetObjectData =
-    document.getElementById('objectDataSheet').getBoundingClientRect().top -
-    detailsTopHeight -
-    15; //for smoother transition
+  scroll(0, 0);
+  markButton($buttonDocumentData);
 
-  const offsetReferences =
+  const offsetObjectData = Math.floor(
+    document.getElementById('objectDataSheet').getBoundingClientRect().top -
+      detailsTopHeight
+  );
+
+  const offsetReferences = Math.floor(
     document.getElementById('referencesSheet').getBoundingClientRect().top -
-    detailsTopHeight -
-    15; //for smoother transition
+      detailsTopHeight
+  );
 
   let offset = 0;
   let previousOffset = 0;
@@ -329,14 +346,11 @@ function viewDetails(i) {
     scroll(0, 0);
   });
   $buttonObjectData.addEventListener('click', evt => {
-    scroll(0, offsetObjectData);
+    scroll(0, offsetObjectData + 1);
   });
   $buttonReferences.addEventListener('click', evt => {
-    scroll(0, offsetReferences);
+    scroll(0, offsetReferences + 1);
   });
-
-  scroll(0, 0);
-  markButton($buttonDocumentData);
 }
 
 function markButton(button) {

@@ -332,11 +332,25 @@ h4 {
 }
 
 #detailsHeader {
-  color: var(--colorText3);
-  font: normal normal normal 34px/39px Avenir;
+  display: flex;
   margin-top: 6px;
 }
+#detailsHeaderRight {
+  display: inline-flex;
+  font: normal normal normal 14px/20px Avenir;
+  filter: invert(41%) sepia(21%) saturate(3869%) hue-rotate(336deg)
+    brightness(86%) contrast(94%);
+  margin-left: auto;
+}
+#detailsHeaderLeft {
+  color: var(--colorText3);
+  font: normal normal normal 34px/39px Avenir;
+}
 
+#detailsErrorMessage {
+  display: none;
+  margin-inline: 7px;
+}
 #detailsButtonsTop {
   margin-top: 20.5px;
   display: inline-flex;
@@ -392,8 +406,8 @@ h4 {
   box-shadow: 0px 4px 6px var(--colorOutline2);
   border-radius: 10px;
   margin-left: 10px;
-  margin-top: 10px;
-  margin-bottom: 30px;
+  margin-top: 0px;
+  margin-bottom: 40px;
   padding: 40px;
 }
 

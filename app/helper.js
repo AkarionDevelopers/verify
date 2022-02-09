@@ -9,7 +9,7 @@ export function printDocumentDataSheet(data, i) {
     'Type:' +
     '</div>' +
     '<div class="documentDataItem">  ' +
-    $fileDetails.object['type'] +
+    sanitize($fileDetails.object['type']) +
     '</div>' +
     '</div>' +
     '<div class="documentDataSet" id="documentDataCol2">' +
@@ -17,7 +17,7 @@ export function printDocumentDataSheet(data, i) {
     'Document ID:' +
     '</div>' +
     '<div class="documentDataItem">  ' +
-    $fileDetails.object['id'] +
+    sanitize($fileDetails.object['id']) +
     '</div>' +
     '</div>' +
     '</div>' +
@@ -36,7 +36,7 @@ export function printDocumentDataSheet(data, i) {
     'Timeline ID:' +
     '</div>' +
     '<div class="documentDataItem">  ' +
-    $fileDetails.object['timelineId'] +
+    sanitize($fileDetails.object['timelineId']) +
     '</div>' +
     '</div>' +
     '</div>' +
@@ -47,7 +47,7 @@ export function printDocumentDataSheet(data, i) {
     'Created on:' +
     '</div>' +
     '<div class="documentDataItem">  ' +
-    formatDate($fileDetails.object['genesisDate']) +
+    formatDate(sanitize($fileDetails.object['genesisDate'])) +
     '</div>' +
     '</div>' +
     '<div class="documentDataSet" id="documentDataCol2">' +
@@ -55,7 +55,7 @@ export function printDocumentDataSheet(data, i) {
     'Created by:' +
     '</div>' +
     '<div class="documentDataItem">  ' +
-    $fileDetails.object['genesisUserId'] +
+    sanitize($fileDetails.object['genesisUserId']) +
     '</div>' +
     '</div>' +
     '</div>' +
@@ -66,7 +66,7 @@ export function printDocumentDataSheet(data, i) {
     'Last modified on:' +
     '</div>' +
     '<div class="documentDataItem">  ' +
-    formatDate($fileDetails.object['modificationDate']) +
+    sanitize(formatDate($fileDetails.object['modificationDate'])) +
     '</div>' +
     '</div>' +
     '<div class="documentDataSet" id="documentDataCol2">' +
@@ -74,7 +74,7 @@ export function printDocumentDataSheet(data, i) {
     'Modified by:' +
     '</div>' +
     '<div class="documentDataItem">  ' +
-    $fileDetails.object['modificationUserId'] +
+    sanitize($fileDetails.object['modificationUserId']) +
     '</div>' +
     '</div>' +
     '</div>' +
@@ -93,7 +93,7 @@ export function printDocumentDataSheet(data, i) {
     'Predecessor ID:' +
     '</div>' +
     '<div class="documentDataItem">  ' +
-    $fileDetails.object['predecessorId'] +
+    sanitize($fileDetails.object['predecessorId']) +
     '</div>' +
     '</div>' +
     '</div>' +
@@ -131,7 +131,7 @@ function getObjectDataRows($fileDetails, $isVerified) {
       res +=
         '<div class="objectDataRow">' +
         '<div class="objectDataItem" id="objectDataCol1">' +
-        itemName +
+        sanitize(itemName) +
         '</div>' +
         '<div class="objectDataItem" id="objectDataCol2">' +
         getObjectDataValue(objectData[itemName]) +
@@ -145,7 +145,7 @@ function getObjectDataRows($fileDetails, $isVerified) {
       res +=
         '<div class="objectDataRow">' +
         '<div class="objectDataItem" id="objectDataCol1">' +
-        itemName +
+        sanitize(itemName) +
         '</div>' +
         '<div class="objectDataItem" id="objectDataCol2">' +
         JSON.stringify(objectData[itemName]) +
@@ -183,16 +183,16 @@ function getReferencesRows($fileDetails, $isVerified) {
     res +=
       '<div class="objectDataRow">' +
       '<div class="objectDataItem" id="referencesCol1">' +
-      references[item]['name'] +
+      sanitize(references[item]['name']) +
       '</div>' +
       '<div class="objectDataItem" id="referencesCol2">' +
-      references[item]['type'] +
+      sanitize(references[item]['type']) +
       '</div>' +
       '<div class="objectDataItem" id="referencesCol3">' +
-      references[item]['timelineId'] +
+      sanitize(references[item]['timelineId']) +
       '</div>' +
       '<div class="objectDataItem" id="referencesCol4">' +
-      references[item]['id'] +
+      sanitize(references[item]['id']) +
       '</div>' +
       // ($isVerified
       //   ? '<div class="successCircle"></div>'
@@ -203,7 +203,7 @@ function getReferencesRows($fileDetails, $isVerified) {
 }
 
 function formatDate(date) {
-  let parsedDate = new Date(date);
+  let parsedDate = new Date(sanitize(date));
   return (
     '' +
     parsedDate.getFullYear() +
@@ -228,4 +228,17 @@ function getObjectDataValue(objectData) {
   }
 
   return objectData.toString();
+}
+
+function sanitize(string) {
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#x27;',
+    '/': '&#x2F;'
+  };
+  const reg = /[&<>"'/]/gi;
+  return string.replace(reg, match => map[match]);
 }

@@ -469,24 +469,19 @@ h4 {
 
 #referencesCol1 {
   margin-left: 40px;
-  width: 289px;
+  width: 359px;
 }
 #referencesCol2 {
-  width: 213px;
+  width: 283px;
 }
 #referencesCol3 {
-  width: 254px;
+  width: 324px;
 }
 #referencesCol4 {
-  width: 265px;
+  width: 335px;
 }
 #referencesCol5 {
   width: 34px;
-}
-#referencesCol2,
-#referencesCol3,
-#referencesCol4 {
-  margin-left: 70px;
 }
 
 .failCircle,

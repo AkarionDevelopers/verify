@@ -37,10 +37,10 @@ const $buttonObjectData = document.getElementById('buttonObjectData');
 const $buttonReferences = document.getElementById('buttonReferences');
 
 function parseAttachment(file) {
-  /*return fetch('./response.json').then(response => {
+  return fetch('./response.json').then(response => {
     //uncomment this to test new notarization algo with json file
     return response.json();
-  });*/
+  });
 
   return window.pdfjsLib
     .getDocument(file)
@@ -76,6 +76,7 @@ async function verify($data) {
 }
 
 async function checkFile(file) {
+  console.log(file);
   let promise = new Promise((resolve, reject) => {
     file
       .arrayBuffer()

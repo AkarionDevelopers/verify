@@ -9,7 +9,7 @@ export function printDocumentDataSheet(data, i) {
     'Type:' +
     '</div>' +
     '<div class="documentDataItem">  ' +
-    $metaData['type'] +
+    sanitize($metaData['type']) +
     '</div>' +
     '</div>' +
     '<div class="documentDataSet" id="documentDataCol2">' +
@@ -17,7 +17,7 @@ export function printDocumentDataSheet(data, i) {
     'Document ID:' +
     '</div>' +
     '<div class="documentDataItem">  ' +
-    $metaData['_id'] +
+    sanitize($metaData['_id']) +
     '</div>' +
     '</div>' +
     '</div>' +
@@ -36,7 +36,7 @@ export function printDocumentDataSheet(data, i) {
     'Timeline ID:' +
     '</div>' +
     '<div class="documentDataItem">  ' +
-    $metaData['timelineId'] +
+    sanitize($metaData['timelineId']) +
     '</div>' +
     '</div>' +
     '</div>' +
@@ -55,7 +55,7 @@ export function printDocumentDataSheet(data, i) {
     'Created by:' +
     '</div>' +
     '<div class="documentDataItem">  ' +
-    $metaData['genesisUserId'] +
+    sanitize($metaData['genesisUserId']) +
     '</div>' +
     '</div>' +
     '</div>' +
@@ -74,7 +74,7 @@ export function printDocumentDataSheet(data, i) {
     'Modified by:' +
     '</div>' +
     '<div class="documentDataItem">  ' +
-    $metaData['modificationUserId'] +
+    sanitize($metaData['modificationUserId']) +
     '</div>' +
     '</div>' +
     '</div>' +
@@ -93,7 +93,7 @@ export function printDocumentDataSheet(data, i) {
     'Predecessor ID:' +
     '</div>' +
     '<div class="documentDataItem">  ' +
-    $metaData['predecessorId'] +
+    sanitize($metaData['predecessorId']) +
     '</div>' +
     '</div>' +
     '</div>' +
@@ -129,7 +129,7 @@ function getObjectDataRows($objectData, $isVerified) {
       res +=
         '<div class="objectDataRow">' +
         '<div class="objectDataItem" id="objectDataCol1">' +
-        itemName +
+        sanitize(itemName) +
         '</div>' +
         '<div class="objectDataItem" id="objectDataCol2">' +
         getObjectDataValue($objectData[itemName]) +
@@ -143,7 +143,7 @@ function getObjectDataRows($objectData, $isVerified) {
       res +=
         '<div class="objectDataRow">' +
         '<div class="objectDataItem" id="objectDataCol1">' +
-        itemName +
+        sanitize(itemName) +
         '</div>' +
         '<div class="objectDataItem" id="objectDataCol2">' +
         JSON.stringify($objectData[itemName]) +
@@ -182,16 +182,16 @@ function getReferencesRows($references, $isVerified) {
     res +=
       '<div class="objectDataRow">' +
       '<div class="objectDataItem" id="referencesCol1">' +
-      $references[item]['name'] +
+      sanitize($references[item]['name']) +
       '</div>' +
       '<div class="objectDataItem" id="referencesCol2">' +
-      $references[item]['type'] +
+      sanitize($references[item]['type']) +
       '</div>' +
       '<div class="objectDataItem" id="referencesCol3">' +
-      $references[item]['timelineId'] +
+      sanitize($references[item]['timelineId']) +
       '</div>' +
       '<div class="objectDataItem" id="referencesCol4">' +
-      $references[item]['_id'] +
+      sanitize($references[item]['_id']) +
       '</div>' +
       // ($isVerified
       //   ? '<div class="successCircle"></div>'
@@ -227,4 +227,17 @@ function getObjectDataValue(objectData) {
   }
 
   return objectData.toString();
+}
+
+function sanitize(string) {
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#x27;',
+    '/': '&#x2F;'
+  };
+  const reg = /[&<>"'/]/gi;
+  return string.replace(reg, match => map[match]);
 }

@@ -1,5 +1,6 @@
 export function printDocumentDataSheet(data, i) {
-  const $metaData = JSON.parse(data.get('data')[i].object.metaData);
+  console.log(data)
+  const $metaData = JSON.parse(data.get('data')[i].notarization.object.metaData);
   //row 1
   let res =
     '<div class="dataSheet" id="documentDataSheet">' +
@@ -103,7 +104,7 @@ export function printDocumentDataSheet(data, i) {
 }
 
 export function printObjectDataSheet(data, i) {
-  const $objectData = JSON.parse(data.get('data')[i].object.objectData);
+  const $objectData = JSON.parse(data.get('data')[i].notarization.object.objectData);
   const $isVerified = data.get('isVerified')[i];
   return (
     '<div class="dataSheet" id="objectDataSheet">' +
@@ -158,7 +159,7 @@ function getObjectDataRows($objectData, $isVerified) {
   return res;
 }
 export function printReferences(data, i) {
-  const $references = JSON.parse(data.get('data')[i].object.metaData)
+  const $references = JSON.parse(data.get('data')[i].notarization.object.metaData)
     .references;
   const $isVerified = data.get('isVerified')[i];
   return (

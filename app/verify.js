@@ -101,6 +101,7 @@ function fromHex(h) {
 }
 
 export function verifyObjectData(data) {
+  console.log(data)
   const secretStep = data.hashing.steps[0];
   if (secretStep == null) return false;
   const hash = hashRaw(data.object.objectData + secretStep.postfix);

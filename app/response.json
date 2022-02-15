@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "object": {
+    "partitionId": "base-6f896a85-df5d-495a-ad2b-1b280de4fcac",
+    "metaData": "{\"_id\":\"61d4548b9132736374337bb7\",\"genesisDate\":1626258560710,\"genesisUserId\":\"5ed8f20cce475900041d7508\",\"modificationCount\":6,\"modificationDate\":1641305227421,\"modificationUserId\":\"5ed8f20cce475900041d7508\",\"predecessorId\":\"60eef4328d24470004c8bb7c\",\"references\":[{\"_id\":\"5ef37295e46646000367e2c4\",\"name\":\"documentRef\",\"timelineId\":\"5ef37295e46646000367e2c5\",\"type\":\"DOCUMENT\"},{\"_id\":\"614c54970199555e6ac121a2\",\"name\":\"ownerRef\",\"timelineId\":\"5ed8f20e3452250003b0a1cc\",\"type\":\"CONTACT\"},{\"_id\":\"614b38300199555e6abff9fb\",\"name\":\"statusRef\",\"timelineId\":\"60e60579eab19e0004ebc2e0\",\"type\":\"PROCESSING_ACTIVITY_STATUS\"},{\"_id\":\"5ed8f20e3452250003b0a19b\",\"name\":\"dpgMainStoragePeriodRef\",\"timelineId\":\"5ed8f20e3452250003b0a19c\",\"type\":\"STORAGE_PERIOD\"},{\"_id\":\"5ed8f20e3452250003b09fc9\",\"name\":\"dataflowDataSourceRef\",\"timelineId\":\"5ed8f20e3452250003b09fca\",\"type\":\"DATA_SOURCE\"},{\"_id\":\"5f72f89e119020000334a3a1\",\"name\":\"thirdPartyDataSourceRef\",\"timelineId\":\"5ed8f20e3452250003b0a1d2\",\"type\":\"ORG\"},{\"_id\":\"60eef4308d24470004c8bb79\",\"name\":\"dataflowProcessingActivityRef\",\"timelineId\":\"605b34b1f2c7a90003c4b87e\",\"type\":\"PROCESSING_ACTIVITY\"},{\"_id\":\"6050c6f901c089000329fa1f\",\"name\":\"dataflowReceiverCategoryRef\",\"timelineId\":\"6050c6f901c089000329fa20\",\"type\":\"RECEIVER_CATEGORY\"},{\"_id\":\"5f72f89e119020000334a3a1\",\"name\":\"involvedReceiverOrgsRef\",\"timelineId\":\"5ed8f20e3452250003b0a1d2\",\"type\":\"ORG\"},{\"_id\":\"6050c6f901c089000329fa1f\",\"name\":\"dataflowItemRef\",\"timelineId\":\"6050c6f901c089000329fa20\",\"type\":\"RECEIVER_CATEGORY\"},{\"_id\":\"5f72f89e119020000334a3a1\",\"name\":\"dataflowItemRef\",\"timelineId\":\"5ed8f20e3452250003b0a1d2\",\"type\":\"ORG\"},{\"_id\":\"5ed8f20e3452250003b09fc9\",\"name\":\"dataflowItemRef\",\"timelineId\":\"5ed8f20e3452250003b09fca\",\"type\":\"DATA_SOURCE\"},{\"_id\":\"5ed8f20e3452250003b0a04d\",\"name\":\"dpgDataSubjectCategoryRef\",\"timelineId\":\"5ed8f20e3452250003b0a04e\",\"type\":\"DATA_SUBJECT_CATEGORY\"},{\"_id\":\"5ed8f20e3452250003b0a171\",\"name\":\"dpgDataCategoryRef\",\"timelineId\":\"5ed8f20e3452250003b0a172\",\"type\":\"DATA_CATEGORY\"},{\"_id\":\"5ed8f20e3452250003b0a091\",\"name\":\"dpgDataCategoryRef\",\"timelineId\":\"5ed8f20e3452250003b0a092\",\"type\":\"DATA_CATEGORY\"},{\"_id\":\"5ed8f20e3452250003b0a1b7\",\"name\":\"dpgDataCategoryRef\",\"timelineId\":\"5ed8f20e3452250003b0a1b8\",\"type\":\"DATA_CATEGORY\"},{\"_id\":\"5ed8f20e3452250003b0a087\",\"name\":\"dpgDataCategoryRef\",\"timelineId\":\"5ed8f20e3452250003b0a088\",\"type\":\"DATA_CATEGORY\"},{\"_id\":\"5ed8f20e3452250003b0a13f\",\"name\":\"dpgDataCategoryRef\",\"timelineId\":\"5ed8f20e3452250003b0a140\",\"type\":\"DATA_CATEGORY\"},{\"_id\":\"5ed8f20e3452250003b0a145\",\"name\":\"dpgDataCategoryRef\",\"timelineId\":\"5ed8f20e3452250003b0a146\",\"type\":\"DATA_CATEGORY\"},{\"_id\":\"5ed8f20e3452250003b0a077\",\"name\":\"dpgDataCategoryRef\",\"timelineId\":\"5ed8f20e3452250003b0a078\",\"type\":\"DATA_CATEGORY\"},{\"_id\":\"5ed8f20e3452250003b0a04b\",\"name\":\"dpgDataCategoryRef\",\"timelineId\":\"5ed8f20e3452250003b0a04c\",\"type\":\"DATA_CATEGORY\"},{\"_id\":\"5ed8f20e3452250003b0a16d\",\"name\":\"dpgDataCategoryRef\",\"timelineId\":\"5ed8f20e3452250003b0a16e\",\"type\":\"DATA_CATEGORY\"},{\"_id\":\"5ed8f20e3452250003b09ffb\",\"name\":\"dpgDataCategoryRef\",\"timelineId\":\"5ed8f20e3452250003b09ffc\",\"type\":\"DATA_CATEGORY\"},{\"_id\":\"607832c4e03cfd000324d634\",\"name\":\"riskTreatmentRef.risk\",\"timelineId\":\"5f17e973bf66630003819243\",\"type\":\"RISK\"}],\"timelineId\":\"60eebc80875b4f0004f688c4\",\"type\":\"PROCESSING_ACTIVITY\",\"typeIndex\":66}",
+    "objectData": "{\"accessPermissions\":[],\"activeEnd\":0,\"activeStart\":0,\"appliedRiskScenarios\":[],\"consentDetailsTranslations\":[],\"contractDetailsTranslations\":[],\"dataOfChildren\":false,\"dataSubjectsOpinion\":null,\"dataSubjectsOpinionJustificationTranslations\":[],\"dataSubjectsOpinionOutcomeTranslations\":[],\"dataSubjectsOpinionRequested\":false,\"dataflow\":[{\"originKind\":\"receiverCategoryRef\",\"originRefIndex\":0,\"targetKind\":\"receiverOrgRef\",\"targetRefIndex\":1},{\"dpg\":null,\"originKind\":\"dataSourceRef\",\"originRefIndex\":2,\"targetKind\":\"receiverCategoryRef\",\"targetRefIndex\":0},{\"dpg\":null,\"originKind\":\"receiverOrgRef\",\"originRefIndex\":1,\"targetKind\":\"receiverCategoryRef\",\"targetRefIndex\":0}],\"dataflowDetailsTranslations\":[],\"detailsTranslations\":[],\"dpg\":[{\"dataCategories\":[0,1,2,3,4,5,6,7,8,9],\"dataSubjectCategory\":0,\"storagePeriods\":[null,null,null,null,null,null,null,null,null,null]}],\"dpoOpinion\":null,\"dpoOpinionJustificationTranslations\":[],\"dsgEkdArt13210DetailsTranslations\":[],\"dsgEkdArt1321DetailsTranslations\":[],\"dsgEkdArt1322DetailsTranslations\":[],\"dsgEkdArt1323DetailsTranslations\":[],\"dsgEkdArt1324DetailsTranslations\":[],\"dsgEkdArt1325DetailsTranslations\":[],\"dsgEkdArt1326DetailsTranslations\":[],\"dsgEkdArt1327DetailsTranslations\":[],\"dsgEkdArt1328DetailsTranslations\":[],\"dsgEkdArt1329DetailsTranslations\":[],\"dsgEkdConsentDetailsTranslations\":[],\"dsgEkdContractDetailsTranslations\":[],\"dsgEkdDutyPerformanceDetailsTranslations\":[],\"dsgEkdLegalAuthorizationDetailsTranslations\":[],\"dsgEkdLegalObligationDetailsTranslations\":[],\"dsgEkdLegitimateInterestDetailsTranslations\":[],\"dsgEkdOtherTasksDetailsTranslations\":[],\"dsgEkdProcessorContractDetailsTranslations\":[],\"dsgEkdVitalInterestDetailsTranslations\":[],\"externalReference\":\"\",\"gdprArt10DetailsTranslations\":[],\"gdprArt92ADetailsTranslations\":[],\"gdprArt92BDetailsTranslations\":[],\"gdprArt92CDetailsTranslations\":[],\"gdprArt92DDetailsTranslations\":[],\"gdprArt92EDetailsTranslations\":[],\"gdprArt92FDetailsTranslations\":[],\"gdprArt92GDetailsTranslations\":[],\"gdprArt92HDetailsTranslations\":[],\"gdprArt92IDetailsTranslations\":[],\"gdprArt92JDetailsTranslations\":[],\"icon\":null,\"impactAssessmentReq\":false,\"informDuty\":false,\"informDutyDetailsTranslations\":[],\"jurisdiction\":null,\"labelTranslations\":[{\"lang\":\"en\",\"text\":\"testActivity12345653554asdfasdf5566355\"},{\"lang\":\"de\",\"text\":\"testActivity012\"},{\"lang\":\"es\",\"text\":\"testActividad01\"}],\"lastImpactAssessmentDate\":null,\"legal\":[\"CONTRACT\"],\"legalBasesDsgEkd\":[],\"legalBasesGdpr\":{},\"legalBasesLgpd\":[\"LGPD_HEALTH_PROTECTION\"],\"legalObligationDetailsTranslations\":[],\"legitimateInterestDetailsTranslations\":[],\"lgpdAcademicPurposesDetailsTranslations\":[],\"lgpdConsentDetailsTranslations\":[],\"lgpdContractDetailsTranslations\":[],\"lgpdCreditProtectionDetailsTranslations\":[],\"lgpdFraudPreventionDetailsTranslations\":[],\"lgpdHealthProtectionDetailsTranslations\":[],\"lgpdHealthProtectionSensitiveDetailsTranslations\":[],\"lgpdInvestigationOrProsecutionDetailsTranslations\":[],\"lgpdJournalisticAndArtisticPurposesDetailsTranslations\":[],\"lgpdLegalObligationDetailsTranslations\":[],\"lgpdLegalObligationSensitiveDetailsTranslations\":[],\"lgpdLegalProceduresDetailsTranslations\":[],\"lgpdLegalProceduresSensitiveDetailsTranslations\":[],\"lgpdLegitimateInterestDetailsTranslations\":[],\"lgpdLifeOrPhysicalSafetyDetailsTranslations\":[],\"lgpdLifeOrPhysicalSafetySensitiveDetailsTranslations\":[],\"lgpdNationalDefenseDetailsTranslations\":[],\"lgpdOriginOutsideBrazilDetailsTranslations\":[],\"lgpdPrivatePurposesDetailsTranslations\":[],\"lgpdProcessorContractDetailsTranslations\":[],\"lgpdPublicDataDetailsTranslations\":[],\"lgpdPublicPoliciesDetailsTranslations\":[],\"lgpdPublicPoliciesSensitiveDetailsTranslations\":[],\"lgpdPublicSafetyDetailsTranslations\":[],\"lgpdSpecificConsentDetailsTranslations\":[],\"lgpdStateSecurityDetailsTranslations\":[],\"lgpdStudiesByResearchEntitiesDetailsTranslations\":[],\"lgpdStudiesByResearchEntitiesSensitiveDetailsTranslations\":[],\"necessary\":false,\"necessityTranslations\":[],\"parentConsent\":false,\"parentConsentDetailsTranslations\":[],\"pbdd\":false,\"pbddDetailsTranslations\":[],\"piaHighRemainingRisk\":false,\"piaReportRequired\":false,\"processingMethod\":[],\"processorContractDetailsTranslations\":[],\"proportional\":false,\"proportionalityTranslations\":[],\"protectionRequirement\":[],\"publicInterestDetailsTranslations\":[],\"purposeTranslations\":[{\"lang\":\"en\",\"text\":\"asdf\"},{\"lang\":\"de\",\"text\":\"asdf\"},{\"lang\":\"es\",\"text\":\"asdf\"}],\"responsibilitiesDetailsTranslations\":[],\"risk\":3,\"riskAnalysisDetailsTranslations\":[],\"riskCriteria\":[\"SENSITIVE_DATA\",\"MONITORING\",\"SCORING\"],\"riskList\":null,\"riskListDetailsTranslations\":[],\"riskScoring\":[{\"answer\":33,\"comment\":[],\"id\":\"SCORING\"},{\"answer\":33,\"comment\":[],\"id\":\"MONITORING\"}],\"riskTreatment\":[{\"risk\":0,\"riskReductions\":[]}],\"roles\":[\"CONTROLLER\"],\"systematicDescription\":[],\"templateOrigin\":null,\"templateParent\":null,\"templatePreset\":false,\"timeLimited\":false,\"vitalInterestDetailsTranslations\":[]}"
+  },
+  "hashing": {
+    "algorithm": "SHA-256",
+    "steps": [
+      {
+        "tag": "secret",
+        "prefix": null,
+        "postfix": "c880fcc4-b693-48d1-b9b6-8ab828fa470a",
+        "output": "69ae23aa55112ef585b7445e7967e0fc4d2243ca69613990b68e2731875ecde2"
+      },
+      {
+        "tag": "metaData",
+        "prefix": "b6b6750eb1b0c175637328d489b4a6c6364553a27c4f2f581668ba8f07582cdc",
+        "postfix": null,
+        "output": "6ae115db314829d848002b1c37a9e76f7447aaff0f37c0d3aa99ebbfde49ad7b"
+      },
+      {
+        "tag": null,
+        "prefix": "4ebd41af3700390bb6df32b53d68f919e753aa6892b0a0db7c5a3c57e0d565d6",
+        "postfix": null,
+        "output": "e528691ca5c94de6320441980f57426fcc5c51a8253f447e52eb720c85ed5f71"
+      },
+      {
+        "tag": null,
+        "prefix": "e594ec81139851075bc1f74ffde49103370fc1cebaa08578fe350d1706beb248",
+        "postfix": null,
+        "output": "f44be61d8c430390dbe42d58d80a57caa5a65495e09b69266a1d5a78f9b5a066"
+      },
+      {
+        "tag": null,
+        "prefix": "5a009d671bcb1e4c9f04d4942b8773f377bae07befd20a386cbb8cb9ebf83452",
+        "postfix": null,
+        "output": "780df1aa78792a3903c85c7c5618601394a9edf21450fb997d42e4cf3f9010c5"
+      },
+      {
+        "tag": null,
+        "prefix": "6ab6c2e9a21420106ce6cd39c807d844af3b1171d9dc09572cc4529a77f9dd89",
+        "postfix": null,
+        "output": "1476032a95ca94e2329c4cb3971c2fb5261ed65cd606b05e025798cd303f82ea"
+      },
+      {
+        "tag": null,
+        "prefix": "4d3b097fa0275da6b4571e3c804a568e1cd8dec3af9a90e865f70448af607a5e",
+        "postfix": null,
+        "output": "517cd5449d3ab27c77b84888cb2728423ca9527e665df7481732df19530965e5"
+      },
+      {
+        "tag": null,
+        "prefix": "a6ac979e38ef71d4a71a04d0bc10c3ba0680a54be28bfd6c6913da41ec88fd50",
+        "postfix": null,
+        "output": "ee7917b33cc2ecdfd8fe8d2e019fdb95ebff1f42edffe0c12268010e720c3778"
+      },
+      {
+        "tag": null,
+        "prefix": "b2001d84349a53605ab3eff193cb4198c2452c63155ddd49fdac2b54ab7bb108",
+        "postfix": null,
+        "output": "ce1d1e048456113583612df52acd1732ae192f183e0701bf563f365be534bd93"
+      },
+      {
+        "tag": null,
+        "prefix": "03512f495bc02b3195014be792f7591820d0484d6fc1a66b23980a7e30f35cd128abd36402b2d079e237af74d44b97393247293034cd1b477fa54f480dff35b22ff00c401b37d8c1c382cb13b870f6e402e9c1f783454e4a8c7e77c5a8c730dc38f437dab193213dd560852576e7d0cd46005eb56fefa0bf7dd730a788e5b17956afdf70080df5f322f576873076333a9fb569ad43b195f469da4a004d9b7b07658e156486512393cef3d9f520ee96ae0a8556bcdc6b0c66b04793c498b7689b7aef3b9ed6bf278f6f215c55a868e4f65dc0d52bf38c830364bd32ed6fb923157cf3234d4b33ccc0e917278058ee5f4583edcc8530511abad00e0bfcd4eb9a0b7e8dc615bbb69ab69051bf5d58d2c439b6ed4b78eeef7174590972060479452c86e7686fce52df86638f3a5dfb9e86fdb9700cfeee42c1ffe230ec3fa0d178c38f868bfa9707674dee539b16acbb44f36b68be4402f3794f43aa98c63c6d553998bfbbf83770ab4ab4f3ad5eff0112c72f6941c5eb1291a87310fd7ffecb3251a032fcbd0e45282cc698444fdbb5e260040cbaa733a996577f031a41d0e4bb9da78e54891e0923a6ed9c3c7ef92188a7a1c20a881706d5995eba8f3dda7c68d3a914b5935c1cfc3737b017c8f426419ec43a4e29c9deeb4f4c68cd2266ca0b0fadda3432cd52d702f157ea12bb4aff94b3bab978b9bde5a309f791507ea6e8d2",
+        "postfix": "d5caa2bc6720820242951b4dce8d799bdac433d3dcbfd365789d0cf88cb1cb95e5afc73459f8a94605e333ac0b7152b2132b13b9d45f2cea3fd4e948913b6d44e7999bf1eb63ca4b576aac94f7c1519555dba246817e8e81283aabb2f9f8fb54ed5c0d25051b2d93b705e3cdf65206cbabfae24b9155f38af33a00ba21c444d8",
+        "output": "38f9bd593289569df71f51f9a310ba235e5d39f2b7aa9df8a45f87316876810d"
+      }
+    ]
+  },
+  "notarization": {
+    "id": "0xe1962936a77f9883eccbfed5df8066391ffa5fbd86efc01c18cd5f467f102d9e",
+    "hash": "38f9bd593289569df71f51f9a310ba235e5d39f2b7aa9df8a45f87316876810d",
+    "time": "2022-01-04T14:17:56.783Z[Etc/UTC]"
+  }
+}

@@ -37,20 +37,13 @@ const $buttonObjectData = document.getElementById('buttonObjectData');
 const $buttonReferences = document.getElementById('buttonReferences');
 
 function parseAttachment(file) {
-  return fetch('./response.json').then(response => {
-    //uncomment this to test new notarization algo with json file
-    return response.json();
-  });
-
   return window.pdfjsLib
     .getDocument(file)
     .promise.then(document => document.getPage(1))
     .then(page => page.getAnnotations())
     .then(annotations => new TextDecoder().decode(annotations[0].file.content))
-    .then(text => {
-      console.log(JSON.parse(text).hashing[0]); //check if correct format
-      JSON.parse(text);
-    })
+    .then(text => JSON.parse(text)
+    )
 
     .catch(() => {
       throw new Error('invalid file content');
@@ -60,17 +53,17 @@ function parseAttachment(file) {
 async function verify($data) {
   data.get('data').push($data);
   console.log(data);
-  if (!verifyObjectData($data)) {
+  if (!verifyObjectData($data.notarization)) {
     throw new Error("object data hashes don't match");
   }
-  if (!verifyMetaData($data)) {
+  if (!verifyMetaData($data.notarization)) {
     throw new Error("meta data hashes don't match");
   }
-  if (!verifyHashingSteps($data)) {
+  if (!verifyHashingSteps($data.notarization)) {
     throw new Error('hashing steps output does not match notarization hash');
   }
   //only works for transactions on ETH Mainnet
-  const verifiedByBlockchain = await verifyBlockchainHash($data);
+  const verifiedByBlockchain = await verifyBlockchainHash($data.notarization);
   if (!verifiedByBlockchain)
     throw new Error('Blockchain verification is not completed');
 }

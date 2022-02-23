@@ -59,10 +59,9 @@ async function verify($data) {
   if (!verifyHashingSteps($data.notarization)) {
     throw new Error('hashing steps output does not match notarization hash');
   }
-  //only works for transactions on ETH Mainnet
-  const verifiedByBlockchain = await verifyBlockchainHash($data.notarization);
-  if (!verifiedByBlockchain)
+  if (!verifyBlockchainHash($data.notarization)) {
     throw new Error('Blockchain verification is not completed');
+  }
 }
 
 async function checkFile(file) {
@@ -272,8 +271,11 @@ function viewDetails(i, thrownError) {
   $details.style.display = 'block';
   const $isVerified = data.get('isVerified')[i];
   if (thrownError != null) {
+    document.getElementById('detailsHeaderRight').style.display = 'flex';
     document.getElementById('detailsErrorMessage').style.display = 'block';
     document.getElementById('detailsErrorMessage').innerText = thrownError;
+  } else {
+    document.getElementById('detailsHeaderRight').style.display = 'none';
   }
 
   document.getElementById('detailsStatusBox').innerHTML = $isVerified

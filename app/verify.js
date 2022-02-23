@@ -156,7 +156,8 @@ export function verifyCumulatedHash(data) {
 export function verifyBlockchainHash(data) {
   const hash = data.notarization.hash;
   const txHash = data.notarization.id;
-  return fetch('https://api.blockcypher.com/v1/eth/main/txs/' + txHash)
+  //uncomment this for mainnet use
+  /*return fetch('https://api.blockcypher.com/v1/eth/main/txs/' + txHash)
     .then(function(response) {
       return response.json();
     })
@@ -168,4 +169,17 @@ export function verifyBlockchainHash(data) {
       console.log('Could not find transaction ' + txHash + ' on ETH Mainnet');
       return false;
     });
+    */
+   //comment this for mainnet use
+  return fetch('https://ropsten.etherscan.io/tx/' + txHash).then(function(response) {
+    return response.text();
+  }).then(function(data) {
+    return data.slice(data.indexOf('inputdata')+11,data.indexOf('<',data.indexOf('inputdata')+2)).trimStart();
+  }).then(function(hash) {
+    return fromHex(hash);
+  }).then(function(str) {
+    return JSON.parse(str.replace('\u0000', ''));
+  }).then(function(res) {
+    return res.hash === hash;
+  });
 }

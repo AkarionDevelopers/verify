@@ -42,17 +42,14 @@ function parseAttachment(file) {
     .promise.then(document => document.getPage(1))
     .then(page => page.getAnnotations())
     .then(annotations => new TextDecoder().decode(annotations[0].file.content))
-    .then(text => JSON.parse(text)
-    )
-
-    .catch(() => {
-      throw new Error('invalid file content');
+    .then(text => JSON.parse(text))
+    .catch((err) => {
+      throw new Error('invalid file content:' + err );
     });
 }
 
 async function verify($data) {
   data.get('data').push($data);
-  console.log(data);
   if (!verifyObjectData($data.notarization)) {
     throw new Error("object data hashes don't match");
   }
@@ -69,7 +66,6 @@ async function verify($data) {
 }
 
 async function checkFile(file) {
-  console.log(file);
   let promise = new Promise((resolve, reject) => {
     file
       .arrayBuffer()

@@ -219,12 +219,24 @@ function formatDate(date) {
 }
 
 function getObjectDataValue(objectData) {
-  if (
-    objectData == null ||
-    objectData.length == 0 ||
-    objectData.toString() == '[object Object]'
-  ) {
-    return '-';
+  if (objectData == null || objectData.length === 0) {
+    return 'null';
+  }
+
+  if (Array.isArray(objectData)) {
+    let arrayAsStr = '';
+    Object.keys(objectData).forEach((key) => {
+      arrayAsStr += `${JSON.stringify(objectData[key])}, `;
+    });
+    return arrayAsStr;
+  }
+
+  if (objectData.toString() === '[object Object]') {
+    let objAsStr = '';
+    Object.keys(objectData).forEach((key) => {
+      objAsStr += `${key}:${JSON.stringify(objectData[key])}, `;
+    });
+    return objAsStr;
   }
 
   return objectData.toString();

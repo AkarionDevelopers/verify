@@ -219,7 +219,7 @@ function formatDate(date) {
 }
 
 function getObjectDataValue(objectData) {
-  if (objectData == null || objectData.length === 0) {
+  if (objectData === null || objectData.length === 0) {
     return 'null';
   }
 

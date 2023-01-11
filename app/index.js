@@ -258,6 +258,8 @@ function updateFileList() {
 
 function resetFileList() {
   $fileList.innerHTML = '';
+  data.set('data', []);
+  data.set('isVerified', []);
 }
 
 function sanitizeHTML(text) {

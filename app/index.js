@@ -219,7 +219,7 @@ function updateFileList() {
             ? '<div id="fileSymbolOuterFailure"> <div id="fileSymbol"> <img src="images/exclamation-triangle-light.svg" width="25" height="25" alt="OK"></div> </div>'
             : '<div id="fileSymbolOuterFailure"> <div id="fileSymbol"><img src="images/times.svg" width="25" height="25" alt="X"></div> </div>') +
           '<div id="fileStatusOuter"> <div id="fileStatus">' +
-          ($isVerified ? 'Succesfully verified!' : 'Verification failed!') +
+          ($isVerified ? 'Successfully verified!' : 'Verification failed!') +
           '</div><div id="fileName">' +
           sanitizeHTML(files[i].name) +
           '</div>   </div> <div id="fileRightSegment">' +

@@ -253,7 +253,7 @@ function sanitize(string) {
   };
   const reg = /[&<>"'/]/gi;
   if (string === undefined) {
-    return 'value undefined TODO DEV-3429';
+    return '';
   }
   return string.replace(reg, match => map[match]);
 }

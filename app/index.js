@@ -59,8 +59,9 @@ async function verify($data) {
   if (!verifyHashingSteps($data.notarization)) {
     throw new Error('hashing steps output does not match notarization hash');
   }
-  if (!verifyBlockchainHash($data.notarization)) {
-    throw new Error('Blockchain verification is not completed');
+  const successful = await verifyBlockchainHash($data.notarization);
+  if (!successful) {
+    throw new Error('Verification of notarization hash with Blockchain failed');
   }
 }
 

@@ -153,20 +153,17 @@ export function verifyCumulatedHash(data) {
   return hashRaw(cumulatedHash);
 }
 
-export function verifyBlockchainHash(data) {
+export async function verifyBlockchainHash(data) {
   const hash = data.notarization.hash;
   const txHash = data.notarization.id;
 
-  return fetch('https://api.blockcypher.com/v1/eth/main/txs/' + txHash)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(data) {
-      const message = JSON.parse(fromHex(data.outputs[0].script));
-      return message.hash === hash;
-    })
-    .catch(function(error) {
-      console.log('Could not find transaction ' + txHash + ' on ETH Mainnet');
-      return false;
-    });
+  try {
+    const response = await fetch('https://api.blockcypher.com/v1/eth/main/txs/' + txHash);
+    const responseData = await response.json();
+    const message = JSON.parse(fromHex(responseData.outputs[0].script));
+    return message.hash === hash;
+  } catch (error) {
+    console.log('Could not find blockchain transaction ', txHash, ' on Ethereum Mainnet.');
+    return false;
+  }
 }

@@ -1,7 +1,6 @@
-# open-data-integrity-verification
-Open Data Integrity Verification
+# Open Data Integrity Verification
 
-View at [https://akariondevelopers.github.io/open-data-integrity-verification/](https://akariondevelopers.github.io/open-data-integrity-verification/)
+View at [https://akariondevelopers.github.io/verify/](https://akariondevelopers.github.io/verify/)
 
 Run locally with command
 

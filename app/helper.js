@@ -104,7 +104,7 @@ export function printDocumentDataSheet(data, i) {
 }
 
 export function printObjectDataSheet(data, i) {
-  const $objectData = JSON.parse(data.get('data')[i].notarization.object.objectData);
+  const $objectData = data.get('data')[i].notarization.object.objectDataProperties;
   const $isVerified = data.get('isVerified')[i];
   return (
     '<div class="dataSheet" id="objectDataSheet">' +
@@ -159,8 +159,7 @@ function getObjectDataRows($objectData, $isVerified) {
   return res;
 }
 export function printReferences(data, i) {
-  const $references = JSON.parse(data.get('data')[i].notarization.object.metaData)
-    .references;
+  const $references = JSON.parse(data.get('data')[i].notarization.object.references);
   const $isVerified = data.get('isVerified')[i];
   return (
     '<div class="dataSheet" id="referencesSheet">' +

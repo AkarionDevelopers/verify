@@ -1,5 +1,4 @@
 export function printDocumentDataSheet(data, i) {
-  console.log(data)
   const $metaData = JSON.parse(data.get('data')[i].notarization.object.metaData);
   //row 1
   let res =

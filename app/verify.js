@@ -100,22 +100,44 @@ function fromHex(h) {
   return decodeURIComponent(escape(s));
 }
 
+export function verifyObjectDataProperties(data) {
+  const props = data.object.objectDataProperties;
+  let errorsFound = false;
+  Object.keys(props).forEach((key) => {
+    const keyAndHash = ['"', key, '":"', hashRaw(props[key]), '"'].join('');
+    if (!data.object.objectData.includes(keyAndHash)) {
+      errorsFound = true;
+      console.log('ObjectDataProperty', key, 'verification failed');
+    } else {
+      console.debug('ObjectDataProperty', key, 'verified successfully');
+    }
+  });
+  return !errorsFound;
+}
+
 export function verifyObjectData(data) {
-  console.log(data)
   const secretStep = data.hashing.steps[0];
   if (secretStep == null) return false;
   const hash = hashRaw(data.object.objectData + secretStep.postfix);
   return hash === secretStep.output;
 }
-export function verifyMetaData(data) {
-  const metaDataStep = data.hashing.steps[1];
-  const secretStep = data.hashing.steps[0];
-  if (metaDataStep == null || secretStep == null) return false;
-  //prefix of metaData should be hash of metaData, check if true
-  if (hashRaw(data.object.metaData) != metaDataStep.prefix) return false;
-  const hash = hashRaw(metaDataStep.prefix + secretStep.output);
-  return hash === metaDataStep.output;
+
+export function verifyReferences(data) {
+  const metaDataAndReferencesStep = data.hashing.steps[1];
+  if (metaDataAndReferencesStep == null) return false;
+  return hashRaw(data.object.references) === metaDataAndReferencesStep.postfix;
 }
+
+export function verifyMetaData(data) {
+  const metaDataAndReferencesStep = data.hashing.steps[1];
+  const secretStep = data.hashing.steps[0];
+  if (metaDataAndReferencesStep == null || secretStep == null) return false;
+  //prefix of metaData should be hash of metaData, check if true
+  if (hashRaw(data.object.metaData) != metaDataAndReferencesStep.prefix) return false;
+  const hash = hashRaw(metaDataAndReferencesStep.prefix + secretStep.output + metaDataAndReferencesStep.postfix);
+  return hash === metaDataAndReferencesStep.output;
+}
+
 export function verifyHashingSteps(data) {
   const steps = data.hashing.steps;
   for (let i = 2; i < steps.length; i++) {
@@ -163,7 +185,7 @@ export async function verifyBlockchainHash(data) {
     const message = JSON.parse(fromHex(responseData.outputs[0].script));
     return message.hash === hash;
   } catch (error) {
-    console.log('Could not find blockchain transaction ', txHash, ' on Ethereum Mainnet.');
+    console.log('Could not find blockchain transaction', txHash, 'on Ethereum Mainnet.');
     return false;
   }
 }

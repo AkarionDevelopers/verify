@@ -105,7 +105,6 @@ export function verifyObjectDataProperties(data) {
   let errorsFound = false;
   Object.keys(props).forEach((key) => {
     const keyAndHash = `"${key}":"${hashRaw(props[key])}"`;
-    console.log(keyAndHash);
     if (!data.object.objectData.includes(keyAndHash)) {
       errorsFound = true;
       console.log('ObjectDataProperty', key, 'verification failed');

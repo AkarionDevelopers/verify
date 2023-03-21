@@ -192,7 +192,7 @@ function updateView() {
     $instructionText.textContent = 'Select a source to import your files';
     $fileList.style.display = 'none';
     $descriptionTop.textContent =
-      'Select the Chroniql PDF files to verify the integrity of their contents. The data is embedded inside the PDF.';
+      'Select the Notarization PDFs to verify the integrity of their contents. The data is embedded inside the PDF.';
     resetFileList();
   }
 }

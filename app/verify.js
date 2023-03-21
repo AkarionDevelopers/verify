@@ -104,7 +104,8 @@ export function verifyObjectDataProperties(data) {
   const props = data.object.objectDataProperties;
   let errorsFound = false;
   Object.keys(props).forEach((key) => {
-    const keyAndHash = ['"', key, '":"', hashRaw(props[key]), '"'].join('');
+    const keyAndHash = `"${key}":"${hashRaw(props[key])}"`;
+    console.log(keyAndHash);
     if (!data.object.objectData.includes(keyAndHash)) {
       errorsFound = true;
       console.log('ObjectDataProperty', key, 'verification failed');
@@ -117,23 +118,23 @@ export function verifyObjectDataProperties(data) {
 
 export function verifyObjectData(data) {
   const secretStep = data.hashing.steps[0];
-  if (secretStep == null) return false;
+  if (secretStep === null) return false;
   const hash = hashRaw(data.object.objectData + secretStep.postfix);
   return hash === secretStep.output;
 }
 
 export function verifyReferences(data) {
   const metaDataAndReferencesStep = data.hashing.steps[1];
-  if (metaDataAndReferencesStep == null) return false;
+  if (metaDataAndReferencesStep === null) return false;
   return hashRaw(data.object.references) === metaDataAndReferencesStep.postfix;
 }
 
 export function verifyMetaData(data) {
   const metaDataAndReferencesStep = data.hashing.steps[1];
   const secretStep = data.hashing.steps[0];
-  if (metaDataAndReferencesStep == null || secretStep == null) return false;
+  if (metaDataAndReferencesStep === null || secretStep === null) return false;
   //prefix of metaData should be hash of metaData, check if true
-  if (hashRaw(data.object.metaData) != metaDataAndReferencesStep.prefix) return false;
+  if (hashRaw(data.object.metaData) !== metaDataAndReferencesStep.prefix) return false;
   const hash = hashRaw(metaDataAndReferencesStep.prefix + secretStep.output + metaDataAndReferencesStep.postfix);
   return hash === metaDataAndReferencesStep.output;
 }
@@ -146,9 +147,9 @@ export function verifyHashingSteps(data) {
     const postfix = steps[i].postfix || '';
     const output = steps[i].output;
     hash = hashRaw(prefix + previousOutput + postfix);
-    if (hash != output) return false;
+    if (hash !== output) return false;
     //additional check from last step to hash in notarization
-    if (i === steps.length - 1 && hash != data.notarization.hash) return false;
+    if (i === steps.length - 1 && hash !== data.notarization.hash) return false;
   }
   return true;
 }

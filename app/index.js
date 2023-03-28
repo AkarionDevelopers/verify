@@ -1,8 +1,10 @@
 import {
   verifyBlockchainHash,
-  verifyObjectData,
+  verifyHashingSteps,
   verifyMetaData,
-  verifyHashingSteps
+  verifyReferences,
+  verifyObjectData,
+  verifyObjectDataProperties
 } from './verify.js';
 import {
   printDocumentDataSheet,
@@ -50,8 +52,14 @@ function parseAttachment(file) {
 
 async function verify($data) {
   data.get('data').push($data);
+  if (!verifyObjectDataProperties($data.notarization)) {
+    throw new Error("object data property hashes don't match");
+  }
   if (!verifyObjectData($data.notarization)) {
     throw new Error("object data hashes don't match");
+  }
+  if (!verifyReferences($data.notarization)) {
+    throw new Error("references hashes don't match");
   }
   if (!verifyMetaData($data.notarization)) {
     throw new Error("meta data hashes don't match");
@@ -184,7 +192,7 @@ function updateView() {
     $instructionText.textContent = 'Select a source to import your files';
     $fileList.style.display = 'none';
     $descriptionTop.textContent =
-      'Select the Chroniql PDF files to verify the integrity of their contents. The data is embedded inside the PDF.';
+      'Select the Notarization PDFs to verify the integrity of their contents. The data is embedded inside the PDF.';
     resetFileList();
   }
 }

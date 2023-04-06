@@ -13,7 +13,7 @@ function flatten(data) {
       }
     } else {
       let isEmpty = true;
-      Object.keys(cur).forEach(p => {
+      Object.keys(cur).forEach((p) => {
         isEmpty = false;
         recurse(cur[p], prop ? `${prop}.${p}` : p);
       });
@@ -59,7 +59,7 @@ function hashNull(salt) {
   return hashRaw(salt);
 }
 
-function hash(key, value, salt) {
+function getHash(key, value, salt) {
   if (!salt) {
     // salt has was removed -> entry sanitized
     return 'sanitized';
@@ -68,9 +68,9 @@ function hash(key, value, salt) {
     return 'entry-not-found';
   }
   if (
-    key === 'genesisDate' ||
-    key === 'modificationDate' ||
-    key === 'endedDate'
+    key === 'genesisDate'
+    || key === 'modificationDate'
+    || key === 'endedDate'
   ) {
     return hashDate(value, salt);
   }
@@ -132,39 +132,39 @@ export function verifyMetaData(data) {
   const metaDataAndReferencesStep = data.hashing.steps[1];
   const secretStep = data.hashing.steps[0];
   if (metaDataAndReferencesStep === null || secretStep === null) return false;
-  //prefix of metaData should be hash of metaData, check if true
+  // prefix of metaData should be hash of metaData, check if true
   if (hashRaw(data.object.metaData) !== metaDataAndReferencesStep.prefix) return false;
-  const hash = hashRaw(metaDataAndReferencesStep.prefix + secretStep.output + metaDataAndReferencesStep.postfix);
+  const hash = hashRaw(
+    metaDataAndReferencesStep.prefix
+    + secretStep.output
+    + metaDataAndReferencesStep.postfix,
+  );
   return hash === metaDataAndReferencesStep.output;
 }
 
 export function verifyHashingSteps(data) {
-  const steps = data.hashing.steps;
-  for (let i = 2; i < steps.length; i++) {
+  const { steps } = data.hashing;
+  for (let i = 2; i < steps.length; i += 1) {
     const prefix = steps[i].prefix || '';
     const previousOutput = steps[i - 1].output;
     const postfix = steps[i].postfix || '';
-    const output = steps[i].output;
-    hash = hashRaw(prefix + previousOutput + postfix);
+    const { output } = steps[i];
+    const hash = hashRaw(prefix + previousOutput + postfix);
     if (hash !== output) return false;
-    //additional check from last step to hash in notarization
+    // additional check from last step to hash in notarization
     if (i === steps.length - 1 && hash !== data.notarization.hash) return false;
   }
   return true;
 }
 
-export function verifyPropHashes(data) {
-  return getInvalidProps(data).length === 0;
-}
-
 export function verifyCumulatedHash(data) {
   const flattenedObject = flatten(data.object);
   const cumulatedHash = data.notarization.auditProofs[0].notarizedObject.notarizationEntries
-    .map(entry => {
-      const entryHash = hash(
+    .map((entry) => {
+      const entryHash = getHash(
         entry.name,
         flattenedObject[entry.name],
-        entry.salt
+        entry.salt,
       );
       if (entryHash === 'sanitized') {
         return entry.hash;
@@ -176,11 +176,11 @@ export function verifyCumulatedHash(data) {
 }
 
 export async function verifyBlockchainHash(data) {
-  const hash = data.notarization.hash;
+  const { hash } = data.notarization;
   const txHash = data.notarization.id;
 
   try {
-    const response = await fetch('https://api.blockcypher.com/v1/eth/main/txs/' + txHash);
+    const response = await fetch(`https://api.blockcypher.com/v1/eth/main/txs/${txHash}`);
     const responseData = await response.json();
     const message = JSON.parse(fromHex(responseData.outputs[0].script));
     return message.hash === hash;

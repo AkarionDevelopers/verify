@@ -58,7 +58,7 @@ export function printDocumentDataSheet(data, i) {
   const $metaData = JSON.parse(data.get('data')[i].notarization.object.metaData);
 
   // row 1
-  const res = `${'<div class="dataSheet" id="documentDataSheet">'
+  const res = `${'<div class="dataSheet documentDataSheet">'
     + '<div class="documentDataRow">'
     + '<div class="documentDataSet">'
     + '<div class="documentDataTitle">'
@@ -68,7 +68,7 @@ export function printDocumentDataSheet(data, i) {
     sanitize($metaData.type)
   }</div>`
     + '</div>'
-    + '<div class="documentDataSet" id="documentDataCol2">'
+    + '<div class="documentDataSet documentDataCol2">'
     + '<div class="documentDataTitle">'
     + 'Document ID:'
     + '</div>'
@@ -88,7 +88,7 @@ export function printDocumentDataSheet(data, i) {
       $metaData.typeIndex
     }</div>`
     + '</div>'
-    + '<div class="documentDataSet" id="documentDataCol2">'
+    + '<div class="documentDataSet documentDataCol2">'
     + '<div class="documentDataTitle">'
     + 'Timeline ID:'
     + '</div>'
@@ -107,7 +107,7 @@ export function printDocumentDataSheet(data, i) {
       formatDate($metaData.genesisDate)
     }</div>`
     + '</div>'
-    + '<div class="documentDataSet" id="documentDataCol2">'
+    + '<div class="documentDataSet documentDataCol2">'
     + '<div class="documentDataTitle">'
     + 'Created by:'
     + '</div>'
@@ -126,7 +126,7 @@ export function printDocumentDataSheet(data, i) {
       formatDate($metaData.modificationDate)
     }</div>`
     + '</div>'
-    + '<div class="documentDataSet" id="documentDataCol2">'
+    + '<div class="documentDataSet documentDataCol2">'
     + '<div class="documentDataTitle">'
     + 'Modified by:'
     + '</div>'
@@ -136,7 +136,7 @@ export function printDocumentDataSheet(data, i) {
     + '</div>'
     + '</div>'
     // row 5
-    + '<div class="documentDataRow" id="lastRow">'
+    + '<div class="documentDataRow lastRow">'
     + '<div class="documentDataSet">'
     + '<div class="documentDataTitle">'
     + 'Version:'
@@ -145,7 +145,7 @@ export function printDocumentDataSheet(data, i) {
       $metaData.modificationCount
     }</div>`
     + '</div>'
-    + '<div class="documentDataSet" id="documentDataCol2">'
+    + '<div class="documentDataSet documentDataCol2">'
     + '<div class="documentDataTitle">'
     + 'Predecessor ID:'
     + '</div>'
@@ -171,10 +171,10 @@ function getObjectDataRows($objectData) {
       // single line item or empty
       res
         += `${'<div class="objectDataRow">'
-        + '<div class="objectDataItem" id="objectDataCol1">'}${
+        + '<div class="objectDataItem objectDataCol1">'}${
           sanitize(itemName)
         }</div>`
-        + `<div class="objectDataItem" id="objectDataCol2">${
+        + `<div class="objectDataItem objectDataCol2">${
           getObjectDataValue($objectData[itemName])
         }</div>`
         + '</div>';
@@ -182,10 +182,10 @@ function getObjectDataRows($objectData) {
       // multi line objectData
       res
         += `${'<div class="objectDataRow">'
-        + '<div class="objectDataItem" id="objectDataCol1">'}${
+        + '<div class="objectDataItem objectDataCol1">'}${
           sanitize(itemName)
         }</div>`
-        + `<div class="objectDataItem" id="objectDataCol2">${
+        + `<div class="objectDataItem objectDataCol2">${
           JSON.stringify($objectData[itemName])
         }</div>`
         + '</div>';
@@ -198,10 +198,10 @@ function getObjectDataRows($objectData) {
 export function printObjectDataSheet(data, i) {
   const $objectData = data.get('data')[i].notarization.object.objectDataProperties;
   return (
-    `${'<div class="dataSheet" id="objectDataSheet">'
+    `${'<div class="dataSheet objectDataSheet">'
     + '<div class="objectDataRow" style="border-top: 0px">'
-    + '<div class="objectDataItem" id="objectDataCol1" style="font-weight: 500">Name</div>'
-    + '<div class="objectDataItem" id="objectDataCol2" style="font-weight: 500">Value</div>'
+    + '<div class="objectDataItem objectDataCol1" style="font-weight: 500">Name</div>'
+    + '<div class="objectDataItem objectDataCol2" style="font-weight: 500">Value</div>'
     + '</div>'}${
       getObjectDataRows($objectData)
     }</div>`
@@ -215,16 +215,16 @@ function getReferencesRows($references) {
   for (const item in $references) {
     res
       += `${'<div class="objectDataRow">'
-      + '<div class="objectDataItem" id="referencesCol1">'}${
+      + '<div class="objectDataItem referencesCol1">'}${
         sanitize($references[item].name)
       }</div>`
-      + `<div class="objectDataItem" id="referencesCol2">${
+      + `<div class="objectDataItem referencesCol2">${
         sanitize($references[item].type)
       }</div>`
-      + `<div class="objectDataItem" id="referencesCol3">${
+      + `<div class="objectDataItem referencesCol3">${
         sanitize($references[item].timelineId)
       }</div>`
-      + `<div class="objectDataItem" id="referencesCol4">${
+      + `<div class="objectDataItem referencesCol4">${
         // eslint-disable-next-line no-underscore-dangle
         sanitize($references[item]._id)
       }</div>`
@@ -236,12 +236,12 @@ function getReferencesRows($references) {
 export function printReferences(data, i) {
   const $references = JSON.parse(data.get('data')[i].notarization.object.references);
   return (
-    `${'<div class="dataSheet" id="referencesSheet">'
+    `${'<div class="dataSheet referencesSheet">'
     + '<div class="objectDataRow" style="border-top: 0px">'
-    + '<div class="objectDataItem" id="referencesCol1" style="font-weight: 500">Name</div>'
-    + '<div class="objectDataItem" id="referencesCol2" style="font-weight: 500">Type</div>'
-    + '<div class="objectDataItem" id="referencesCol3" style="font-weight: 500">Timeline ID</div>'
-    + '<div class="objectDataItem" id="referencesCol4" style="font-weight: 500">ID</div>'
+    + '<div class="objectDataItem referencesCol1" style="font-weight: 500">Name</div>'
+    + '<div class="objectDataItem referencesCol2" style="font-weight: 500">Type</div>'
+    + '<div class="objectDataItem referencesCol3" style="font-weight: 500">Timeline ID</div>'
+    + '<div class="objectDataItem referencesCol4" style="font-weight: 500">ID</div>'
     + '</div>'}${
       getReferencesRows($references)
     }</div>`

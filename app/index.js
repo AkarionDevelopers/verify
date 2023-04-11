@@ -16,27 +16,25 @@ const files = [];
 const data = new Map();
 data.set('data', []);
 data.set('isVerified', []);
-const $buttonBrowse = document.getElementById('buttonBrowse');
-const $buttonLearnMore = document.getElementById('buttonLearnMore');
-const $buttonNewVerification = document.getElementById('buttonNewVerification');
-const $detailsButtonNewVerification = document.getElementById(
-  'detailsButtonNewVerification',
-);
-const $uploadBox = document.getElementById('uploadBox');
-const $fileList = document.getElementById('fileList');
-const $instructionText = document.getElementById('instructionText');
-const $buttonReturnVerifier = document.getElementById('buttonReturnVerifier');
-const $arrowLeft = document.getElementById('arrowLeft');
-const $descriptionTop = document.getElementById('descriptionTop');
-const $main = document.getElementById('main');
+const $buttonBrowse = document.querySelector('.buttonBrowse');
+const $buttonLearnMore = document.querySelector('.buttonLearnMore');
+const $buttonNewVerification = document.querySelector('.buttonNewVerification');
+const $detailsButtonNewVerification = document.querySelector('.detailsButtonNewVerification');
+const $uploadBox = document.querySelector('.uploadBox');
+const $fileList = document.querySelector('.fileList');
+const $instructionText = document.querySelector('.instructionText');
+const $buttonReturnVerifier = document.querySelector('.buttonReturnVerifier');
+const $arrowLeft = document.querySelector('.arrowLeft');
+const $descriptionTop = document.querySelector('.descriptionTop');
+const $main = document.querySelector('.main');
 
-const $details = document.getElementById('details');
-const $buttonBack = document.getElementById('buttonBack');
-const $detailsScrollPanel = document.getElementById('detailsScrollPanel');
+const $details = document.querySelector('.details');
+const $buttonBack = document.querySelector('.buttonBack');
+const $detailsScrollPanel = document.querySelector('.detailsScrollPanel');
 
-const $buttonDocumentData = document.getElementById('buttonDocumentData');
-const $buttonObjectData = document.getElementById('buttonObjectData');
-const $buttonReferences = document.getElementById('buttonReferences');
+const $buttonDocumentData = document.querySelector('.buttonDocumentData');
+const $buttonObjectData = document.querySelector('.buttonObjectData');
+const $buttonReferences = document.querySelector('.buttonReferences');
 
 function parseAttachment(file) {
   return window.pdfjsLib
@@ -120,36 +118,36 @@ function viewDetails(i, thrownError) {
   $details.style.display = 'block';
   const $isVerified = data.get('isVerified')[i];
   if (thrownError != null) {
-    document.getElementById('detailsHeaderRight').style.display = 'flex';
-    document.getElementById('detailsErrorMessage').style.display = 'block';
-    document.getElementById('detailsErrorMessage').innerText = thrownError;
+    document.querySelector('.detailsHeaderRight').style.display = 'flex';
+    document.querySelector('.detailsErrorMessage').style.display = 'block';
+    document.querySelector('.detailsErrorMessage').innerText = thrownError;
   } else {
-    document.getElementById('detailsHeaderRight').style.display = 'none';
+    document.querySelector('.detailsHeaderRight').style.display = 'none';
   }
 
-  document.getElementById('detailsStatusBox').innerHTML = $isVerified
+  document.querySelector('.detailsStatusBox').innerHTML = $isVerified
     ? '<div class="detailsStatusSuccess">Successful</div>'
     : '<div class="detailsStatusFail">Failed</div>';
 
-  document.getElementById('detailsFileName').innerHTML = files[i].name;
+  document.querySelector('.detailsFileName').innerHTML = files[i].name;
 
   $detailsScrollPanel.innerHTML = printDocumentDataSheet(data, i);
   $detailsScrollPanel.innerHTML += printObjectDataSheet(data, i);
   $detailsScrollPanel.innerHTML += printReferences(data, i);
   $detailsScrollPanel.innerHTML += '<div style="height: 20px"> </div>';
 
-  const detailsTopHeight = document.getElementById('detailsTop').offsetHeight;
+  const detailsTopHeight = document.querySelector('.detailsTop').offsetHeight;
 
   window.scroll(0, 0);
   markButton($buttonDocumentData);
 
   const offsetObjectData = Math.floor(
-    document.getElementById('objectDataSheet').getBoundingClientRect().top
+    document.querySelector('.objectDataSheet').getBoundingClientRect().top
       - detailsTopHeight,
   );
 
   const offsetReferences = Math.floor(
-    document.getElementById('referencesSheet').getBoundingClientRect().top
+    document.querySelector('.referencesSheet').getBoundingClientRect().top
       - detailsTopHeight,
   );
 
@@ -197,7 +195,7 @@ function viewDetails(i, thrownError) {
 function updateFileList() {
   for (let i = 0; i < files.length; i += 1) {
     let $html = '';
-    $html += '<div id="fileOutline">';
+    $html += '<div class="fileOutline">';
     let $isVerified; let $isValidFormat;
     const fileName = files[i].name;
     const $isPdf = fileName.substr(fileName.length - 4) === '.pdf';
@@ -218,32 +216,32 @@ function updateFileList() {
       )
       .then(() => {
         if ($isVerified) {
-          $html += '<div id="fileSymbolOuterSuccess"> <div id="fileSymbol"> <img src="images/check.svg" width="25" height="25" alt="OK"></div> </div>';
+          $html += '<div class="fileSymbolOuterSuccess"> <div class="fileSymbol"> <img src="images/check.svg" width="25" height="25" alt="OK"></div> </div>';
         } else if ($isPdf) {
-          $html += '<div id="fileSymbolOuterFailure"> <div id="fileSymbol"> <img src="images/refresh.svg" width="25" height="25" alt="OK"></div> </div>';
+          $html += '<div class="fileSymbolOuterFailure"> <div class="fileSymbol"> <img src="images/refresh.svg" width="25" height="25" alt="OK"></div> </div>';
         } else if ($isValidFormat) {
-          $html += '<div id="fileSymbolOuterFailure"> <div id="fileSymbol"> <img src="images/exclamation-triangle-light.svg" width="25" height="25" alt="OK"></div> </div>';
+          $html += '<div class="fileSymbolOuterFailure"> <div class="fileSymbol"> <img src="images/exclamation-triangle-light.svg" width="25" height="25" alt="OK"></div> </div>';
         } else {
-          $html += '<div id="fileSymbolOuterFailure"> <div id="fileSymbol"><img src="images/times.svg" width="25" height="25" alt="X"></div> </div>';
+          $html += '<div class="fileSymbolOuterFailure"> <div class="fileSymbol"><img src="images/times.svg" width="25" height="25" alt="X"></div> </div>';
         }
 
-        $html += '<div id="fileStatusOuter"> <div id="fileStatus">';
+        $html += '<div class="fileStatusOuter"> <div class="fileStatus">';
         if ($isVerified) {
           $html += 'Successfully verified!';
         } else {
           $html += 'Verification failed!';
         }
-        $html += '</div><div id="fileName">';
+        $html += '</div><div class="fileName">';
         $html += sanitizeHTML(files[i].name);
-        $html += '</div>   </div> <div id="fileRightSegment">';
+        $html += '</div>   </div> <div class="fileRightSegment">';
         if ($isVerified) {
-          $html += `<div class="viewButton" id="viewButton_${i}"> View</div>`;
+          $html += `<div class="viewButton" data-index="${i}"> View</div>`;
         } else if (!$isPdf) {
-          $html += '<div id="noView"><span>Invalid file format</span></div>';
+          $html += '<div class="noView"><span>Invalid file format</span></div>';
         } else if (!$isValidFormat) {
-          $html += '<div id="noView"><span>Invalid file content</span></div>';
+          $html += '<div class="noView"><span>Invalid file content</span></div>';
         } else {
-          $html += `<div class="viewButton" id="viewButton_${i}"> View</div>`;
+          $html += `<div class="viewButton" data-index="${i}"> View</div>`;
         }
         $html += '</div></div>';
         $fileList.innerHTML += $html;
@@ -254,8 +252,8 @@ function updateFileList() {
       .then(() => {
         for (let j = 0; j < files.length; j += 1) {
           // eslint-disable-next-line no-loop-func
-          document.addEventListener('click', (e) => {
-            if (e.target && e.target.id === `viewButton_${j}`) {
+          document.querySelector('.viewButton').addEventListener('click', (e) => {
+            if (e.target && e.target.dataset.index === `${j}`) {
               viewDetails(j, $thrownError);
             }
           });
@@ -307,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  document.getElementById('upload').addEventListener('change', (evt) => {
+  document.querySelector('.upload').addEventListener('change', (evt) => {
     // eslint-disable-next-line no-restricted-syntax, guard-for-in
     for (const file in evt.target.files) {
       files[0].push(file);
@@ -315,11 +313,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }, false);
 });
 function openDialog() {
-  document.getElementById('manualSelection').click();
+  document.querySelector('.manualSelection').click();
 }
 
 function handleFiles() {
-  const selectedFiles = document.getElementById('manualSelection').files;
+  const selectedFiles = document.querySelector('.manualSelection').files;
   for (let i = 0; i < selectedFiles.length; i += 1) {
     files.push(selectedFiles.item(i));
   }
@@ -332,7 +330,7 @@ $buttonBrowse.addEventListener('click', () => {
 });
 
 document
-  .getElementById('manualSelection')
+  .querySelector('.manualSelection')
   .addEventListener('change', handleFiles, false);
 
 $buttonLearnMore.addEventListener('click', () => {

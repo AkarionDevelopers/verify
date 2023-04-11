@@ -393,11 +393,15 @@ h4 {
   height: 23px;
   text-align: center;
   padding-top: 5px;
+  padding-left: 5px;
   border: 1.2px solid var(--colorChroniqlPrimary);
   background: var(--colorBackground1);
   border: 1px solid var(--colorChroniqlPrimary);
   border-radius: 4px;
   cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .dataSheet {
@@ -456,15 +460,15 @@ h4 {
 
 .objectDataCol1 {
   margin-left: 40px;
-  width: 499px;
+  width: 299px;
 }
 
 .objectDataCol2 {
-  width: 574px;
+  width: 409px;
 }
 
 .objectDataCol3 {
-  width: 34px;
+  width: 400px;
 }
 
 .referencesCol1 {
@@ -500,4 +504,22 @@ h4 {
 
 .successCircle {
   background-color: var(--colorSuccess);
+}
+
+.fileValidator {
+  width: 100px;
+  height: 24.5px;
+  border: 1px solid var(--colorChroniqlPrimary);
+  border-radius: 4px;
+  font: normal normal normal 14px/20px Avenir;
+  color: var(--colorChroniqlPrimary);
+  text-align: center;
+  margin-top: 10px;
+  cursor: pointer;
+  display: block;
+  padding-top: 5px;
+}
+
+.fileValidator input {
+  display: none;
 }

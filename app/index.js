@@ -16,6 +16,7 @@ const files = [];
 const data = new Map();
 data.set('data', []);
 data.set('isVerified', []);
+data.set('lang', 'en');
 const $buttonBrowse = document.querySelector('.buttonBrowse');
 const $buttonLearnMore = document.querySelector('.buttonLearnMore');
 const $buttonNewVerification = document.querySelector('.buttonNewVerification');

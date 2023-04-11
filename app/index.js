@@ -140,7 +140,7 @@ function viewDetails(i, thrownError) {
 
   const detailsTopHeight = document.getElementById('detailsTop').offsetHeight;
 
-  document.scroll(0, 0);
+  window.scroll(0, 0);
   markButton($buttonDocumentData);
 
   const offsetObjectData = Math.floor(
@@ -184,13 +184,13 @@ function viewDetails(i, thrownError) {
   });
 
   $buttonDocumentData.addEventListener('click', () => {
-    document.scroll(0, 0);
+    window.scroll(0, 0);
   });
   $buttonObjectData.addEventListener('click', () => {
-    document.scroll(0, offsetObjectData + 1);
+    window.scroll(0, offsetObjectData + 1);
   });
   $buttonReferences.addEventListener('click', () => {
-    document.scroll(0, offsetReferences + 1);
+    window.scroll(0, offsetReferences + 1);
   });
 }
 

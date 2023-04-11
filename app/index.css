@@ -25,7 +25,7 @@ body {
   margin: 0px;
 }
 
-#descriptionTop {
+.descriptionTop {
   padding-left: 10px;
 }
 
@@ -38,7 +38,7 @@ h1 {
   padding-left: 10px;
 }
 
-#buttonNewVerification {
+.buttonNewVerification {
   text-align: center;
   color: var(--colorChroniqlPrimary);
   font: normal normal normal 14px/20px Avenir;
@@ -46,7 +46,7 @@ h1 {
   cursor: pointer;
 }
 
-#buttonReturnVerifier {
+.buttonReturnVerifier {
   font: normal normal normal 14px/20px Avenir;
   margin-top: 34.36px;
   visibility: hidden;
@@ -54,7 +54,7 @@ h1 {
   margin-left: 10px;
 }
 
-#buttonLearnMore {
+.buttonLearnMore {
   font: normal normal normal 14px/20px Avenir-Heavy;
   color: var(--colorText3);
   letter-spacing: 0;
@@ -64,7 +64,7 @@ h1 {
   background-color: var(--colorBackground1);
 }
 
-#buttonBrowse {
+.buttonBrowse {
   font: normal normal normal 14px/20px Avenir-Heavy;
   color: var(--colorBackground1);
   letter-spacing: 0;
@@ -79,7 +79,7 @@ h4 {
   color: var(--colorText3);
 }
 
-#detailsFileName {
+.detailsFileName {
   font: normal normal normal 17px/25px Avenir;
   color: var(--colorText3);
   margin-top: 2px;
@@ -118,13 +118,13 @@ h4 {
   background: var(--colorBackground2) 0% 0% no-repeat padding-box;
 }
 
-#logo {
+.logo {
   position: absolute;
   padding-top: 60px;
   padding-left: 13px;
 }
 
-#arrowLeft {
+.arrowLeft {
   position: absolute;
   padding-top: 33px;
   padding-left: 74px;
@@ -132,7 +132,7 @@ h4 {
   cursor: pointer;
 }
 
-#instruction {
+.instruction {
   font: normal normal normal 14px/20px Avenir;
   color: var(--colorText3);
   text-align: left;
@@ -146,7 +146,7 @@ h4 {
   padding-right: 7px;
 }
 
-#uploadBox {
+.uploadBox {
   height: 345px;
   width: 730px;
   box-shadow: 0px 2px 10px var(--colorOutline2);
@@ -179,11 +179,11 @@ h4 {
   margin-bottom: auto;
 }
 
-#dragAndDrop {
+.dragAndDrop {
   margin-block-start: 10px;
 }
 
-#fileList {
+.fileList {
   display: none;
   overflow-x: hidden;
   height: 440px;
@@ -194,7 +194,7 @@ h4 {
   display: none;
 }
 
-#fileOutline {
+.fileOutline {
   height: 90px;
   box-shadow: 0px 2px 10px #0000001f;
   border-radius: 10px 0px 0px 0px;
@@ -203,19 +203,19 @@ h4 {
   margin-top: 10px;
 }
 
-#fileSymbolOuterSuccess {
+.fileSymbolOuterSuccess {
   border-top: 3px solid var(--colorSuccess);
   width: 45px;
   margin-left: 20px;
 }
 
-#fileSymbolOuterFailure {
+.fileSymbolOuterFailure {
   border-top: 3px solid var(--colorFailure);
   width: 45px;
   margin-left: 20px;
 }
 
-#fileSymbol {
+.fileSymbol {
   height: 25px;
   width: 50%;
   margin-top: 62.5%;
@@ -223,21 +223,21 @@ h4 {
   text-align: center;
 }
 
-#fileStatusOuter {
+.fileStatusOuter {
   width: 490px;
   padding-top: 22px;
   padding-left: 10px;
 }
 
-#fileStatus {
+.fileStatus {
   font: normal normal normal 17px/25px Avenir;
 }
 
-#fileName {
+.fileName {
   font: normal normal normal 14px/20px Avenir;
 }
 
-#fileRightSegment {
+.fileRightSegment {
   width: 165px;
   height: 90px;
   text-align: center;
@@ -258,7 +258,7 @@ h4 {
   margin-top: 30px;
 }
 
-#noView {
+.noView {
   height: 100%;
   display: table;
   width: 135px;
@@ -268,26 +268,26 @@ h4 {
   text-align: right;
 }
 
-#noView span {
+.noView span {
   vertical-align: middle;
   display: table-cell;
 }
 
-#details {
+.details {
   display: none;
 }
-#detailsTop {
+.detailsTop {
   position: sticky;
   top: 0px;
 }
 
-#detailsOuterTop {
+.detailsOuterTop {
   width: 1440px;
   height: 222px;
   background-color: var(--colorBackground1);
 }
 
-#detailsInnerTop {
+.detailsInnerTop {
   width: 1228px;
   height: 222px;
   background-color: var(--colorBackground1);
@@ -296,7 +296,7 @@ h4 {
   margin-right: auto;
 }
 
-#detailsOuter {
+.detailsOuter {
   width: 1440px;
   background-color: var(--colorBackground2);
 }
@@ -326,46 +326,46 @@ h4 {
   color: var(--colorFailure);
 }
 
-#detailsStatusBar {
+.detailsStatusBar {
   margin-top: 25px;
   display: flex;
 }
 
-#detailsHeader {
+.detailsHeader {
   display: flex;
   margin-top: 6px;
 }
-#detailsHeaderRight {
+.detailsHeaderRight {
   display: inline-flex;
   font: normal normal normal 14px/20px Avenir;
   filter: invert(41%) sepia(21%) saturate(3869%) hue-rotate(336deg)
     brightness(86%) contrast(94%);
   margin-left: auto;
 }
-#detailsHeaderLeft {
+.detailsHeaderLeft {
   color: var(--colorText3);
   font: normal normal normal 34px/39px Avenir;
 }
 
-#detailsErrorMessage {
+.detailsErrorMessage {
   display: none;
   margin-inline: 7px;
 }
-#detailsButtonsTop {
+.detailsButtonsTop {
   margin-top: 20.5px;
   display: inline-flex;
   width: 100%;
   margin-left: 10px;
 }
 
-#detailsDataButtons {
+.detailsDataButtons {
   display: flex;
   float: left;
   width: 855px;
   margin-top: 4.5px;
 }
 
-#detailsReturnButtons {
+.detailsReturnButtons {
   display: flex;
   float: right;
 }
@@ -411,7 +411,7 @@ h4 {
   padding: 40px;
 }
 
-#detailsScrollPanel {
+.detailsScrollPanel {
   margin-bottom: 55px;
 }
 
@@ -440,11 +440,11 @@ h4 {
   display: flex;
 }
 
-#documentDataCol2 {
+.documentDataCol2 {
   margin-left: 108px;
 }
 
-#lastRow {
+.lastRow {
   margin-bottom: 0px;
 }
 
@@ -454,33 +454,33 @@ h4 {
   padding-top: 20px;
 }
 
-#objectDataCol1 {
+.objectDataCol1 {
   margin-left: 40px;
   width: 499px;
 }
 
-#objectDataCol2 {
+.objectDataCol2 {
   width: 574px;
 }
 
-#objectDataCol3 {
+.objectDataCol3 {
   width: 34px;
 }
 
-#referencesCol1 {
+.referencesCol1 {
   margin-left: 40px;
   width: 359px;
 }
-#referencesCol2 {
+.referencesCol2 {
   width: 283px;
 }
-#referencesCol3 {
+.referencesCol3 {
   width: 324px;
 }
-#referencesCol4 {
+.referencesCol4 {
   width: 335px;
 }
-#referencesCol5 {
+.referencesCol5 {
   width: 34px;
 }
 

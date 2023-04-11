@@ -9,45 +9,45 @@
 </head>
 <body>
   <div>
-  <div id="main">
+  <div class="main">
       <div class="outerContainerTop">
-          <img src="images/logo.svg" width="230.5" height="51" alt="Logo" id=logo>
+          <img src="images/logo.svg" width="230.5" height="51" alt="Logo" class="logo">
         
       </div>
 
       <div class="outerContainer">
-        <img class="infoLogo" src="images/lang-arrow-back.svg" width="19" height="19" alt="Logo" id="arrowLeft"></img>
+        <img class="infoLogo arrowLeft" src="images/lang-arrow-back.svg" width="19" height="19" alt="Logo"></img>
           <div class=innerContainer>
-            <div id="buttonReturnVerifier">Verifier</div>
+            <div class="buttonReturnVerifier">Verifier</div>
             <h1>Notarization Verification</h1>
-            <div id="descriptionTop">Select the Notarization PDFs to verify the integrity of their contents. The data is embedded inside the PDF.</div>
-            <div id="instruction">
+            <div class="descriptionTop">Select the Notarization PDFs to verify the integrity of their contents. The data is embedded inside the PDF.</div>
+            <div class="instruction">
               <img class="infoLogo" src="images/info-circle-light.svg" width="19" height="19" alt="Logo"></img>
-              <div id="instructionText">Select a source to import your files</div> 
+              <div class="instructionText">Select a source to import your files</div> 
             </div>
 
             
-            <div id="uploadBox">
+            <div class="uploadBox">
               <div class="iconAndText">
-                <img src="images/cloud-upload.svg" width="85" alt="Logo" id="cloud">
-                <h4 id="dragAndDrop">Drag & Drop your PDF files here</h4>
-                <input id="upload" type="file" accept="application/pdf" hidden>
+                <img src="images/cloud-upload.svg" width="85" alt="Logo" class="cloud">
+                <h4 class="dragAndDrop">Drag & Drop your PDF files here</h4>
+                <input class="upload" type="file" accept="application/pdf" hidden>
               </div>
               
               
 
 
             </div>
-            <div id="fileList">
+            <div class="fileList">
               
 
             </div>
-            <p id="buttonNewVerification" style="display: none">New Verification</p>
+            <p class="buttonNewVerification" style="display: none">New Verification</p>
 
             <div class="buttonBox">
-              <div class="button" id="buttonLearnMore">Learn More</div>
-              <div class="button" id="buttonBrowse" >Browse File </div>
-              <input id='manualSelection' type='file' hidden multiple/>
+              <div class="button buttonLearnMore">Learn More</div>
+              <div class="button buttonBrowse">Browse File </div>
+              <input class='manualSelection' type='file' hidden multiple/>
             </div>
             
             
@@ -56,40 +56,38 @@
           
       </div>
   </div>
-  <div id="details">
-    <div id="detailsTop">
-    <div id="detailsOuterTop" >
-      <div id="detailsInnerTop">
+  <div class="details">
+    <div class="detailsTop">
+    <div class="detailsOuterTop" >
+      <div class="detailsInnerTop">
           <img src="images/logo.svg" style="margin-left:-4px;" height="60" alt="Logo">
-          <div id="detailsStatusBar">
-            <div id="detailsStatusBox">Loading</div>
-            <div id="detailsFileName"></div>
+          <div class="detailsStatusBar">
+            <div class="detailsStatusBox">Loading</div>
+            <div class="detailsFileName"></div>
           </div>
-          <div id="detailsHeader"><div id="detailsHeaderLeft">Verification Details</div><div id="detailsHeaderRight"><img src="images/info-circle-light.svg" width="19" height="19" alt="Logo"></img><div id="detailsErrorMessage"></div></div></div>
+          <div class="detailsHeader"><div class="detailsHeaderLeft">Verification Details</div><div class="detailsHeaderRight"><img src="images/info-circle-light.svg" width="19" height="19" alt="Logo"></img><div class="detailsErrorMessage"></div></div></div>
       </div>
     </div>
-    <div id="detailsOuter"style="height:80px">
+    <div class="detailsOuter"style="height:80px">
       <div class="detailsInner" style="height:80px">
-        <div id="detailsButtonsTop">
-                <div id="detailsDataButtons">
-                    <div class="detailsDataButton" id="buttonDocumentData">Document Data</div>
-                    <div class="detailsDataButton" id="buttonObjectData">Object Data</div>
-                    <div class="detailsDataButton" id="buttonReferences">References</div>
+        <div class="detailsButtonsTop">
+                <div class="detailsDataButtons">
+                    <div class="detailsDataButton buttonDocumentData">Document Data</div>
+                    <div class="detailsDataButton buttonObjectData">Object Data</div>
+                    <div class="detailsDataButton buttonReferences">References</div>
                 </div>
-                <div id="detailsReturnButtons">
-                    <div class="detailsReturnButton" id=buttonBack>Cancel Preview</div>
-                    <div class="detailsReturnButton" id=detailsButtonNewVerification>New Verification</div>
+                <div class="detailsReturnButtons">
+                    <div class="detailsReturnButton buttonBack">Cancel Preview</div>
+                    <div class="detailsReturnButton detailsButtonNewVerification">New Verification</div>
                 </div>
               </div>
           </div>
         </div>
       </div>
-      <div id="detailsOuter">
-         <div class="detailsInner" id="detailsScrollPanel">
+      <div class="detailsOuter">
+         <div class="detailsInner detailsScrollPanel">
           </div>  
       </div>
-         
-      
     </div>
   </div>
 </body>

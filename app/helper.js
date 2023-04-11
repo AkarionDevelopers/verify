@@ -30,30 +30,6 @@ function formatDate(date) {
   );
 }
 
-function getObjectDataValue(objectData) {
-  if (objectData === null || objectData.length === 0) {
-    return 'null';
-  }
-
-  if (Array.isArray(objectData)) {
-    let arrayAsStr = '';
-    Object.keys(objectData).forEach((key) => {
-      arrayAsStr += `${JSON.stringify(objectData[key])}, `;
-    });
-    return arrayAsStr;
-  }
-
-  if (objectData.toString() === '[object Object]') {
-    let objAsStr = '';
-    Object.keys(objectData).forEach((key) => {
-      objAsStr += `${key}:${JSON.stringify(objectData[key])}, `;
-    });
-    return objAsStr;
-  }
-
-  return objectData.toString();
-}
-
 export function printDocumentDataSheet(data, i) {
   const $metaData = JSON.parse(data.get('data')[i].notarization.object.metaData);
 
@@ -159,51 +135,84 @@ export function printDocumentDataSheet(data, i) {
   return res;
 }
 
-function getObjectDataRows($objectData) {
+function getObjectDataRows(notarization, objectData, fieldInfos, lang) {
   let res = '';
   // eslint-disable-next-line no-restricted-syntax
-  for (const itemName in $objectData) {
-    if (
-      $objectData[itemName] == null
-      || !Array.isArray($objectData[itemName])
-      || $objectData[itemName].length <= 1
-    ) {
-      // single line item or empty
-      res
-        += `${'<div class="objectDataRow">'
-        + '<div class="objectDataItem objectDataCol1">'}${
-          sanitize(itemName)
-        }</div>`
-        + `<div class="objectDataItem objectDataCol2">${
-          getObjectDataValue($objectData[itemName])
-        }</div>`
-        + '</div>';
-    } else {
-      // multi line objectData
-      res
-        += `${'<div class="objectDataRow">'
-        + '<div class="objectDataItem objectDataCol1">'}${
-          sanitize(itemName)
-        }</div>`
-        + `<div class="objectDataItem objectDataCol2">${
-          JSON.stringify($objectData[itemName])
-        }</div>`
-        + '</div>';
+  Object.keys(notarization).forEach((itemName) => {
+    const fieldInfo = fieldInfos[itemName];
+    let label = itemName;
+    if (fieldInfo) {
+      label = `${fieldInfo.label} (${itemName})`;
     }
-  }
+    let formattedValue = '';
+    if (
+      fieldInfo
+      && fieldInfo.component
+      && fieldInfo.component.props
+      && fieldInfo.component.props.options
+    ) {
+      const match = fieldInfo.component.props.options.find((o) => `${o.value}` === objectData[itemName]);
+      if (match) {
+        formattedValue = sanitize(match.label);
+      }
+    }
+    if (
+      fieldInfo
+      && fieldInfo.component
+      && fieldInfo.component.name === 'ak-input'
+      && typeof objectData[itemName] === 'string'
+    ) {
+      formattedValue = sanitize(objectData[itemName][lang]);
+    }
+    if (
+      fieldInfo
+      && fieldInfo.component
+      && fieldInfo.component.name === 'translations-input'
+      && objectData[itemName]
+    ) {
+      const match = objectData[itemName][lang];
+      if (match) {
+        formattedValue = sanitize(match);
+      }
+    }
+    if (
+      fieldInfo
+      && fieldInfo.component
+      && fieldInfo.component.name === 'file-upload'
+      && objectData[itemName]
+    ) {
+      formattedValue = `${objectData[itemName].name}<label class="fileValidator"><span class="status">Validate file</span><input type="file" class="validate" data-hash="${objectData[itemName].hash}"></label>`;
+    }
+    res
+        += `${'<div class="objectDataRow">'
+        + '<div class="objectDataItem objectDataCol1">'}${
+        sanitize(label)
+      }</div>`
+        + `<div class="objectDataItem objectDataCol2">${
+          formattedValue
+        }</div>`
+        + `<div class="objectDataItem objectDataCol3">${
+          sanitize(notarization[itemName])
+        }</div>`
+        + '</div>';
+  });
 
   return res;
 }
 
 export function printObjectDataSheet(data, i) {
-  const $objectData = data.get('data')[i].notarization.object.objectDataProperties;
+  const notarization = data.get('data')[i].notarization.object.objectDataProperties;
+  const { objectData } = data.get('data')[i].object;
+  const { fieldInfos } = data.get('data')[i].notarization.object;
+  const lang = data.get('data')[i].lang || 'en';
   return (
     `${'<div class="dataSheet objectDataSheet">'
     + '<div class="objectDataRow" style="border-top: 0px">'
     + '<div class="objectDataItem objectDataCol1" style="font-weight: 500">Name</div>'
-    + '<div class="objectDataItem objectDataCol2" style="font-weight: 500">Value</div>'
+    + '<div class="objectDataItem objectDataCol2" style="font-weight: 500">Formatted Value</div>'
+    + '<div class="objectDataItem objectDataCol3" style="font-weight: 500">Notarized Value</div>'
     + '</div>'}${
-      getObjectDataRows($objectData)
+      getObjectDataRows(notarization, objectData, fieldInfos, lang)
     }</div>`
   );
 }
@@ -247,3 +256,23 @@ export function printReferences(data, i) {
     }</div>`
   );
 }
+
+document.addEventListener('change', (e) => {
+  if (e.target.classList.contains('validate')) {
+    const targetHash = e.target.dataset.hash;
+    // eslint-disable-next-line new-cap
+    const shaObj = new window.jsSHA('SHA-256', 'ARRAYBUFFER');
+    const reader = new FileReader();
+    reader.onload = () => {
+      shaObj.update(reader.result);
+      const fileHash = shaObj.getHash('HEX');
+      const $status = e.target.parentNode.querySelector('.status');
+      if (fileHash === targetHash) {
+        $status.innerText = 'Valid!';
+      } else {
+        $status.innerText = 'Not valid!';
+      }
+    };
+    reader.readAsArrayBuffer(e.target.files[0]);
+  }
+});

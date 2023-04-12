@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="226.857" height="70.338" viewBox="0 0 226.857 70.338">
+  <defs>
+    <filter id="Rectangle_Copy_3" x="0" y="0" width="62.438" height="70.338" filterUnits="userSpaceOnUse">
+      <feOffset dy="1" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feFlood flood-opacity="0.2"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Chroniql_Logo" data-name="Chroniql Logo" transform="translate(6 5)">
+    <text id="chroniql" transform="translate(71.857 43)" fill="#4955a1" font-size="43" font-family="Avenir-Heavy, Avenir" font-weight="800" letter-spacing="-0.044em"><tspan x="0" y="0">chroniql</tspan></text>
+    <g id="Group_2_Copy" data-name="Group 2 Copy">
+      <g transform="matrix(1, 0, 0, 1, -6, -5)" filter="url(#Rectangle_Copy_3)">
+        <path id="Rectangle_Copy_3-2" data-name="Rectangle Copy 3" d="M0,14.585,25.207,0,50.438,14.585V43.754L25.207,58.338,0,43.754Z" transform="translate(6 5)" fill="#fff"/>
+      </g>
+      <g id="Group_4_Copy_9" data-name="Group 4 Copy 9" transform="translate(2.934 3.495)">
+        <path id="Fill_1" data-name="Fill 1" d="M22.266,25.815h0l-6.5-3.771,6.505-3.771,6.508,3.771-6.506,3.771ZM6.811,16.858h0L0,12.907,22.266,0,44.534,12.907,37.72,16.856,22.266,7.9,6.812,16.857Z" transform="translate(0 0)" fill="#4955a1"/>
+        <path id="Fill_1-2" data-name="Fill 1" d="M22.266,25.815h0l-6.5-3.771,6.505-3.771,6.508,3.771-6.506,3.771ZM6.811,16.858h0L0,12.907,22.266,0,44.534,12.907,37.72,16.856,22.266,7.9,6.812,16.857Z" transform="translate(0 0)" fill="#fff" opacity="0.4"/>
+        <path id="Fill_2" data-name="Fill 2" d="M22.266,38.722l0,0-11.13-6.45L0,25.815V0L6.812,3.949V21.865l15.453,8.958v7.9Zm0-18.272,0,0-6.5-3.769V9.136l6.505,3.771V20.45Z" transform="translate(0 12.908)" fill="#4955a1"/>
+        <path id="Fill_2-2" data-name="Fill 2" d="M22.266,38.722l0,0-11.13-6.45L0,25.815V0L6.812,3.949V21.865l15.453,8.958v7.9Zm0-18.272,0,0-6.5-3.769V9.136l6.505,3.771V20.45Z" transform="translate(0 12.908)" fill="#28305c" opacity="0.4"/>
+        <path id="Fill_3" data-name="Fill 3" d="M15.453,3.949,6.506,9.136,0,12.908v7.543l6.506-3.772,8.947,5.186L0,30.823v7.9l11.133-6.454,11.133-6.454V0Z" transform="translate(22.266 12.908)" fill="#4955a1"/>
+      </g>
+    </g>
+  </g>
+</svg>

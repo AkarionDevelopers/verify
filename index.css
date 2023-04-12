@@ -1,0 +1,525 @@
+:root {
+  --colorBackground1: #ffffff;
+  --colorBackground2: #f9f9f9;
+  --colorOutline1: #eceef5;
+  --colorOutline2: #0000000f;
+  --colorText1: #151e3f;
+  --colorText2: #303030;
+  --colorText3: #161718;
+  --colorButton: #4955a1;
+  --colorChroniqlPrimary: #4955a1;
+  --colorSuccess: #84c318;
+  --colorSuccessBackground: #84c3181a;
+  --colorFailure: #d64933;
+  --colorFailureBackground: #d649331a;
+  --colorDocumentDataItem: #9b9b9b;
+  --colorRowBorder: #e7e7e7;
+}
+
+body {
+  font: normal normal 300 24px/35px Avenir;
+  color: var(--colorText2);
+  letter-spacing: 0;
+  text-align: left;
+  background-color: var(--colorBackground2);
+  margin: 0px;
+}
+
+.descriptionTop {
+  padding-left: 10px;
+}
+
+h1 {
+  font: normal normal normal 46px/56px Avenir;
+  color: var(--colorText1);
+  text-align: left;
+  margin-block-end: 10px;
+  margin-block-start: 11.64px;
+  padding-left: 10px;
+}
+
+.buttonNewVerification {
+  text-align: center;
+  color: var(--colorChroniqlPrimary);
+  font: normal normal normal 14px/20px Avenir;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.buttonReturnVerifier {
+  font: normal normal normal 14px/20px Avenir;
+  margin-top: 34.36px;
+  visibility: hidden;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.buttonLearnMore {
+  font: normal normal normal 14px/20px Avenir-Heavy;
+  color: var(--colorText3);
+  letter-spacing: 0;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 40px;
+  background-color: var(--colorBackground1);
+}
+
+.buttonBrowse {
+  font: normal normal normal 14px/20px Avenir-Heavy;
+  color: var(--colorBackground1);
+  letter-spacing: 0;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 40px;
+  background-color: var(--colorButton);
+}
+
+h4 {
+  font: normal normal normal 17px/25px Avenir;
+  color: var(--colorText3);
+}
+
+.detailsFileName {
+  font: normal normal normal 17px/25px Avenir;
+  color: var(--colorText3);
+  margin-top: 2px;
+}
+.outerContainer,
+.outerContainerTop {
+  width: 935px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.outerContainer {
+  height: 910px;
+  background: var(--colorBackground1) 0% 0% no-repeat padding-box;
+  border: 1px solid var(--colorOutline1);
+  border-radius: 10px 10px 10px 10px;
+}
+
+.outerContainerTop {
+  height: 170px;
+  background: var(--colorBackground2) 0% 0% no-repeat padding-box;
+}
+
+.innerContainer,
+.innerContainerTop {
+  margin-left: auto;
+  margin-right: auto;
+  width: 750px;
+}
+
+.innerContainer {
+  background: var(--colorBackground1) 0% 0% no-repeat padding-box;
+}
+
+.innerContainerTop {
+  background: var(--colorBackground2) 0% 0% no-repeat padding-box;
+}
+
+.logo {
+  position: absolute;
+  padding-top: 60px;
+  padding-left: 13px;
+}
+
+.arrowLeft {
+  position: absolute;
+  padding-top: 33px;
+  padding-left: 74px;
+  visibility: hidden;
+  cursor: pointer;
+}
+
+.instruction {
+  font: normal normal normal 14px/20px Avenir;
+  color: var(--colorText3);
+  text-align: left;
+  display: inline-flex;
+  margin-top: 90px;
+  margin-bottom: 7px;
+  margin-left: 10px;
+}
+
+.infoLogo {
+  padding-right: 7px;
+}
+
+.uploadBox {
+  height: 345px;
+  width: 730px;
+  box-shadow: 0px 2px 10px var(--colorOutline2);
+  border: 1px dashed var(--colorText3);
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.button {
+  width: 173px;
+  height: 40px;
+  border: 2px solid var(--colorChroniqlPrimary);
+  border-radius: 10px 0px 0px 0px;
+  margin-left: 18.02px;
+  cursor: pointer;
+}
+
+.buttonBox {
+  display: inline-flex;
+  float: right;
+  margin-bottom: 127px;
+  margin-top: 60px;
+  margin-right: 10px;
+}
+
+.iconAndText {
+  text-align: center;
+  margin-top: 108px;
+  margin-bottom: auto;
+}
+
+.dragAndDrop {
+  margin-block-start: 10px;
+}
+
+.fileList {
+  display: none;
+  overflow-x: hidden;
+  height: 440px;
+  scrollbar-width: none;
+  padding-left: 10px;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+.fileOutline {
+  height: 90px;
+  box-shadow: 0px 2px 10px #0000001f;
+  border-radius: 10px 0px 0px 0px;
+  margin-bottom: 10px;
+  display: inline-flex;
+  margin-top: 10px;
+}
+
+.fileSymbolOuterSuccess {
+  border-top: 3px solid var(--colorSuccess);
+  width: 45px;
+  margin-left: 20px;
+}
+
+.fileSymbolOuterFailure {
+  border-top: 3px solid var(--colorFailure);
+  width: 45px;
+  margin-left: 20px;
+}
+
+.fileSymbol {
+  height: 25px;
+  width: 50%;
+  margin-top: 62.5%;
+  margin-left: 25%;
+  text-align: center;
+}
+
+.fileStatusOuter {
+  width: 490px;
+  padding-top: 22px;
+  padding-left: 10px;
+}
+
+.fileStatus {
+  font: normal normal normal 17px/25px Avenir;
+}
+
+.fileName {
+  font: normal normal normal 14px/20px Avenir;
+}
+
+.fileRightSegment {
+  width: 165px;
+  height: 90px;
+  text-align: center;
+}
+
+.viewButton {
+  width: 70px;
+  height: 24.5px;
+  border: 1px solid var(--colorChroniqlPrimary);
+  border-radius: 4px;
+  font: normal normal normal 14px/20px Avenir;
+  color: var(--colorChroniqlPrimary);
+  text-align: center;
+  display: inline-block;
+  margin-left: 36.5px;
+  cursor: pointer;
+  padding-block-start: 5.5px;
+  margin-top: 30px;
+}
+
+.noView {
+  height: 100%;
+  display: table;
+  width: 135px;
+  padding-right: 30px;
+  font: normal normal normal 14px/20px Avenir;
+  color: var(--colorFailure);
+  text-align: right;
+}
+
+.noView span {
+  vertical-align: middle;
+  display: table-cell;
+}
+
+.details {
+  display: none;
+}
+.detailsTop {
+  position: sticky;
+  top: 0px;
+}
+
+.detailsOuterTop {
+  width: 1440px;
+  height: 222px;
+  background-color: var(--colorBackground1);
+}
+
+.detailsInnerTop {
+  width: 1228px;
+  height: 222px;
+  background-color: var(--colorBackground1);
+  padding-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.detailsOuter {
+  width: 1440px;
+  background-color: var(--colorBackground2);
+}
+
+.detailsInner {
+  width: 1248px;
+  background-color: var(--colorBackground2);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.detailsStatusSuccess,
+.detailsStatusFail {
+  height: 24px;
+  background-color: var(--colorSuccessBackground);
+  color: var(--colorSuccess);
+  padding-left: 17px;
+  padding-right: 17px;
+  border-radius: 4px;
+  font: normal normal 500 14px/20px Avenir;
+  text-align: center;
+  margin-right: 10px;
+  padding-top: 6px;
+}
+.detailsStatusFail {
+  background-color: var(--colorFailureBackground);
+  color: var(--colorFailure);
+}
+
+.detailsStatusBar {
+  margin-top: 25px;
+  display: flex;
+}
+
+.detailsHeader {
+  display: flex;
+  margin-top: 6px;
+}
+.detailsHeaderRight {
+  display: inline-flex;
+  font: normal normal normal 14px/20px Avenir;
+  filter: invert(41%) sepia(21%) saturate(3869%) hue-rotate(336deg)
+    brightness(86%) contrast(94%);
+  margin-left: auto;
+}
+.detailsHeaderLeft {
+  color: var(--colorText3);
+  font: normal normal normal 34px/39px Avenir;
+}
+
+.detailsErrorMessage {
+  display: none;
+  margin-inline: 7px;
+}
+.detailsButtonsTop {
+  margin-top: 20.5px;
+  display: inline-flex;
+  width: 100%;
+  margin-left: 10px;
+}
+
+.detailsDataButtons {
+  display: flex;
+  float: left;
+  width: 855px;
+  margin-top: 4.5px;
+}
+
+.detailsReturnButtons {
+  display: flex;
+  float: right;
+}
+
+.detailsDataButton {
+  font: normal normal normal 17px/25px Avenir;
+  text-align: left;
+  color: var(--colorText3);
+  margin-right: 46px;
+  cursor: pointer;
+  padding-bottom: 6px;
+}
+
+.detailsDataButton:focus {
+  font: normal normal 900 17px/25px Avenir;
+  color: var(--colorChroniqlPrimary);
+  border-bottom: 3px solid var(--colorChroniqlPrimary);
+}
+
+.detailsReturnButton {
+  font: normal normal normal 14px/21px Avenir;
+  color: var(--colorText3);
+  margin-left: 20px;
+  width: 165px;
+  height: 23px;
+  text-align: center;
+  padding-top: 5px;
+  padding-left: 5px;
+  border: 1.2px solid var(--colorChroniqlPrimary);
+  background: var(--colorBackground1);
+  border: 1px solid var(--colorChroniqlPrimary);
+  border-radius: 4px;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dataSheet {
+  width: 1148px;
+  background-color: var(--colorBackground1);
+  box-shadow: 0px 4px 6px var(--colorOutline2);
+  border-radius: 10px;
+  margin-left: 10px;
+  margin-top: 0px;
+  margin-bottom: 40px;
+  padding: 40px;
+}
+
+.detailsScrollPanel {
+  margin-bottom: 55px;
+}
+
+.documentDataTitle {
+  font: normal normal normal 14px/25px Avenir;
+  text-align: left;
+  color: var(--colorDocumentDataItem);
+  width: 168px;
+}
+
+.documentDataItem,
+.objectDataItem {
+  font: normal normal normal 14px/20px Avenir;
+  text-align: left;
+  color: var(--colorText3);
+  width: 200px;
+  padding-block-end: 20px;
+  word-wrap: break-word;
+}
+
+.documentDataSet {
+  display: flex;
+}
+
+.documentDataRow {
+  display: flex;
+}
+
+.documentDataCol2 {
+  margin-left: 108px;
+}
+
+.lastRow {
+  margin-bottom: 0px;
+}
+
+.objectDataRow {
+  display: flex;
+  border-top: 1px solid var(--colorRowBorder);
+  padding-top: 20px;
+}
+
+.objectDataCol1 {
+  margin-left: 40px;
+  width: 299px;
+}
+
+.objectDataCol2 {
+  width: 409px;
+}
+
+.objectDataCol3 {
+  width: 400px;
+}
+
+.referencesCol1 {
+  margin-left: 40px;
+  width: 359px;
+}
+.referencesCol2 {
+  width: 283px;
+}
+.referencesCol3 {
+  width: 324px;
+}
+.referencesCol4 {
+  width: 335px;
+}
+.referencesCol5 {
+  width: 34px;
+}
+
+.failCircle,
+.successCircle {
+  height: 14px;
+  width: 14px;
+  background-color: var(--colorRowBorder);
+  border-radius: 50%;
+  display: flex;
+  margin-left: 10px;
+}
+
+.failCircle {
+  background-color: var(--colorFailure);
+}
+
+.successCircle {
+  background-color: var(--colorSuccess);
+}
+
+.fileValidator {
+  width: 100px;
+  height: 24.5px;
+  border: 1px solid var(--colorChroniqlPrimary);
+  border-radius: 4px;
+  font: normal normal normal 14px/20px Avenir;
+  color: var(--colorChroniqlPrimary);
+  text-align: center;
+  margin-top: 10px;
+  cursor: pointer;
+  display: block;
+  padding-top: 5px;
+}
+
+.fileValidator input {
+  display: none;
+}
